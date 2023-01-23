@@ -12,31 +12,31 @@
 
 from applogic import userdirect as ud
 
-appname = "TactApp Application"
-tag_1 = "Keep track of your professional network"
-tag_2 = "This application is powered by commands. Use the following to \n\tperform most common tasks. Use tactman for more."
+appname = "\tTactApp Application"
+tag_1 = "\tKeep track of your professional network"
+tag_2 = "\tThis application is powered by commands. Use the following to \n\tperform most common tasks. Use tactman for more."
 
-line = "__________________________________________"
+line = "\t__________________________________________"
 
 #================================   display on screen  ============================
 
 
 
 def main():
+    print()
     print("\t\t", appname)
     print("\t", tag_1)
     print(line)
-    print(tag_1)
-    print("\n")
-    print("New: add\tEdit: dit\tDelete: del\tDisplay: dis")
+    print("\tNew: add\tEdit: dit\tDelete: del\tDisplay: dis")
     print(line)
 
     done = False
     cmds = ["add", "adds", "dit", "dits", "del", "dels", "dis", "diss", "manpro", "done"]
 
     while not done:
-        print("\nWhat do you want to do? ")
-        activity = input("?> ")
+        print()
+        print("\tWhat do you want to do? ")
+        activity = input("\t?> ")
         
         if activity not in cmds:
             print("Command not found")
