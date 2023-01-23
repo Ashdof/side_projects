@@ -44,7 +44,7 @@ class prodbmanager:
         """Create Table in database file"""
         try:
             conn = self.db_connection()
-            query = '''CREATE TABLE IF NOT EXISTS myprocons(
+            query = '''CREATE TABLE IF NOT EXISTS myprocons (
                 id INTEGER PRIMARY KEY AUTO INCREMENT
                 lastname TEXT NOT NULL,
                 firstname TEXT NOT NULL,
@@ -57,12 +57,12 @@ class prodbmanager:
             cursor.execute(query)
             conn.commit()
 
-            print("Table creation was sucessful.")
+            print("\tTable creation was sucessful.")
 
             cursor.close()
 
         except sqlite3.Error as e:
-            print("Failed to create table: ", e)
+            print("\tFailed to create table: ", e)
 
         finally:
             if conn:
@@ -92,7 +92,7 @@ class prodbmanager:
                 return qty
 
         except sqlite3.Error as e:
-            print("Failed to save record: ", e)
+            print("\tFailed to save record: ", e)
 
         finally:
             if conn:
@@ -123,7 +123,7 @@ class prodbmanager:
 
             
         except sqlite3.Error as e:
-            print("Failed to update record: ", e)
+            print("\tFailed to update record: ", e)
 
         finally:
             if conn: 
@@ -143,19 +143,19 @@ class prodbmanager:
             records = cursor.fetchall()
 
             table = Texttable()
-            table.header(["Last name", "First name", "Code", "Profession", "Email", "Phone number"])
+            table.header(["\tLast name", "First name", "Code", "Profession", "Email", "Phone number"])
             table.set_cols_dtype(['t', 't', 't', 't', 't', 't'])
 
             for record in records:
                 table.add_row([record[0], record[1], record[2], record[3], record[4], record[5]])
                 # table.set_deco(Texttable.HEADER)
 
-            print("\n", table.draw())
-            print("\nNumber of records found: ", self.get_number_of_records())
+            print("\n\t", table.draw())
+            print("\n\tNumber of records found: ", self.get_number_of_records())
 
             cursor.close()
         except sqlite3.Error as e:
-            print("Failed to fetch records: ", e)
+            print("\tFailed to fetch records: ", e)
         finally:
             if conn:
                 conn.close()
@@ -175,19 +175,19 @@ class prodbmanager:
             records = cursor.fetchall()
 
             table = Texttable()
-            table.header(["Last name", "First name", "Phone number"])
+            table.header(["\tLast name", "First name", "Phone number"])
             table.set_cols_dtype(['t', 't', 't'])
 
             for record in records:
                 table.add_row([record[0], record[1], record[2]])
                 table.set_deco(Texttable.HEADER)
 
-            print("\n", table.draw())
-            print("\nNumber of records found: ", self.get_number_of_records())
+            print("\n\t", table.draw())
+            print("\n\tNumber of records found: ", self.get_number_of_records())
 
             cursor.close()
         except sqlite3.Error as e:
-            print("Failed to fetch record: ", e)
+            print("\tFailed to fetch record: ", e)
         finally:
             if conn:
                 conn.close()
@@ -215,12 +215,12 @@ class prodbmanager:
                 table.add_row([record[0], record[1], record[2]])
                 table.set_deco(Texttable.HEADER)
 
-            print("\n", table.draw())
-            print("\nNumber of records found: ", self.get_number_of_records())
+            print("\n\t", table.draw())
+            print("\n\tNumber of records found: ", self.get_number_of_records())
 
             cursor.close()
         except sqlite3.Error as e:
-            print("Failed to fetch record: ", e) 
+            print("\tFailed to fetch record: ", e) 
         finally:
             if conn:
                 conn.close()
@@ -242,19 +242,19 @@ class prodbmanager:
             records = cursor.fetchall()
 
             table = Texttable()
-            table.header(["Last name", "First name", "Profession", "Phone number"])
+            table.header(["\tLast name", "First name", "Profession", "Phone number"])
             table.set_cols_dtype(['t', 't', 't', 't'])
 
             for record in records:
                 table.add_row([record[0], record[1], record[2], record[3]])
                 table.set_deco(Texttable.HEADER)
 
-            print("\n", table.draw())
-            print("\nNumber of records found: ", self.get_number_of_records())
+            print("\n\t", table.draw())
+            print("\n\tNumber of records found: ", self.get_number_of_records())
 
             cursor.close()
         except sqlite3.Error as e:
-            print("Failed to fetch record: ", e)
+            print("\tFailed to fetch record: ", e)
         finally:
             if conn:
                 conn.close()
@@ -275,19 +275,19 @@ class prodbmanager:
             records = cursor.fetchall()
 
             table = Texttable()
-            table.header(["Last name", "First name", "Email Address"])
+            table.header(["\tLast name", "First name", "Email Address"])
             table.set_cols_dtype(['t', 't', 't'])
 
             for record in records:
                 table.add_row([record[0], record[1], record[2]])
                 table.set_deco(Texttable.HEADER)
             
-            print("\n", table.draw())
-            print("\nNumber of records found: ", self.get_number_of_records())
+            print("\n\t", table.draw())
+            print("\n\tNumber of records found: ", self.get_number_of_records())
 
             cursor.close()
         except sqlite3.Error as e:
-            print("Failed to fetch record: ", e)
+            print("\tFailed to fetch record: ", e)
         finally:
             if conn:
                 conn.close()
@@ -311,7 +311,7 @@ class prodbmanager:
             return total
             
         except sqlite3.Error as e:
-            print("Failed to fetch record: ", e)
+            print("\tFailed to fetch record: ", e)
         finally:
             if conn:
                 conn.close()
@@ -338,7 +338,7 @@ class prodbmanager:
                 return (0)
 
         except sqlite3.Error as e:
-            print("Failed to delete record: ", e)
+            print("\tFailed to delete record: ", e)
             
         finally:
             if conn:
@@ -368,7 +368,7 @@ class prodbmanager:
             return uniq_codes
             
         except sqlite3.Error as e:
-            print("Failed to fetch records: ", e)
+            print("\tFailed to fetch records: ", e)
 
         finally:
             if conn:
@@ -398,7 +398,7 @@ class prodbmanager:
 
             return _fullnames
         except sqlite3.Error as e:
-            print("Failed to fetch records", e)
+            print("\tFailed to fetch records", e)
         finally:
             if conn:
                 conn.close()
