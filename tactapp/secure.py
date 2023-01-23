@@ -12,6 +12,8 @@
 
 #!/usr/bin/python3
 
+import tactapp as tact
+
 class UserSecure:
     """User Authentication CLass"""
 
@@ -43,3 +45,6 @@ if __name__ == '__main__':
     print()
     username = input("\tUsername: ")
     password = input("\tPassword: ")
+
+    if password:
+        tact.main()
