@@ -14,7 +14,7 @@ from applogic import tactdbmanager as ptk
 dbpath = "procons.db"
 record = ptk.prodbmanager(db_path=dbpath)
 
-line_1 = "___________________________"
+line = "\t___________________________"
 
 class UserDirect:
     
@@ -64,27 +64,31 @@ class UserDirect:
         to the database
         """
 
-        faults = ["", " ", "@", "/", "?",";", ":", "#", "%", "&", "!", "$", "^", "*", "(", ")"]
+        faults = [" ", "@", "/", "?",";", ":", "#", "%", "&", "!", "$", "^", "*", "(", ")"]
         done = False
 
         while not done:
-            name_code = input("\nUnique code: ")
+            name_code = input("\n\tUnique code: ")
 
             if name_code in faults:
-                print("{} is allowed".format(name_code))
+                print("\t{} is not allowed".format(name_code))
+            elif name_code == "":
+                print("\tAdd process cancelled")
+                done = True
+                break
             else:
-                last_name = input("Last name: ")
-                first_name = input("First name: ")
-                prof_sion = input("Profession: ")
-                e_mail = input("Email: ")
-                phone_num = input("Phone: ")
+                last_name = input("\tLast name: ")
+                first_name = input("\tFirst name: ")
+                prof_sion = input("\tProfession: ")
+                e_mail = input("\tEmail: ")
+                phone_num = input("\tPhone: ")
 
                 record.save_record(_lastname=last_name, _firstname=first_name, _uniquecode=name_code, _profession=prof_sion, _email=e_mail, _phone_number=phone_num)
                 
                 done = True
 
-                print("Record saved successfully")
-                print(line_1)
+                print("\tRecord saved successfully")
+                print(line)
 
 
     def _commit_multi_records(self):
@@ -96,26 +100,26 @@ class UserDirect:
         faults = [" ", "@", "/", "?",";", ":", "#", "%", "&", "!", "$", "^", "*", "(", ")", "'"]
 
         while not done:
-            name_code = input("\nUnique code: ")
+            name_code = input("\n\tUnique code: ")
 
             if name_code in faults:
-                print("{} is allowed".format(name_code))
+                print("\t{} is not allowed".format(name_code))
 
             elif name_code == "":
-                print("New record entry process cancelled")
+                print("\tNew record entry process cancelled")
                 done = True
 
             else:
-                last_name = input("Last name: ")
-                first_name = input("First name: ")
-                prof_sion = input("Profession: ")
-                e_mail = input("Email: ")
-                phone_num = input("Phone: ")
+                last_name = input("\tLast name: ")
+                first_name = input("\tFirst name: ")
+                prof_sion = input("\tProfession: ")
+                e_mail = input("\tEmail: ")
+                phone_num = input("\tPhone: ")
 
                 record.save_record(_lastname=last_name, _firstname=first_name, _namecode=name_code, _profession=prof_sion, _email=e_mail, _phone_number=phone_num)
 
-        print("Records saved successfully")
-        print(line_1)
+        print("\tRecords saved successfully")
+        print(line)
 
 
     def _editrecord_(self):
@@ -129,29 +133,29 @@ class UserDirect:
             vals = ['Y', 'y']
 
             while not done:
-                name_code = input("\nUnique code: ")
+                name_code = input("\n\tUnique code: ")
 
                 if name_code == "":
-                    print("Data edit process cancelled")
+                    print("\tData edit process cancelled")
                     done = True
 
                 elif name_code in faults:
-                    print("{} is not allowed".format(name_code))
+                    print("\t{} is not allowed".format(name_code))
 
                 else:
-                    last_name = input("Last name: ")
-                    first_name = input("First name: ")
-                    prof_sion = input("Profession: ")
-                    e_mail = input("Email: ")
-                    phone_num = input("Phone: ")
+                    last_name = input("\tLast name: ")
+                    first_name = input("\tFirst name: ")
+                    prof_sion = input("\tProfession: ")
+                    e_mail = input("\tEmail: ")
+                    phone_num = input("\tPhone: ")
 
                     edit_info = record.edit_record(_lastname=last_name, _firstname=first_name, _namecode=name_code, _profession=prof_sion, _email=e_mail, _phone_number=phone_num)
                     if edit_info == 1:
-                        print("{}'s record not found".format(name_code))
+                        print("\t{}'s record not found".format(name_code))
                         done = True
 
                     elif edit_info == 0:
-                        print("{}'s record updated successfully.".format(name_code)) 
+                        print("\t{}'s record updated successfully.".format(name_code)) 
                         done = True
 
 
@@ -163,14 +167,14 @@ class UserDirect:
         
         done = False
 
-        print("\nSelect the number for a corresponding record to display\n")
-        print("1: Detail Record\n2: Name and Codes\n3: Name, Profession and Phone Numbers\n4: Names and Phone Numbers\n5. Name and Email Addresses ")
+        print("\n\tSelect the number for a corresponding record to display\n")
+        print("\t1: Detail Record\n\t2: Name and Codes\n\t3: Name, Profession and Phone Numbers\n\t4: Names and Phone Numbers\n\t5. Name and Email Addresses ")
         
         while not done:
-            val = input("\nNumber ?>: ")
+            val = input("\n\tNumber ?>: ")
 
             if val == "":
-                print("Display process cancelled")
+                print("\tDisplay process cancelled")
                 done = True
                 
             else:
@@ -204,14 +208,14 @@ class UserDirect:
         
         done = False
 
-        print("\nSelect the number for a corresponding record to display\n")
-        print("1: Detail Record\n2: Name and Codes\n3: Name, Profession and Phone Numbers\n4: Names and Phone Numbers\n5. Name and Email Addresses ")
+        print("\n\tSelect the number for a corresponding record to display\n")
+        print("\t1: Detail Record\n\t2: Name and Codes\n\t3: Name, Profession and Phone Numbers\n\t4: Names and Phone Numbers\n\t5. Name and Email Addresses ")
         
         while not done:
-            val = input("\nNumber ?>: ")
+            val = input("\n\tNumber ?>: ")
 
             if val == "":
-                print("Display process cancelled")
+                print("\tDisplay process cancelled")
                 done = True
                 
             else:
@@ -236,20 +240,20 @@ class UserDirect:
         done = False
 
         while not done:
-            quest = input("\nUnique code ?> ")
+            quest = input("\n\tUnique code ?> ")
 
             if quest == "":
-                print("Delete process cancelled")
+                print("\tDelete process cancelled")
                 done = True
             
             else:
                 del_info = record.delete_record(quest)
 
                 if del_info == 1:
-                    print("{}'s record not found'".format(quest))
+                    print("\t{}'s record not found'".format(quest))
 
                 elif del_info == 0:
-                    print("{}'s record deleted successfully.".format(quest)) 
+                    print("\t{}'s record deleted successfully.".format(quest)) 
                     done = True
 
     
@@ -262,20 +266,20 @@ class UserDirect:
         done = False
 
         while not done:
-            quest = input("\nUnique code ?> ")
+            quest = input("\n\tUnique code ?> ")
 
             if quest == "":
-                print("Delete process cancelled")
+                print("\tDelete process cancelled")
                 done = True
             
             else:
                 del_info = record.delete_record(quest)
 
                 if del_info == 1:
-                    print("{}'s record not found'".format(quest))
+                    print("\t{}'s record not found'".format(quest))
 
                 elif del_info == 0:
-                    print("{}'s record deleted successfully.".format(quest)) 
+                    print("\t{}'s record deleted successfully.".format(quest)) 
 
     
     def _manpro_(self):

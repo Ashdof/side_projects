@@ -42,7 +42,7 @@ def main():
             print("Command not found")
 
         elif activity == "done":
-            print("\nAPPLICATION EXIT")
+            print("\n\tAPPLICATION EXIT")
             done = True
             exit(0)
 
