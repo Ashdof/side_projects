@@ -14,3 +14,32 @@
 
 class UserSecure:
     """User Authentication CLass"""
+
+    def __init__(self):
+        """Initialise class"""
+
+        pass
+    
+    def user_login(self):
+        """User Login
+        
+        Description:
+            This method enables the user to sign in to the application with his username
+            and passowrd
+        """
+
+
+#   ==============================================================================
+
+if __name__ == '__main__':
+
+    appname = "TactApp Application"
+    tag_1 = "Keep track of your professional network"
+    tag_2 = "Use the following to perform most common tasks.\n\tType mantact for more"
+    line = "\t_______________________________________"
+
+    print("\t\t", appname, "\n\t\t______________________")
+    print("\tLogin to proceed or type 'su' to sign up")
+    print()
+    username = input("\tUsername: ")
+    password = input("\tPassword: ")
