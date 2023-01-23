@@ -1,0 +1,50 @@
+                            
+MY PROFESSIONAL NETWORK APP
+REFERNCE MANUAL
+
+
+NAME
+                manpro - this command displays the reference manual of the application
+
+DESCRIPTION
+                My ProNetwork App is a simple commandline based application for storing the contacts of professionals in your network. It operates by executing commads which are explained below
+
+==========================:    COMMANDS    :================================
+
+The Quiz
+                What do you want to do? 
+                This is the Quiz. It prompts for what should be done. If the command provided is found, the appropriate function is executed; otherwise the Quiz is displayed again.  
+
+_add_           Add one information at a time. 
+                When invoked, this command enables the addition of one contact information at a time. When the user hits the
+                "Enter" key after providing the necessary information, the Quiz gets displayed prompting for the next action to execute.
+
+_adds_          Add multiple information
+                This command enables the user to add multiple contact information at a time. When invoked, records can be entered in multiple rounds as far as unique codes are provided. If the "Enter" key is pressed without entering any key value when Unique code is requested, the process cancels.
+    
+_edit_          Edit the data of a contact. 
+                This command enables the editing of the information of a contact. When invoked, the user is asked to provide the unique code of a record to edit. Detail information must be provided to update every data in the record
+
+_del_           Delete a record
+                This command enables the user to delete a record by providing the unique code for the contact. 
+
+_dels_          Delete multiple records
+                This command initiates the process to delete multiple records in a loop. At the start of each loop, the unique code of each record must be provided and the "Enter" key pressed to complete the delete process. Hitting the "Enter" key without providing any data at the request for the unique key will end the process and exit the delete loop. However, providing a wrong unique code will cause the loop to persist
+
+_ds_            Display records
+                This command enables the user to access various parts of the contact information stored in the database. When invoked, 5 options appear. Selecting a number associated with an option displays the associated information. Providing the wrong data will keep the process in a loop. However, pressing the "Enter" key without providing any data will exit the display mode
+
+                1 - Detail Records:       Displays all records in detail
+                2 - Name and Codes:       Displays the names and codes of all records
+                3 - Name, Profession, Phone Numbers:      Displays the names, profession and phone numbers of all contacts
+                4 - Name and Phone Numbers:       Displays the names, phone numbers of all contacts
+                5 - Name and Email Addresses:     Displays the names and email addresses of all contacts
+
+_dss_           Display multiple records
+                This commands initiates the process to display different parts of the contact information in a loop. At the start pf each loop, the unique code of a record must be provided and the "Enter" key pressed to the selected part of the information. Hitting the "Enter" key without providing any data at the request for the unique key will end the process and exit the display loop. However, providing a wrong unique code will cause the loop to persist
+
+_manpro_        The Application Manual
+                This command, when invoked displays the application's manual
+
+_done_          Quit MY PROFESSIONAL NETWORK APPLICATION
+                This command exits the application, displays a message and returns the console to the operating system.
