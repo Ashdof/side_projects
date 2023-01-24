@@ -11,14 +11,16 @@
 #!/usr/bin/python3
 
 import sqlite3
+from base.root import TactRoot
 
-class TactdbManager:
+class TactdbManager(TactRoot):
     """Database management module"""
 
-    def __init__(self, dbpath):
+    def __init__(self, dbpath, id=None):
         """Initialise path to the database file"""
 
         self.__dbpath = dbpath
+        super().__init__(id)
     
     @property
     def dbpath(self):
@@ -65,6 +67,8 @@ class TactdbManager:
 
         try:
             con = sqlite3.connect(self.dbpath)
+            if con:
+                print("Database created suucessfully")
             return con
         except sqlite3.Error as e:
             print("Failed to connect to database, ", e)
