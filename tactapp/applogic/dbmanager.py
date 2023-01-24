@@ -11,7 +11,7 @@
 #!/usr/bin/python3
 
 import sqlite3
-from base.root import TactRoot
+from base.tactbase import TactRoot
 
 class TactdbManager(TactRoot):
     """Database management module"""
