@@ -12,3 +12,23 @@
 """
 
 #!/usr/bin/python3
+
+
+import sqlite3
+
+class TactRoot:
+    """Base module
+    
+    Description:
+    """
+
+    _dbobjs = 0
+
+    def __init__(self, id=None):
+        """Initialise the module"""
+
+        if id == None:
+            self.id = id
+        else:
+            type(self)._dbobjs += 1
+            self.id = self._dbobjs
