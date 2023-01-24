@@ -12,7 +12,7 @@
 
 #!/usr/bin/python3
 
-import applogic.apphome as tact
+import resource.apphome as tact
 
 class UserSecure:
     """User Authentication CLass"""

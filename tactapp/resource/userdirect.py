@@ -8,7 +8,7 @@
     CLASS DESCRIPTION:      THIS CLASS PROVIDES THE USER INTERFACE
 """
 
-from applogic import tactdbmanager as ptk
+from resource import tactdbmanager as ptk
 
 """Pass the path to the database file to the class being called"""
 dbpath = "tactsdb.db"

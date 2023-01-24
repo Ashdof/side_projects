@@ -10,7 +10,7 @@
     CLASS DESCRIPTION:      THIS CLASS PROVIDES THE USER INTERFACE
 """
 
-from applogic import userdirect as ud
+from resource import userdirect as ud
 
 appname = "\tTactApp Application"
 tag_1 = "\tKeep track of your professional network"
