@@ -16,7 +16,7 @@ from applogic.tactroot import TactRoot
 class TactdbManager(TactRoot):
     """Database management module"""
 
-    def __init__(self, dbpath, id=None):
+    def __init__(self, dbpath="", id=None):
         """Initialise path to the database file"""
 
         self.__dbpath = dbpath
