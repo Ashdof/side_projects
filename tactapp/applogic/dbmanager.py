@@ -52,3 +52,19 @@ class TactdbManager:
         
         else:
             self.__dbpath = newpath
+    
+    def dbconnection(self):
+        """Database connection
+        
+        Description:
+            This method creates a connection to the database file
+        
+        Returns:
+            A connection string to the database file
+        """
+
+        try:
+            con = sqlite3.connect(self.__dbpath)
+            return con
+        except sqlite3.Error as e:
+            print("Failed to connect to database, ", e)
