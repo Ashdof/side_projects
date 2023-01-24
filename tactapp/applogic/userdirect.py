@@ -2,7 +2,7 @@
     =======================     TACT APPLICATION     ===================================
     FILE:                   USER DIRECT CLASS
     DATE:                   23-JAN-2023
-    LAST UPDATED:           23-JAN-2023
+    LAST UPDATED:           24-JAN-2023
     DEVELOPER:              EMMANUEL ENCHILL
     DESCRIPTION:            THIS CLASS INTERACTS DIRECTLY WITH THE USER INTERFACE CLASS; IT CONNECTS TO THE DATABASE MANAGER
     CLASS DESCRIPTION:      THIS CLASS PROVIDES THE USER INTERFACE
@@ -11,7 +11,7 @@
 from applogic import tactdbmanager as ptk
 
 """Pass the path to the database file to the class being called"""
-dbpath = "procons.db"
+dbpath = "tactsdb.db"
 record = ptk.prodbmanager(db_path=dbpath)
 
 line = "\t___________________________"
@@ -68,26 +68,27 @@ class UserDirect:
         done = False
 
         while not done:
-            name_code = input("\n\tUnique code: ")
+            last_name = input("\n\tLast name: ")
 
-            if name_code in faults:
-                print("\t{} is not allowed".format(name_code))
-            elif name_code == "":
+            if last_name in faults: 
+                print("\t{} is not allowed".format(last_name))
+            elif last_name == "":
                 print("\tAdd process cancelled")
                 done = True
                 break
             else:
-                last_name = input("\tLast name: ")
                 first_name = input("\tFirst name: ")
                 prof_sion = input("\tProfession: ")
                 e_mail = input("\tEmail: ")
                 phone_num = input("\tPhone: ")
 
-                record.save_record(_lastname=last_name, _firstname=first_name, _uniquecode=name_code, _profession=prof_sion, _email=e_mail, _phone_number=phone_num)
+                name_code = last_name[0] + last_name[1] + first_name[1] + first_name[0]
+                rc = record.save_record(_uniquecode=name_code, _lastname=last_name, _firstname=first_name, _prof=prof_sion, _email=e_mail, _phone=phone_num)
                 
                 done = True
+                if rc == 1:
+                    print("\tRecord saved successfully")
 
-                print("\tRecord saved successfully")
                 print(line)
 
 

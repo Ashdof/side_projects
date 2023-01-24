@@ -2,7 +2,7 @@
     =======================     TACT DATABASE MANAGER     ===================================
     FILE:                   DATABASE ACCESS CLASS
     DATE:                   23-JAN-2023
-    LAST UPDATED:           23-JAN-2023
+    LAST UPDATED:           24-JAN-2023
     DEVELOPER:              EMMANUEL ENCHILL
     DESCRIPTION:            THIS CLASS FILE HAS METHODS TO CONNECT TO THE DATABASE AND PERFORM CRUD ACTIONS ON IT. IT ACTS
                             AS THE GLUE BETWEEN THE DATABASE FILE AND FRONTEND CLASS THAT INTERACTS WITH THE USER.
@@ -15,18 +15,42 @@ from texttable import Texttable
 
 class prodbmanager:
     
-    def __init__(self, db_path):
+    def __init__(self, db_path=""):
         """Initialise the class with the path to the database file
         
         db_path     Path to the database file
         """
-        self._db_path = db_path
-    
+        self.__dbpath = db_path
 
-    def __init__(self, db_path=""):
-        """Initialise the class without any arguments"""
-        self._db_path = db_path
-    
+    @property
+    def get_path(self):
+        """Path to database file
+
+        Description:
+            This method obtains the path to the database file
+
+        Returns:
+            Path to the database file
+        """
+
+        return self.__dbpath
+
+    # @set_path.setter
+    def set_path(self, _new_path):
+        """Locate new database file
+        
+        Description:
+            This method updates the path to the database file
+
+        Args:
+            _new_path (str): path to the new database file
+        """
+        if type(_new_path) != str:
+            raise TypeError("Path must be a string of characters")
+        elif _new_path == " ":
+            raise ValueError("Path must be empty")
+        else:
+            self.__dbpath = _new_path
 
     def db_connection(self):
         """Database Connection
@@ -34,7 +58,7 @@ class prodbmanager:
         Create a connection to the database 
         """
         try:
-            conn = sqlite3.connect(self._db_path)
+            conn = sqlite3.connect(self.__dbpath)
             return conn
         except sqlite3.Error as e:
             print("Failed to connect: ", e)
@@ -69,7 +93,7 @@ class prodbmanager:
                 conn.close()
     
   
-    def save_record(self, _lastname, _firstname, _uniquecode, _profession, _email, _phone_number):
+    def save_record(self, _uniquecode, _lastname, _firstname, _prof, _email, _phone):
         """Save Record
 
         Commit the record to the database table
@@ -78,8 +102,8 @@ class prodbmanager:
             conn = self.db_connection()
             cursor = conn.cursor()
             
-            query = "INSERT INTO myprocons (lastname, firstname, code, profession, emailaddress, phone) VALUES (?, ?, ?, ?, ?, ?)"
-            data_tuple = (_lastname, _firstname, _uniquecode, _profession, _email, _phone_number)
+            query = "INSERT INTO tacts (code, lastname, firstname, prof, email, phone) VALUES (?, ?, ?, ?, ?, ?)"
+            data_tuple = (_uniquecode, _lastname, _firstname, _prof, _email, _phone)
             cursor.execute(query, data_tuple)
 
             conn.commit()
@@ -92,7 +116,7 @@ class prodbmanager:
                 return qty
 
         except sqlite3.Error as e:
-            print("\tFailed to save record: ", e)
+            print("\tFailed to save record, ", e)
 
         finally:
             if conn:
