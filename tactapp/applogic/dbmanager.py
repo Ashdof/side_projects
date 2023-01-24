@@ -11,3 +11,44 @@
 #!/usr/bin/python3
 
 import sqlite3
+
+class TactdbManager:
+    """Database management module"""
+
+    def __init__(self, dbpath):
+        """Initialise path to the database file"""
+
+        self.__dbpath = dbpath
+    
+    @property
+    def dbpath(self):
+        """Get Path
+        
+        Description:
+            This method obtains the path to the database file
+        
+        Returns:
+            Path to the database file
+        """
+
+        return self.__dbpath
+    
+    @dbpath.setter
+    def dbpath(self, newpath):
+        """Locate new database file
+        
+        Description:
+            This method updates the path to the database file
+
+        Args:
+            _new_path (str): path to the new database file
+        """
+
+        if not isinstance(newpath, str):
+            raise TypeError("{} must be a string of characters".format(newpath))
+        
+        elif newpath == " ":
+            raise ValueError("{} is blank and not allowed")
+        
+        else:
+            self.__dbpath = newpath
