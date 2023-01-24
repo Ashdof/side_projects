@@ -64,7 +64,7 @@ class TactdbManager:
         """
 
         try:
-            con = sqlite3.connect(self.__dbpath)
+            con = sqlite3.connect(self.dbpath)
             return con
         except sqlite3.Error as e:
             print("Failed to connect to database, ", e)
