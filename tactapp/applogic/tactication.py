@@ -65,11 +65,7 @@ class Tactication(TactRoot):
             ValueError if a blank value is assigned to the method
 
         """
-
-        if newname == " ":
-            raise ValueError("'{}' cannot be used as a username".format(newname))
-
-        elif len(newname) < 3:
+        if len(newname) < 3:
             raise ValueError("Username should be at least three charaters long.")
 
         else:
@@ -118,3 +114,22 @@ class Tactication(TactRoot):
 
         else:
             self.__password = newpass
+    
+    def signup(self):
+        """User signup
+        
+        Description:
+            This method is for user registration of a new user. To be able to use
+            the application, the user will have to register with a username and
+            password. This method invokes the user authentication method from the
+            database manager module to authenticate the user
+        """
+
+        uname = self.username()
+        pword = self.password()
+        
+        userreg = "Invoke the user authenticatiom method from the database manager module"
+        if userreg:
+            print("Welcome, {}".format(uname))
+        else:
+            print("Registration failed")
