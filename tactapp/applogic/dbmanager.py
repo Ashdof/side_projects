@@ -96,7 +96,8 @@ class TactdbManager(TactRoot):
         try:
             con = sqlite3.connect(self.dbpath)
             if con:
-                print("Database created suucessfully")
-            return con
+                return con
+            else:
+                return 1
         except sqlite3.Error as e:
             print("Failed to connect to database, ", e)
