@@ -1,11 +1,12 @@
 """
     =======================     TACT DATABASE MANAGER     ===================================
     FILE:                   DATABASE ACCESS CLASS
-    DATE:                   24-JAN-2023
-    LAST UPDATED:           24-JAN-2023
+    DATE CREATED:           24-JAN-2023
+    LAST UPDATED:           25-JAN-2023
     DEVELOPER:              EMMANUEL ENCHILL
     DESCRIPTION:            THIS CLASS FILE HAS METHODS TO CONNECT TO THE DATABASE AND PERFORM CRUD ACTIONS ON IT. IT ACTS
-                            AS THE GLUE BETWEEN THE DATABASE FILE AND FRONTEND CLASS THAT INTERACTS WITH THE USER.
+                            AS THE GLUE BETWEEN THE DATABASE FILE AND FRONTEND CLASS THAT INTERACTS WITH THE USER. IT ALSO
+                            INHERITS FROM THE ROOT MODULE AND ITS PROPERTIES
 """
 
 #!/usr/bin/python3
@@ -17,7 +18,18 @@ class TactdbManager(TactRoot):
     """Database management module"""
 
     def __init__(self, dbpath="", id=None):
-        """Initialise path to the database file"""
+        """Initialise module
+        
+        Description:
+            This method initialises the module by setting the path to the
+            database file and the id if it is provided
+        
+        Args:
+            id (int): an integer value that tracks the number of database
+            instances created.
+
+            dbpath (str): absolute path to the database file
+        """
 
         self.__dbpath = dbpath
         super().__init__(id)
@@ -27,7 +39,9 @@ class TactdbManager(TactRoot):
         """Get Path
         
         Description:
-            This method obtains the path to the database file
+            This method obtains the path to the database file. It executed by
+            invoking the function through a dot-notation scheme without the
+            parenthesis
         
         Returns:
             Path to the database file
@@ -40,10 +54,17 @@ class TactdbManager(TactRoot):
         """Locate new database file
         
         Description:
-            This method updates the path to the database file
+            This method updates the path to the database file by assigning a
+            custom path to the module. It can be assigned a new path via a dot
+            notation: eg. db_variable.dbpath = </path/to/file>. The path is
+            string in either single or double quotes
 
         Args:
             _new_path (str): path to the new database file
+        
+        Raises:
+            TypeError if invalide type, such as int, float etc is assigned
+            ValueError if of the elements in the list of faults is assigned
         """
 
         if not isinstance(newpath, str):
@@ -59,10 +80,14 @@ class TactdbManager(TactRoot):
         """Database connection
         
         Description:
-            This method creates a connection to the database file
+            This method creates a connection to the database file by invoking the
+            property method for the path to the database file. If the database file
+            does not exists, it first creates the database, creates a connection to
+            it and returns the connection string which can be used to connect execute
+            transactions on the database
         
         Returns:
-            A connection string to the database file
+            A connection string to the database
         """
 
         try:
