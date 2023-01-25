@@ -94,10 +94,42 @@ class TactdbManager(TactRoot):
         """
 
         try:
-            con = sqlite3.connect(self.dbpath)
-            if con:
-                return con
-            else:
-                return 1
+            conn = sqlite3.connect(self.dbpath)
+            return conn
+
         except sqlite3.Error as e:
             print("Failed to connect to database, ", e)
+    
+    def save_tact_user(self, regdate, username, password, ubase):
+        """Save new user record
+
+        Description:
+            This method commits the record of a newly registered user into a precreated
+            table purposefully for storing user information. 
+
+        Args:
+            regdate (datetime): the date of registration of the user
+            username (str): the username of the user
+            password (str): a string of at least 6 characters used as password by the user
+            ubase (str): a string of uuid which serve the user's purpose
+        """
+
+        try:
+            conn = self.dbconnection()
+            cursor = conn.cursor()
+
+            query = "INSERT INTO tactusera73fb274976741158f3854f0c1554c0b (date_registered, username, password, userbase)\
+                VALUES (?, ?, ?, ?)"
+            queryple = (regdate, username, password, ubase)
+            cursor.execute(query, queryple)
+            conn.commit()
+
+            if conn:
+                return 0
+
+        except sqlite3.Error as e:
+            print("\tError!", e)
+        finally:
+            if conn:
+                cursor.close()
+                conn.close()

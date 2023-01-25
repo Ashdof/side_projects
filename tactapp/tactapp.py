@@ -11,6 +11,7 @@
 """
 
 #!/usr/bin/python3
+from getpass import getpass
 
 from applogic.tactication import Tactication
 
@@ -48,7 +49,7 @@ class UserSecure:
                 self.usersignup()
             
             else:
-                password = input("\tPassword: ")
+                password = getpass("\tPassword: ")
 
                 if password == "":
                     print("\t[X] User signin cancelled.")
@@ -92,7 +93,7 @@ class UserSecure:
                 print("\tUsername cannot be blank!\n")
 
             else:
-                password = input("\tPassword: ")
+                password = getpass("\tPassword: ")
 
                 if password == "":
                     print("\t[X] User registration cancelled.")
@@ -103,7 +104,7 @@ class UserSecure:
                     print("\tPassword cannot be blank!\n")
 
                 else:
-                    password_2 = input("\tConfirm password: ")
+                    password_2 = getpass("\tConfirm Password: ")
 
                     if password_2 == "":
                         print("\t[X] User registration cancelled.")
@@ -117,7 +118,7 @@ class UserSecure:
                         reguser = Tactication(username=username, password=password_2, id=1)
                         reguser.signup()
                         if reguser:
-                            print("\n\tNow sign in\n\t________________________")
+                            print("\n\tRegistration successful, now sign in\n\t______________________________")
                             break
 
                         else:

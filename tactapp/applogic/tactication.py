@@ -14,6 +14,11 @@ import uuid
 import datetime
 
 from applogic.tactroot import TactRoot
+from applogic.dbmanager import TactdbManager
+
+dbasepath = "dbase/tacters.db"
+db = TactdbManager()
+
 
 class Tactication(TactRoot):
     """User authentication module"""
@@ -127,12 +132,19 @@ class Tactication(TactRoot):
             password. This method invokes the user authentication method from the
             database manager module to authenticate the user
         """
-        tday = datetime.date.today()
-        uid = uuid.uuid4()
-        uname = self.username
-        pword = self.password
-        
-        # "Invoke the user authenticatiom method from the database manager module"
-        userreg = 0
-        if userreg == 0:
-            return 0
+        try:
+            db.dbpath = dbasepath
+
+            tday = datetime.date.today()
+            uid = uuid.uuid4().hex
+            userid = "tactuser" + str(uid)
+            uname = self.username
+            pword = self.password
+
+            # userreg = db.save_tact_user(regdate=tday, username=uname, password=pword, ubase=userid)
+            userreg = 0
+            if userreg:
+                return 0
+
+        except (TypeError, ValueError, AttributeError) as e:
+            print("\tError!", e)
