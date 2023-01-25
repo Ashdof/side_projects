@@ -29,15 +29,30 @@ class UserSecure:
             This method enables the user to sign in to the application with his username
             and passowrd
         """
+        pass
 
+    def auth(self):
+        """User registration
+        
+        Description:
+            This method registers a new user for the application
+        """
+
+        print("\n\tSign up to proceed\n\t_____________________________")
+        username = input("\tUsername: ")
+        password = input("\tPassword: ")
+        password_2 = input("\tConfirm password: ")
 
 #   ==============================================================================
 
 if __name__ == '__main__':
+    user = UserSecure()
+
     print("\tLogin or type 'su' to signup\n\t_____________________________")
     username = input("\tUsername: ")
-    password = input("\tPassword: ")
-
-    if password:
-        pass
+    
+    if username == "su":
+        user.auth()
+    else:
+        password = input("\tPassword: ")
         # tact.main()
