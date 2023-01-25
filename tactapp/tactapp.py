@@ -1,7 +1,7 @@
 """
     =======================     TACT APPLICATION     ===================================
     FILE:                   USER AUTHENTICATION CLASS
-    DATE CREATED:                   23-JAN-2023
+    DATE CREATED:           25-JAN-2023
     LAST UPDATED:           25-JAN-2023
     DEVELOPER:              EMMANUEL ENCHILL
 
