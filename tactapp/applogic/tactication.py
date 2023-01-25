@@ -10,6 +10,9 @@
 
 #!/usr/bin/python3
 
+import uuid
+import datetime
+
 from applogic.tactroot import TactRoot
 
 class Tactication(TactRoot):
@@ -124,7 +127,8 @@ class Tactication(TactRoot):
             password. This method invokes the user authentication method from the
             database manager module to authenticate the user
         """
-
+        tday = datetime.date.today()
+        uid = uuid.uuid4()
         uname = self.username
         pword = self.password
         
