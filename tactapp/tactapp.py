@@ -31,7 +31,7 @@ class UserSecure:
         """
         pass
 
-    def auth(self):
+    def usersignup(self):
         """User registration
 
         Description:
@@ -95,7 +95,7 @@ if __name__ == '__main__':
     username = input("\tUsername: ")
     
     if username == "su":
-        user.auth()
+        user.usersignup()
     else:
         password = input("\tPassword: ")
         # tact.main()
