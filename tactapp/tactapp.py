@@ -45,7 +45,7 @@ class UserSecure:
             username = input("\tUsername: ")
 
             if username == "":
-                print("\tUser registration cancelled.")
+                print("\t[X] User registration cancelled.")
                 done = True
                 break
 
