@@ -12,7 +12,7 @@
 
 #!/usr/bin/python3
 
-# import resource.apphome as tact
+from applogic.tactication import Tactication
 
 class UserSecure:
     """User Authentication CLass"""
@@ -33,15 +33,58 @@ class UserSecure:
 
     def auth(self):
         """User registration
-        
+
         Description:
             This method registers a new user for the application
         """
+        done = False
 
         print("\n\tSign up to proceed\n\t_____________________________")
-        username = input("\tUsername: ")
-        password = input("\tPassword: ")
-        password_2 = input("\tConfirm password: ")
+
+        while not done:
+            username = input("\tUsername: ")
+
+            if username == "":
+                print("\tUser registration cancelled.")
+                done = True
+                break
+
+            elif username == " ":
+                print("\tUsername cannot be blank!\n")
+
+            else:
+                password = input("\tPassword: ")
+
+                if password == "":
+                    print("\t[X] User registration cancelled.")
+                    done = True
+                    break
+
+                elif password == " ":
+                    print("\tPassword cannot be blank!\n")
+
+                else:
+                    password_2 = input("\tConfirm password: ")
+
+                    if password_2 == "":
+                        print("\t[X] User registration cancelled.")
+                        done = True
+                        break
+
+                    elif password_2 != password:
+                        print("\tPasswords do not match!\n")
+
+                    else:
+                        reguser = Tactication(username=username, password=password_2, id=1)
+                        reguser.signup()
+                        if reguser:
+                            print("\n\tWelcome, {}".format(username))
+                            break
+
+                        else:
+                            print("Registration failed!")
+                            break
+
 
 #   ==============================================================================
 

@@ -119,17 +119,16 @@ class Tactication(TactRoot):
         """User signup
         
         Description:
-            This method is for user registration of a new user. To be able to use
+            This method is for registration of a new user. To be able to use
             the application, the user will have to register with a username and
             password. This method invokes the user authentication method from the
             database manager module to authenticate the user
         """
 
-        uname = self.username()
-        pword = self.password()
+        uname = self.username
+        pword = self.password
         
-        userreg = "Invoke the user authenticatiom method from the database manager module"
-        if userreg:
-            print("Welcome, {}".format(uname))
-        else:
-            print("Registration failed")
+        # "Invoke the user authenticatiom method from the database manager module"
+        userreg = 0
+        if userreg == 0:
+            return 0
