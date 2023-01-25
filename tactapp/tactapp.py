@@ -22,14 +22,53 @@ class UserSecure:
 
         pass
     
-    def user_login(self):
+    def usersignin(self):
         """User Login
         
         Description:
             This method enables the user to sign in to the application with his username
             and passowrd
         """
-        pass
+        done = False
+
+        print("\tLogin or type 'su' to signup\n\t_____________________________")
+
+        while not done:
+
+            username = input("\tUsername: ")
+            if username == "":
+                print("\t[X] User signin cancelled.")
+                done = True
+                break
+
+            elif username == " ":
+                print("\tUsername cannot be blank!\n")
+            
+            if username == "su":
+                self.usersignup()
+            
+            else:
+                password = input("\tPassword: ")
+
+                if password == "":
+                    print("\t[X] User signin cancelled.")
+                    done = True
+                    break
+
+                elif password == " ":
+                    print("\tPassword cannot be blank!\n")
+                
+                else:
+                    loguser = Tactication(username=username, password=password)
+                    loguser.signup()
+                    if loguser:
+                        print("\n\tWelcome {}".format(username))
+                        # self.usersignin()
+                        break
+
+                    else:
+                        print("\n\tLogin failed!")
+                        break
 
     def usersignup(self):
         """User registration
@@ -78,24 +117,17 @@ class UserSecure:
                         reguser = Tactication(username=username, password=password_2, id=1)
                         reguser.signup()
                         if reguser:
-                            print("\n\tWelcome, {}".format(username))
+                            print("\n\tNow sign in\n\t________________________")
                             break
 
                         else:
-                            print("Registration failed!")
+                            print("\n\tRegistration failed!")
                             break
 
 
 #   ==============================================================================
 
 if __name__ == '__main__':
-    user = UserSecure()
 
-    print("\tLogin or type 'su' to signup\n\t_____________________________")
-    username = input("\tUsername: ")
-    
-    if username == "su":
-        user.usersignup()
-    else:
-        password = input("\tPassword: ")
-        # tact.main()
+    user = UserSecure()
+    user.usersignin()
