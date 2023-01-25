@@ -67,14 +67,17 @@ class TactdbManager(TactRoot):
             ValueError if of the elements in the list of faults is assigned
         """
 
+        faults = ["", " ", "@", "#", "-", "?", ">", "<", "}", "{", "|", "\\", "%"]
+
         if not isinstance(newpath, str):
             raise TypeError("{} must be a string of characters".format(newpath))
         
-        elif newpath == " ":
-            raise ValueError("{} is blank and not allowed")
-        
         else:
-            self.__dbpath = newpath
+            for fault in newpath:
+                if fault in faults:
+                    raise ValueError("{} is present in path name and it\'s not allowed".format(fault))
+        
+        self.__dbpath = newpath
     
     def dbconnection(self):
         """Database connection
