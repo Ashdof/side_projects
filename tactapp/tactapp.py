@@ -1,8 +1,8 @@
 """
     =======================     TACT APPLICATION     ===================================
     FILE:                   USER AUTHENTICATION CLASS
-    DATE:                   23-JAN-2023
-    LAST UPDATED:           23-JAN-2023
+    DATE CREATED:                   23-JAN-2023
+    LAST UPDATED:           25-JAN-2023
     DEVELOPER:              EMMANUEL ENCHILL
 
     DESCRIPTION:            THIS IS THE IMPORVED VERSION OF THE MYPRONETWORK APPLICATION
@@ -12,7 +12,7 @@
 
 #!/usr/bin/python3
 
-import resource.apphome as tact
+# import resource.apphome as tact
 
 class UserSecure:
     """User Authentication CLass"""
@@ -39,4 +39,5 @@ if __name__ == '__main__':
     password = input("\tPassword: ")
 
     if password:
-        tact.main()
+        pass
+        # tact.main()
