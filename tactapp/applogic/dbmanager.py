@@ -2,7 +2,7 @@
     =======================     TACT DATABASE MANAGER     ===================================
     FILE:                   DATABASE ACCESS CLASS
     DATE CREATED:           24-JAN-2023
-    LAST UPDATED:           25-JAN-2023
+    LAST UPDATED:           27-JAN-2023
     DEVELOPER:              EMMANUEL ENCHILL
     DESCRIPTION:            THIS CLASS FILE HAS METHODS TO CONNECT TO THE DATABASE AND PERFORM CRUD ACTIONS ON IT. IT ACTS
                             AS THE GLUE BETWEEN THE DATABASE FILE AND FRONTEND CLASS THAT INTERACTS WITH THE USER. IT ALSO
@@ -86,7 +86,7 @@ class TactdbManager(TactRoot):
             This method creates a connection to the database file by invoking the
             property method for the path to the database file. If the database file
             does not exists, it first creates the database, creates a connection to
-            it and returns the connection string which can be used to connect execute
+            it and returns the connection string which can be used to connect execution
             transactions on the database
         
         Returns:
