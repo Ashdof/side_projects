@@ -92,13 +92,12 @@ class TactdbManager(TactRoot):
         Returns:
             A connection string to the database
         """
-
         try:
-            conn = sqlite3.connect(self.dbpath)
+            conn = sqlite3.connect(self.__dbpath)
             return conn
 
         except sqlite3.Error as e:
-            print("Failed to connect to database, ", e)
+            print("\tFailed to connect to database: ", e)
     
     def save_tact_user(self, regdate, username, password, ubase):
         """Save new user record

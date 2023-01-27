@@ -15,6 +15,8 @@ from getpass import getpass
 
 from applogic.tactication import Tactication
 
+db = Tactication()
+
 class UserSecure:
     """User Authentication CLass"""
 
@@ -61,10 +63,9 @@ class UserSecure:
                 
                 else:
                     loguser = Tactication(username=username, password=password)
-                    loguser.signup()
+                    loguser.connect()
                     if loguser:
-                        print("\n\tWelcome {}".format(username))
-                        # self.usersignin()
+                        # self.usersignin() Invoke app main home page here
                         break
 
                     else:
@@ -115,15 +116,23 @@ class UserSecure:
                         print("\tPasswords do not match!\n")
 
                     else:
-                        reguser = Tactication(username=username, password=password_2, id=1)
-                        reguser.signup()
-                        if reguser:
-                            print("\n\tRegistration successful, now sign in\n\t______________________________")
-                            break
+                        try:
+                            reguser = Tactication(username=username, password=password_2, id=1)
+                            reguser.signup()
 
-                        else:
-                            print("\n\tRegistration failed!")
-                            break
+                            if reguser:
+                                print("\n\tRegistration successful, now sign in\n\t______________________________")
+                                break
+
+                        except (TypeError, ValueError, AttributeError) as e:
+                            print("\tError!", e)
+        
+    def test_connection(self):
+        try:
+            db.connect()
+
+        except (TypeError, ValueError, AttributeError) as e:
+            print("\tError!", e)
 
 
 #   ==============================================================================
@@ -131,4 +140,4 @@ class UserSecure:
 if __name__ == '__main__':
 
     user = UserSecure()
-    user.usersignin()
+    user.test_connection()

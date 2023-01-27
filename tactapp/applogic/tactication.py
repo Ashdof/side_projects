@@ -16,8 +16,9 @@ import datetime
 from applogic.tactroot import TactRoot
 from applogic.dbmanager import TactdbManager
 
-dbasepath = "dbase/tacters.db"
+newpath = "applogic/dbase/tactdbase.db"
 db = TactdbManager()
+db.dbpath = newpath
 
 
 class Tactication(TactRoot):
@@ -74,7 +75,7 @@ class Tactication(TactRoot):
 
         """
         if len(newname) < 3:
-            raise ValueError("Username should be at least three charaters long.")
+            raise ValueError("\tUsername should be at least three charaters long.")
 
         else:
             self.__username = newname
@@ -118,7 +119,7 @@ class Tactication(TactRoot):
         """
 
         if len(newpass) < 6:
-            raise ValueError("Password must be at least 6 characters long")
+            raise ValueError("\tPassword must be at least 6 characters long")
 
         else:
             self.__password = newpass
@@ -132,19 +133,25 @@ class Tactication(TactRoot):
             password. This method invokes the user authentication method from the
             database manager module to authenticate the user
         """
+        tday = datetime.date.today()
+        uid = uuid.uuid4().hex
+        userid = "tactuser" + str(uid)
+        uname = self.username
+        pword = self.password
+
         try:
-            db.dbpath = dbasepath
-
-            tday = datetime.date.today()
-            uid = uuid.uuid4().hex
-            userid = "tactuser" + str(uid)
-            uname = self.username
-            pword = self.password
-
-            # userreg = db.save_tact_user(regdate=tday, username=uname, password=pword, ubase=userid)
-            userreg = 0
+            userreg = db.save_tact_user(regdate=tday, username=uname, password=pword, ubase=userid)
             if userreg:
-                return 0
+                print("Data saved!")
+
+        except (TypeError, ValueError, AttributeError) as e:
+            print("\tError!", e)
+
+    def connect(self):
+        try:
+            userreg = db.dbconnection()
+            if userreg:
+                print("\tConnected!")
 
         except (TypeError, ValueError, AttributeError) as e:
             print("\tError!", e)
