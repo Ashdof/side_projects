@@ -117,7 +117,7 @@ class TactdbManager(TactRoot):
             conn = self.dbconnection()
             cursor = conn.cursor()
 
-            query = "INSERT INTO tacta73fb274976741158f3854f0c1554c0b (date_registered, username, password, userbase)\
+            query = "INSERT INTO tacta73fb274976741158f3854f0c1554c0b (registrationdate, username, password, ubase)\
                 VALUES (?, ?, ?, ?)"
             queryple = (regdate, username, password, ubase)
             cursor.execute(query, queryple)

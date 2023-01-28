@@ -146,7 +146,7 @@ class Tactication(TactRoot):
         try:
             userreg = db.save_tact_user(regdate=tday, username=uname, password=pword, ubase=userid)
             if userreg:
-                print("Data saved!")
+                print("\tData saved!")
 
         except (TypeError, ValueError, AttributeError) as e:
             print("\tError!", e)
