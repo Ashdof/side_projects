@@ -74,10 +74,15 @@ class Tactication(TactRoot):
             ValueError if a blank value is assigned to the method
 
         """
-        if len(newname) < 3:
-            raise ValueError("\tUsername should be at least three charaters long.")
-
+        faults = ["_", "-", "\\", "/", "?", "@", "#", "~", "&", "$", "(", ")", "[", "{", "]", "}", "|", "!"]
+        if len(newname) < 4:
+            raise ValueError("\tUsername must be at least four charaters long.")
+        
         else:
+            for fault in newname:
+                if fault in faults:
+                    raise ValueError("'{}' cannot be used in a username.".format(fault))
+
             self.__username = newname
 
     @property
@@ -134,8 +139,7 @@ class Tactication(TactRoot):
             database manager module to authenticate the user
         """
         tday = datetime.date.today()
-        uid = uuid.uuid4().hex
-        userid = "tactuser" + str(uid)
+        userid = self.getuuid()
         uname = self.username
         pword = self.password
 
@@ -155,3 +159,29 @@ class Tactication(TactRoot):
 
         except (TypeError, ValueError, AttributeError) as e:
             print("\tError!", e)
+
+    def getuuid(self):
+        """Generate a UUID
+
+        Description:
+            This method generates a UUID4 (universally unique identifier). It computes
+            the hexdecimal value, takes slices from the user's supplied username, appends
+            the slices to the hexed uuid and returns a string representation of the uuid
+        
+        Returns:
+            A string representation of the computed uuid
+        """
+        try:
+            length_of_username = len(self.username)
+            uid = uuid.uuid4().hex
+            half_value = int((len(uid) / length_of_username) * 3)
+            first_uuid_part = uid[:half_value]
+            second_uuid_part = uid[half_value:]
+            userid = self.username[0] + str(first_uuid_part) + self.username[1:3] + str(second_uuid_part) + self.username[3:]
+
+            return userid
+
+        except (ZeroDivisionError, ValueError, TypeError) as e:
+            print("Error!", e)
+
+        
