@@ -93,6 +93,9 @@ class UserSecure:
             elif username == " ":
                 print("\tUsername cannot be blank!\n")
 
+            elif len(username) < 4:
+                print("\tUsername must be at least 4 charaters long.")
+
             else:
                 password = getpass("\tPassword: ")
 
@@ -103,6 +106,9 @@ class UserSecure:
 
                 elif password == " ":
                     print("\tPassword cannot be blank!\n")
+                
+                elif len(password) < 6:
+                    print("\tPassword must be at least 6 characters long")
 
                 else:
                     password_2 = getpass("\tConfirm Password: ")

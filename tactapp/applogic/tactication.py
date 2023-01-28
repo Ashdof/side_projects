@@ -163,7 +163,7 @@ class Tactication(TactRoot):
             if userlog == 1:
                 print("\tWelcome {}".format(self.username))
             else:
-                print("\tEither {} or {} was not found".format(self.username, self.password))
+                print("\t{}'s information was not found".format(self.username))
 
         except (ValueError, TypeError, AttributeError) as e:
             print("Error!", e)
