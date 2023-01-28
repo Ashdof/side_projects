@@ -132,3 +132,40 @@ class TactdbManager(TactRoot):
             if conn:
                 cursor.close()
                 conn.close()
+    
+    def user_login(self, username, password):
+        """User login
+
+        Description:
+            This method enables a user to log into the application by supplying a username and a
+            password.
+        
+        Args:
+            username (str): the username of this user
+            password (str): the password of this user
+        
+        Returns:
+            1 if both username and password exist in the database
+            0 if either username or password does not exist in the database
+        """
+
+        try:
+            conn = self.dbconnection()
+            cursor = conn.cursor()
+
+            query = "SELECT * FROM tacta73fb274976741158f3854f0c1554c0b WHERE username = ? AND password = ? "
+            querytuple = (username, password)
+            cursor.execute(query, querytuple)
+
+            if cursor.fetchall():
+                return 1
+            else:
+                return 0
+
+        except sqlite3.Error as e:
+            print("\tError!", e)
+        
+        finally:
+            if conn:
+                cursor.close()
+                conn.close()

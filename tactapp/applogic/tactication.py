@@ -150,6 +150,23 @@ class Tactication(TactRoot):
 
         except (TypeError, ValueError, AttributeError) as e:
             print("\tError!", e)
+    
+    def userlogin(self):
+        """User login
+
+        Description:
+            This method enables a user to log into the application with a username and
+            password information.
+        """
+        try:
+            userlog = db.user_login(self.username, self.password)
+            if userlog == 1:
+                print("\tWelcome {}".format(self.username))
+            else:
+                print("\tEither {} or {} was not found".format(self.username, self.password))
+
+        except (ValueError, TypeError, AttributeError) as e:
+            print("Error!", e)
 
     def connect(self):
         try:

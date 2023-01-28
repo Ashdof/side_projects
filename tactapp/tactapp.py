@@ -63,7 +63,7 @@ class UserSecure:
                 
                 else:
                     loguser = Tactication(username=username, password=password)
-                    loguser.connect()
+                    loguser.userlogin()
                     if loguser:
                         # self.usersignin() Invoke app main home page here
                         break
