@@ -10,13 +10,12 @@
     CLASS DESCRIPTION:      THIS CLASS PROVIDES USER AUTHENTICATION
 """
 
-#!/usr/bin/python3
+#!/usr/bin/env python3
 from getpass import getpass
 
 from applogic.tactication import Tactication
 from applogic.tacthome import TactAppHome
 
-db = Tactication()
 app = TactAppHome()
 
 class UserSecure:
@@ -62,10 +61,15 @@ class UserSecure:
 
                 elif password == " ":
                     print("\tPassword cannot be blank!\n")
-                
+
                 else:
-                    print()
-                    app.main(username=username)
+                    log = Tactication(username=username, password=password)
+                    log.userlogin()
+                    if log == 1:
+                        print("\tWelcome {}".format(username))
+                        app.main(username=username)
+                    else:
+                        print("\tLogin failed. {}'s information was not found\n".format(username))
 
     def usersignup(self):
         """User registration
@@ -128,7 +132,7 @@ class UserSecure:
 
                         else:
                             try:
-                                reguser = Tactication(username=username, password=password_2, id=1)
+                                reguser = Tactication(firstname=firstname, username=username, password=password_2)
                                 reguser.signup()
 
                                 if reguser:
@@ -137,14 +141,6 @@ class UserSecure:
 
                             except (TypeError, ValueError, AttributeError) as e:
                                 print("\tError!", e)
-            
-    def test_connection(self):
-        try:
-            db.connect()
-
-        except (TypeError, ValueError, AttributeError) as e:
-            print("\tError!", e)
-
 
 #   ==============================================================================
 

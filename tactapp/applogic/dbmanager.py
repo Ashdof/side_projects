@@ -9,7 +9,7 @@
                             INHERITS FROM THE ROOT MODULE AND ITS PROPERTIES
 """
 
-#!/usr/bin/python3
+#!/usr/bin/env python3
 
 import sqlite3
 from applogic.tactroot import TactRoot
@@ -153,7 +153,7 @@ class TactdbManager(TactRoot):
             conn = self.dbconnection()
             cursor = conn.cursor()
 
-            query = "SELECT * FROM tacta73fb274976741158f3854f0c1554c0b WHERE username = ? AND password = ? "
+            query = "SELECT username, password FROM tacta73fb274976741158f3854f0c1554c0b WHERE username = ? AND password = ? "
             querytuple = (username, password)
             cursor.execute(query, querytuple)
 

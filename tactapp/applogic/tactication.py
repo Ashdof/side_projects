@@ -8,7 +8,7 @@
     MODULE DESCRIPTION:     THIS MODULE PROVIDES USER AUTHENTICATION METHODS
 """
 
-#!/usr/bin/python3
+#!/usr/bin/env python3
 
 import uuid
 import datetime
@@ -209,9 +209,9 @@ class Tactication(TactRoot):
         try:
             userlog = db.user_login(self.username, self.password)
             if userlog == 1:
-                print("\tWelcome {}".format(self.username))
+                return 1
             else:
-                print("\t{}'s information was not found".format(self.username))
+                return 0
 
         except (ValueError, TypeError, AttributeError) as e:
             print("Error!", e)
