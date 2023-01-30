@@ -55,6 +55,6 @@ This is a simple text file with instructions on how to navigate the application 
 ## Sections of the app in pitures
 
 ``` Application's home page ```
-![Alt text](/applogic/img/home.png "Application home")
+<img src="applogic/img/home.png" alt="application main page">
 
 ` Enjoy the Game `
