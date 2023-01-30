@@ -18,7 +18,7 @@ class TactAppHome:
 
         pass
 
-    def title(self):
+    def title(self, username):
         """Application description
 
         Description:
@@ -26,12 +26,12 @@ class TactAppHome:
         """
 
         appname = "\tTactApp Application"
-        tag_1 = "\tKeep track of your professional network"
+        tag_1 = f"\tManage {username}'s Contacts"
         tag_2 = "\tThis application is powered by commands. Use the following to \n\tperform most common tasks. Use tactman for more."
 
         line = "\t__________________________________________"
     
-    def main(self):
+    def main(self, username):
         """Main Method
         
         Description:
@@ -40,7 +40,7 @@ class TactAppHome:
         """
 
         print()
-        self.title()
+        self.title(username=username)
         print("\tNew: add\tEdit: dit\tDelete: del\tDisplay: dis")
         print("\t__________________________________________")
 
@@ -59,9 +59,3 @@ class TactAppHome:
                 print("\n\tAPPLICATION EXIT")
                 done = True
                 exit(0)
-
-
-if __name__ == '__main__':
-
-    app = TactAppHome()
-    app.main()
