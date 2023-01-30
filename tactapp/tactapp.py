@@ -83,56 +83,66 @@ class UserSecure:
         print("\n\tSign up to proceed\n\t_____________________________")
 
         while not done:
-            username = input("\tUsername: ")
+            firstname = input("\tFirst name: ")
 
-            if username == "":
+            if firstname == " ":
+                print("\tFirst name cannot be blank!\n")
+            
+            elif firstname == "":
                 print("\t[X] User registration cancelled.")
                 done = True
                 break
-
-            elif username == " ":
-                print("\tUsername cannot be blank!\n")
-
-            elif len(username) < 4:
-                print("\tUsername must be at least 4 charaters long.")
-
             else:
-                password = getpass("\tPassword: ")
+                username = input("\tUsername: ")
 
-                if password == "":
+                if username == "":
                     print("\t[X] User registration cancelled.")
                     done = True
                     break
 
-                elif password == " ":
-                    print("\tPassword cannot be blank!\n")
-                
-                elif len(password) < 6:
-                    print("\tPassword must be at least 6 characters long")
+                elif username == " ":
+                    print("\tUsername cannot be blank!\n")
+
+                elif len(username) < 4:
+                    print("\tUsername must be at least 4 charaters long.")
 
                 else:
-                    password_2 = getpass("\tConfirm Password: ")
+                    password = getpass("\tPassword: ")
 
-                    if password_2 == "":
+                    if password == "":
                         print("\t[X] User registration cancelled.")
                         done = True
                         break
 
-                    elif password_2 != password:
-                        print("\tPasswords do not match!\n")
+                    elif password == " ":
+                        print("\tPassword cannot be blank!\n")
+                    
+                    elif len(password) < 6:
+                        print("\tPassword must be at least 6 characters long")
 
                     else:
-                        try:
-                            reguser = Tactication(username=username, password=password_2, id=1)
-                            reguser.signup()
+                        password_2 = getpass("\tConfirm Password: ")
 
-                            if reguser:
-                                print("\n\tRegistration successful, now sign in\n\t______________________________")
-                                break
+                        if password_2 == "":
+                            print("\t[X] User registration cancelled.")
+                            done = True
+                            break
 
-                        except (TypeError, ValueError, AttributeError) as e:
-                            print("\tError!", e)
-        
+                        elif password_2 != password:
+                            print("\tPasswords do not match!\n")
+
+                        else:
+                            try:
+                                reguser = Tactication(username=username, password=password_2, id=1)
+                                reguser.signup()
+
+                                if reguser:
+                                    print("\n\tRegistration successful, now sign in\n\t______________________________")
+                                    break
+
+                            except (TypeError, ValueError, AttributeError) as e:
+                                print("\tError!", e)
+            
     def test_connection(self):
         try:
             db.connect()
