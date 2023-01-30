@@ -169,38 +169,3 @@ class TactdbManager(TactRoot):
             if conn:
                 cursor.close()
                 conn.close()
-    
-    def user_id(self, username):
-        """Fetch user id
-
-        Description:
-            This method fetches the user id generated from the uuid from the users table.
-        
-        Args:
-            username (str): the username of this user
-        
-        Returns:
-            the user uuid of this user
-        """
-
-        try:
-            conn = self.dbconnection()
-            cursor = conn.cursor()
-
-            query = "SELECT ubase FROM tacta73fb274976741158f3854f0c1554c0b WHERE username = ? "
-            querytuple = (username)
-            cursor.execute(query, querytuple)
-            record = cursor.fetchall()
-
-            if cursor:
-                return record
-            else:
-                return 1
-
-        except sqlite3.Error as e:
-            print("\tError!", e)
-        
-        finally:
-            if conn:
-                cursor.close()
-                conn.close()
