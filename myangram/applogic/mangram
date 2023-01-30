@@ -1,0 +1,31 @@
+                            
+MY ANAGRAM GAME
+REFERNCE MANUAL
+
+
+NAME
+                mangram - this command displays the reference manual of the application
+
+DESCRIPTION
+                My Anagram Game is a simple command line based word game. It operates by executing commads which are explained below
+
+==========================:    COMMANDS    :================================
+
+The Quiz
+                What do you want to do? 
+                This is the Quiz. It prompts for what should be done. If the command provided is found, the appropriate function is executed; otherwise the Quiz is displayed again.  
+
+play            Play game 
+                When invoked, this command changes the program into game mode where the game can be played. To quit the game mode, enter either of these: "q", "quit", "Q", "Quit", "QUIT"
+
+ds              Display records
+                This command when invoked changes the application to records mode. In this mode, the game history and statistics can be displayed. When invoked, some options appear. Selecting a number associated with an option displays the associated information. Providing the wrong data will keep the process in a loop. However, pressing the "Enter" key without providing any data will exit the display mode
+
+                1 - Detail Records:       Displays all records in detail
+
+
+mangram         The Application Manual
+                This command, when invoked displays the application's manual
+
+done            Quit MY ANAGRAM GAME
+                This command exits the application, displays a message and returns the console to the operating system.
