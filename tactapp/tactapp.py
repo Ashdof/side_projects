@@ -16,8 +16,10 @@ import time
 
 from applogic.tactication import Tactication
 from applogic.tacthome import TactAppHome
+from applogic.dbmanager import TactdbManager
 
 app = TactAppHome()
+db = TactdbManager("applogic/dbase/tactdbase.db")
 
 class UserSecure:
     """User Authentication CLass"""
@@ -93,14 +95,18 @@ class UserSecure:
             elif firstname == "":
                 print("\t[X] User registration cancelled.")
                 done = True
-                break
+                exit(0)
             else:
                 username = input("\tUsername: ")
+                check = db.verify_user(username=username)
 
-                if username == "":
+                if check:
+                    print("\t'{}' taken, please try again.\n".format(username.upper()))
+
+                elif username == "":
                     print("\t[X] User registration cancelled.")
                     done = True
-                    break
+                    exit(0)
 
                 elif username == " ":
                     print("\tUsername cannot be blank!\n")
@@ -114,7 +120,7 @@ class UserSecure:
                     if password == "":
                         print("\t[X] User registration cancelled.")
                         done = True
-                        break
+                        exit(0)
 
                     elif password == " ":
                         print("\tPassword cannot be blank!\n")
@@ -128,7 +134,7 @@ class UserSecure:
                         if password_2 == "":
                             print("\t[X] User registration cancelled.")
                             done = True
-                            break
+                            exit(0)
 
                         elif password_2 != password:
                             print("\tPasswords do not match!\n")

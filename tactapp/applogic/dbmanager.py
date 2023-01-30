@@ -167,3 +167,33 @@ class TactdbManager(TactRoot):
             if conn:
                 cursor.close()
                 conn.close()
+    
+    def verify_user(self, username):
+        """Verify user
+
+        Description:
+            This method is used to verify the availability of the username supplied
+            by the user. When the user provides the username during signup, the system
+            quickly checks the database to ascertain the name does not already exist.
+            If it does, it notifies user by repeating the request for new username along
+            with a message, stating the reason.
+        
+        Args:
+            username (str): the username of this user
+        """
+
+        try:
+            conn = self.dbconnection()
+            cursor = conn.cursor()
+            find_user = ("SELECT * FROM tacters WHERE username = ?")
+            cursor.execute(find_user, [(username)])
+            rs = cursor.fetchall()
+            return rs
+
+        except sqlite3.Error as e:
+            print("Error!", e)
+        
+        finally:
+            if conn:
+                cursor.close()
+                conn.close()
