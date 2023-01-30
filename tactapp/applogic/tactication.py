@@ -208,22 +208,13 @@ class Tactication(TactRoot):
         """
         try:
             userlog = db.user_login(self.username, self.password)
-            if userlog == 1:
+            if userlog:
                 return 1
             else:
                 return 0
 
         except (ValueError, TypeError, AttributeError) as e:
             print("Error!", e)
-
-    def connect(self):
-        try:
-            userreg = db.dbconnection()
-            if userreg:
-                print("\tConnected!")
-
-        except (TypeError, ValueError, AttributeError) as e:
-            print("\tError!", e)
 
     def getuuid(self):
         """Generate a UUID
