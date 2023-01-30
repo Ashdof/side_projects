@@ -67,7 +67,7 @@ class UserSecure:
                     log = Tactication(username=username, password=password)
                     log.userlogin()
                     if log:
-                        print("\tWelcome {}".format(username))
+                        print("\tWelcome {}, logging in ...".format(username.upper()))
                         time.sleep(2)
                         app.main(username=username)
                     else:
