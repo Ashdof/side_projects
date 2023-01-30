@@ -14,8 +14,10 @@
 from getpass import getpass
 
 from applogic.tactication import Tactication
+from applogic.tacthome import TactAppHome
 
 db = Tactication()
+app = TactAppHome()
 
 class UserSecure:
     """User Authentication CLass"""
@@ -62,15 +64,8 @@ class UserSecure:
                     print("\tPassword cannot be blank!\n")
                 
                 else:
-                    loguser = Tactication(username=username, password=password)
-                    loguser.userlogin()
-                    if loguser:
-                        # self.usersignin() Invoke app main home page here
-                        break
-
-                    else:
-                        print("\n\tLogin failed!")
-                        break
+                    print()
+                    app.main(username=username)
 
     def usersignup(self):
         """User registration
