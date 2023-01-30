@@ -25,11 +25,10 @@ class TactAppHome:
             This method provides the applications name and header information
         """
 
-        appname = "\tTactApp Application"
-        tag_1 = f"\tManage {username}'s Contacts"
-        tag_2 = "\tThis application is powered by commands. Use the following to \n\tperform most common tasks. Use tactman for more."
-
-        line = "\t__________________________________________"
+        print("\tTactApp Application")
+        print(f"\tManage {username}'s Contacts")
+        print("\tThis application is powered by commands. Use the following to \n\tperform most common tasks. Use tactman for more.")
+        print(line = "\t__________________________________________")
     
     def main(self, username):
         """Main Method
@@ -53,7 +52,7 @@ class TactAppHome:
             activity = input("\t?> ")
             
             if activity not in cmds:
-                print("Command not found")
+                print("\tCommand not found")
 
             elif activity == "done":
                 print("\n\tAPPLICATION EXIT")
