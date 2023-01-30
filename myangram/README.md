@@ -55,6 +55,6 @@ This is a simple text file with instructions on how to navigate the application 
 ## Sections of the app in pitures
 
 ``` Application's home page ```
-<img src="applogic/img/home.png" alt="application main page">
+<br /><img src="applogic/img/home.png" alt="application main page">
 
 ` Enjoy the Game `
