@@ -99,7 +99,7 @@ class TactdbManager(TactRoot):
         except sqlite3.Error as e:
             print("\tFailed to connect to database: ", e)
     
-    def save_tact_user(self, regdate, username, password, ubase):
+    def save_tact_user(self, regdate, firstname, username, password, ubase):
         """Save new user record
 
         Description:
@@ -117,9 +117,9 @@ class TactdbManager(TactRoot):
             conn = self.dbconnection()
             cursor = conn.cursor()
 
-            query = "INSERT INTO tacta73fb274976741158f3854f0c1554c0b (registrationdate, username, password, ubase)\
+            query = "INSERT INTO tacta73fb274976741158f3854f0c1554c0b (registrationdate, firstname, username, password, ubase)\
                 VALUES (?, ?, ?, ?)"
-            queryple = (regdate, username, password, ubase)
+            queryple = (regdate, firstname, username, password, ubase)
             cursor.execute(query, queryple)
             conn.commit()
 
