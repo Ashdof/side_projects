@@ -24,7 +24,7 @@ db.dbpath = newpath
 class Tactication(TactRoot):
     """User authentication module"""
 
-    def __init__(self, username="", password="", id=None):
+    def __init__(self, firstname="", username="", password="", id=None):
         """Initialise module
 
         Description:
@@ -32,13 +32,60 @@ class Tactication(TactRoot):
             parameters can be omitted upon invocation
 
         Args:
-            username (str): username of this user and the first parameter
-            password (str): password of this user and the second parameter
+            firstname (str): the first name of this user 
+            username (str): username of this user
+            password (str): password of this user
             id (str):       module instance tracker
         """
+        self.__firstname = firstname
         self.__username = username
         self.__password = password
         super().__init__(id)
+
+    @property
+    def firstname(self):
+        """Get first name
+        
+        Description:
+            This method obtains the first name of the user. It is executed by
+            invoking the function through a dot-notation scheme without the
+            parenthesis. Example:
+
+            variable = authentication_variable.firstname
+        
+        Returns:
+            The firstname of this user
+        """
+
+        return self.__firstname
+    
+    @firstname.setter
+    def firstname(self, newname):
+        """Update first name
+
+        Description:
+            This method sets a new first name for this user. It can be assigned
+            a value via the dot-notation. Example
+
+            authentication_variable.firstname = <new_firstname>
+
+            The new_firstname value should rather be in quotes (single or double)
+            and not the < and >
+
+        Raises:
+            ValueError if a blank value is assigned to the method
+
+        """
+        faults = ["_", "-", "\\", "/", "?", "@", "#", "~", "&", "$", "(", ")", "[", "{", "]", "}", "|", "!"]
+        if len(newname) < 4:
+            raise ValueError("\tUsername must be at least four charaters long.")
+        
+        else:
+            for fault in newname:
+                if fault in faults:
+                    raise ValueError("'{}' cannot be used in a username.".format(fault))
+
+            self.__firstname = newname
 
     @property
     def username(self):
@@ -142,9 +189,10 @@ class Tactication(TactRoot):
         userid = self.getuuid()
         uname = self.username
         pword = self.password
+        fname = self.firstname
 
         try:
-            userreg = db.save_tact_user(regdate=tday, username=uname, password=pword, ubase=userid)
+            userreg = db.save_tact_user(regdate=tday, firstname=fname, username=uname, password=pword, ubase=userid)
             if userreg:
                 print("\tData saved!")
 
