@@ -64,14 +64,15 @@ class UserSecure:
                     print("\tPassword cannot be blank!\n")
 
                 else:
+                    uname = username.upper()
                     log = Tactication(username=username, password=password)
                     log.userlogin()
                     if log:
-                        print("\tWelcome {}, logging in ...".format(username.upper()))
+                        print("\tWelcome {}, logging in ...".format(uname))
                         time.sleep(2)
-                        app.main(username=username)
+                        app.main(username=uname)
                     else:
-                        print("\tLogin failed. {}'s information was not found\n".format(username))
+                        print("\tLogin failed. {}'s information was not found\n".format(uname))
 
     def usersignup(self):
         """User registration
