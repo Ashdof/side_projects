@@ -12,6 +12,7 @@
 
 #!/usr/bin/env python3
 from getpass import getpass
+import time
 
 from applogic.tactication import Tactication
 from applogic.tacthome import TactAppHome
@@ -65,8 +66,9 @@ class UserSecure:
                 else:
                     log = Tactication(username=username, password=password)
                     log.userlogin()
-                    if log == 1:
+                    if log:
                         print("\tWelcome {}".format(username))
+                        time.sleep(2)
                         app.main(username=username)
                     else:
                         print("\tLogin failed. {}'s information was not found\n".format(username))
@@ -137,6 +139,7 @@ class UserSecure:
 
                                 if reguser:
                                     print("\n\tRegistration successful, now sign in\n\t______________________________")
+                                    time.sleep(2)
                                     break
 
                             except (TypeError, ValueError, AttributeError) as e:

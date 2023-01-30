@@ -117,7 +117,7 @@ class TactdbManager(TactRoot):
             conn = self.dbconnection()
             cursor = conn.cursor()
 
-            query = "INSERT INTO tacta73fb274976741158f3854f0c1554c0b (registrationdate, firstname, username, password, ubase)\
+            query = "INSERT INTO users (registrationdate, firstname, username, password, ubase)\
                 VALUES (?, ?, ?, ?, ?)"
             queryple = (regdate, firstname, username, password, ubase)
             cursor.execute(query, queryple)
@@ -153,10 +153,10 @@ class TactdbManager(TactRoot):
             conn = self.dbconnection()
             cursor = conn.cursor()
 
-            query = "SELECT * FROM tacta73fb274976741158f3854f0c1554c0b WHERE username = ? AND password = ? "
-            cursor.execute(query, (username, password))
+            query = "SELECT username, password FROM users WHERE username = ? AND password = ? "
+            querytuple = (username, password)
+            cursor.execute(query, querytuple)
             rs = cursor.fetchall()
-            conn.commit()
 
             return rs
 
