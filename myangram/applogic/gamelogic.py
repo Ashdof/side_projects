@@ -19,7 +19,7 @@ import random
 import datetime
 from applogic.dbclass import GamedbManager
 
-dbfile = 'gamedb/gamedb.db'
+dbfile = 'applogic/gamedb/gamedb.db'
 db = GamedbManager(dbfile)
 ddate = datetime.datetime.now()
 game_date = str(ddate.year) + "-" + str(ddate.month) + "-" + str(ddate.day)

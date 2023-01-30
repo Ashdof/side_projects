@@ -16,7 +16,7 @@
 from applogic.dbclass import GamedbManager
 from applogic.gamelogic import Anagram
 
-gamewords = 'game_words'
+gamewords = 'applogic/game_words'
 dbfile = 'applogic/gamedb/gamedb.db'
 anagram = Anagram(gamewords)
 
@@ -29,7 +29,7 @@ class MyAngram:
     def __init__(self):
         pass
 
-    def titles(self):
+    def head(self):
         appname = "MyAnagram Game Application"
         pro_info = "Challenge yourself to best the world of word game"
         pro_info_1 = "This application is powered by commands. Use the following to \n\tperform most common tasks. Use 'mangram' for more."
@@ -45,7 +45,7 @@ class MyAngram:
         print(line)
 
     def main(self):
-
+        self.head()
         done = False
         cmds = ["play", "mangram", "ds", "done"]
 
