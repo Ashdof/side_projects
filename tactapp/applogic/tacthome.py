@@ -10,3 +10,58 @@
 """
 
 #!/usr/bin/env python3
+
+class TactAppHome:
+
+    def __init__(self):
+        """Initialise this module"""
+
+        pass
+
+    def title(self):
+        """Application description
+
+        Description:
+            This method provides the applications name and header information
+        """
+
+        appname = "\tTactApp Application"
+        tag_1 = "\tKeep track of your professional network"
+        tag_2 = "\tThis application is powered by commands. Use the following to \n\tperform most common tasks. Use tactman for more."
+
+        line = "\t__________________________________________"
+    
+    def main(self):
+        """Main Method
+        
+        Description:
+            This is the main method of the module. All other methods are access
+            from here
+        """
+
+        print()
+        self.title()
+        print("\tNew: add\tEdit: dit\tDelete: del\tDisplay: dis")
+        print("\t__________________________________________")
+
+        done = False
+        cmds = ["add", "adds", "dit", "dits", "del", "dels", "dis", "diss", "manpro", "done"]
+
+        while not done:
+            print()
+            print("\tWhat do you want to do? ")
+            activity = input("\t?> ")
+            
+            if activity not in cmds:
+                print("Command not found")
+
+            elif activity == "done":
+                print("\n\tAPPLICATION EXIT")
+                done = True
+                exit(0)
+
+
+if __name__ == '__main__':
+
+    app = TactAppHome()
+    app.main()
