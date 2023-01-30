@@ -25,10 +25,10 @@ class TactAppHome:
             This method provides the applications name and header information
         """
 
-        print("\tTactApp Application")
-        print(f"\tManage {username}'s Contacts")
+        print("\t\t\tTactApp Application")
+        print(f"\t\tManage {username}'s Professional Contacts")
         print("\tThis application is powered by commands. Use the following to \n\tperform most common tasks. Use tactman for more.")
-        print(line = "\t__________________________________________")
+        print("\t______________________________________________________________")
     
     def main(self, username):
         """Main Method
@@ -41,10 +41,10 @@ class TactAppHome:
         print()
         self.title(username=username)
         print("\tNew: add\tEdit: dit\tDelete: del\tDisplay: dis")
-        print("\t__________________________________________")
+        print("\t\t__________________________________________")
 
         done = False
-        cmds = ["add", "adds", "dit", "dits", "del", "dels", "dis", "diss", "manpro", "done"]
+        cmds = ["add", "adds", "dit", "dits", "del", "dels", "ds", "dss", "manpro", "done"]
 
         while not done:
             print()
