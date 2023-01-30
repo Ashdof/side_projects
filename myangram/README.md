@@ -52,4 +52,9 @@ This is an ple SQLite3 database file which stores the records of a game
 - ` mangram `
 This is a simple text file with instructions on how to navigate the application and the game
 
+## Sections of the app in pitures
+
+``` Application's home page ```
+![Alt text](/applogic/img/home.png "Application home")
+
 ` Enjoy the Game `
