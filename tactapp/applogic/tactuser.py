@@ -130,7 +130,7 @@ class TactUserDirect:
     
     @property
     def firstname(self):
-        """Last name
+        """First name
 
         Description:
             This method obtains the first name of this contact information. It can be
@@ -144,9 +144,9 @@ class TactUserDirect:
 
         return self.__firstname
     
-    @lastname.setter
+    @firstname.setter
     def firstname(self, new_name):
-        """Update last name
+        """Update first name
         
         Description:
             This method updates the first name of this contact information. It can be
@@ -168,3 +168,44 @@ class TactUserDirect:
             raise ValueError("Can't assign first name to empty value")
         else:
             self.__firstname = new_name
+    
+    @property
+    def profession(self):
+        """Profession
+
+        Description:
+            This method obtains the profession of this contact information. It can be
+            accessed by using the dot notation. Example:
+
+            variable = tactuser_variable.profession
+        
+        Returns:
+            The profession of this contact
+        """
+
+        return self.__prof
+    
+    @profession.setter
+    def profession(self, profession):
+        """Update profession
+        
+        Description:
+            This method updates the profession of this contact information. It can be
+            assigned by a dot notation. Example:
+        
+            variable.profession = <profession>
+
+            The profession value should rather be in quotes (single or double)
+            and not the < and >
+        
+        Raises:
+            TypeError if type of profession is not a string
+            ValueError if the length of profession variable is zero
+        """
+
+        if not isinstance(profession, str):
+            raise TypeError("'{}' must a string of characters")
+        elif len(profession == 0):
+            raise ValueError("Can't assign profession to empty value")
+        else:
+            self.__prof = profession
