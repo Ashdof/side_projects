@@ -19,7 +19,7 @@ record = TactdbManager(dbpath=newpath)
 class TactUserDirect:
     """Module to provide capabilities for managing the information of the user's contacts"""
 
-    def __init__(self, uniquecode="", lastname="", firstname="", prof="", email="", phone=""):
+    def __init__(self, uniquecode="", lastname="", firstname="", prof="", email="", phone_number=""):
         """Initialise module
 
         Description:
@@ -39,7 +39,7 @@ class TactUserDirect:
         self.__firstname = firstname
         self.__prof = prof
         self.__email = email
-        self.__phone = phone
+        self.__phonenumber = phone_number
     
     @property
     def uniquecode(self):
@@ -256,4 +256,40 @@ class TactUserDirect:
         else:
             self.__email = email
     
+    @property
+    def phonenumber(self):
+        """Phone
+
+        Description:
+            This method obtains the phone number of this contact information. It can be
+            accessed by using the dot notation. Example:
+
+            variable = tactuser_variable.phone
+        
+        Returns:
+            The phone number of this contact
+        """
+
+        return self.__phonenumber
     
+    @phonenumber.setter
+    def phonenumber(self, phone_number):
+        """Update phone number
+        
+        Description:
+            This method updates the phone number of this contact information. It can be
+            assigned by a dot notation. Example:
+        
+            variable.phonenumber = <phone_number>
+
+            The phone number value should rather be in quotes (single or double)
+            and not the < and >
+        
+        Raises:
+            ValueError if the length of phone number variable is zero
+        """
+
+        if len(phone_number == 0):
+            raise ValueError("Can't assign phone number to empty value")
+        else:
+            self.__phonenumber = phone_number
