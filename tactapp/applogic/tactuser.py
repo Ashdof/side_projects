@@ -40,3 +40,48 @@ class TactUserDirect:
         self.__prof = prof
         self.__email = email
         self.__phone = phone
+    
+    @property
+    def uniquecode(self):
+        """Unique code
+        
+        Description:
+            This method obtains the unique code associated with this contact information. It
+            can accessed by invoking the function through a dot-notation scheme without the
+            parenthesis. Example:
+
+            variable = tactuser_variable.uniquecode
+        
+        Returns:
+            Unique code of this contact
+        """
+
+        return self.__uniquecode
+    
+    @uniquecode.setter
+    def uniquecode(self, new_code):
+        """Update unique code
+        
+        Description:
+            This method updates the unique code of this contact information. 
+        
+        Args:
+            new_code (str): the new code to update the unique code with. It can be set
+            by assigning to a dot notation. Example:
+
+            variable.uniquecode = <new_code>
+
+            The new_code value should rather be in quotes (single or double)
+            and not the < and >
+        
+        Raises:
+            TypeError if new_code value is not a string
+
+        """
+
+        if not isinstance(new_code, str):
+            raise TypeError("\t'{}' must be a string")
+        else:
+            self.__uniquecode = new_code
+    
+    
