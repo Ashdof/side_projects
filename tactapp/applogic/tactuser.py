@@ -67,7 +67,7 @@ class TactUserDirect:
         
         Args:
             new_code (str): the new code to update the unique code with. It can be set
-            by assigning to a dot notation. Example:
+            by assigning by a dot notation. Example:
 
             variable.uniquecode = <new_code>
 
@@ -76,12 +76,54 @@ class TactUserDirect:
         
         Raises:
             TypeError if new_code value is not a string
+            Value Error if length of new_code variable is zero
 
         """
 
         if not isinstance(new_code, str):
             raise TypeError("\t'{}' must be a string")
+        elif len(new_code == 0):
+            raise ValueError("Can't assign unique code to empty value")
         else:
             self.__uniquecode = new_code
     
+    @property
+    def lastname(self):
+        """Last name
+
+        Description:
+            This method obtains the last name of this contact information. It can be
+            accessed by using the dot notation. Example:
+
+            variable = tactuser_variable.lastname
+        
+        Returns:
+            The last name of this contact
+        """
+
+        return self.__lastname
     
+    @lastname.setter
+    def lastname(self, new_name):
+        """Update last name
+        
+        Description:
+            This method updates the last name of this contact information. It can be
+            assigned by a dot notation. Example:
+        
+            variable.lastname = <new_name>
+
+            The new_code value should rather be in quotes (single or double)
+            and not the < and >
+        
+        Raises:
+            TypeError if type of last_name is not a string
+            ValueError if the length of new_name variable is zero
+        """
+
+        if not isinstance(new_name, str):
+            raise TypeError("'{}' must a string of characters")
+        elif len(new_name == 0):
+            raise ValueError("Can't assign last name to empty value")
+        else:
+            self.__lastname = new_name
