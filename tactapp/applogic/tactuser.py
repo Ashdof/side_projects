@@ -81,7 +81,7 @@ class TactUserDirect:
         """
 
         if not isinstance(new_code, str):
-            raise TypeError("\t'{}' must be a string")
+            raise TypeError("\t'{}' must be a string".format(new_code))
         elif len(new_code == 0):
             raise ValueError("Can't assign unique code to empty value")
         else:
@@ -122,7 +122,7 @@ class TactUserDirect:
         """
 
         if not isinstance(new_name, str):
-            raise TypeError("'{}' must a string of characters")
+            raise TypeError("'{}' must a string of characters".format(new_name))
         elif len(new_name == 0):
             raise ValueError("Can't assign last name to empty value")
         else:
@@ -163,7 +163,7 @@ class TactUserDirect:
         """
 
         if not isinstance(new_name, str):
-            raise TypeError("'{}' must a string of characters")
+            raise TypeError("'{}' must a string of characters".format(new_name))
         elif len(new_name == 0):
             raise ValueError("Can't assign first name to empty value")
         else:
@@ -204,8 +204,56 @@ class TactUserDirect:
         """
 
         if not isinstance(profession, str):
-            raise TypeError("'{}' must a string of characters")
+            raise TypeError("'{}' must a string of characters".format(profession))
         elif len(profession == 0):
             raise ValueError("Can't assign profession to empty value")
         else:
             self.__prof = profession
+    
+    @property
+    def email(self):
+        """Email
+
+        Description:
+            This method obtains the email of this contact information. It can be
+            accessed by using the dot notation. Example:
+
+            variable = tactuser_variable.email
+        
+        Returns:
+            The email of this contact
+        """
+
+        return self.__email
+    
+    @email.setter
+    def email(self, email):
+        """Update email
+        
+        Description:
+            This method updates the email of this contact information. It can be
+            assigned by a dot notation. Example:
+        
+            variable.email = <email>
+
+            The email value should rather be in quotes (single or double)
+            and not the < and >
+        
+        Raises:
+            TypeError if type of email is not a string
+            ValueError if the length of email variable is zero or the '@' value is missing
+            or the last four characters are not '.com'
+        """
+
+        if not isinstance(email, str):
+            raise TypeError("'{}' must a string of characters".format(email))
+        elif len(email == 0):
+            raise ValueError("Can't assign email to empty value")
+        elif email[-4:] is not ".com":
+            raise ValueError("'{}' is invalid. Please supply a complete email address with a '.com'".format(email))
+        elif "@" not in email:
+            raise ValueError("'{}' is missing the '@' character.".format(email))
+        else:
+            self.__email = email
+    
+    
