@@ -273,5 +273,7 @@ class TactUserDirect:
 
         if len(phone_number == 0):
             raise ValueError("Can't assign phone number to empty value")
+        elif len(phone_number) != 10 or len(phone_number) > 10:
+            raise ValueError("'{}' is invalid. Please make sure phone number has 10 digits.".format(phone_number))
         else:
             self.__phonenumber = phone_number
