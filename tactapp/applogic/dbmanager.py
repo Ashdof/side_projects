@@ -239,3 +239,52 @@ class TactdbManager(TactRoot):
             if conn:
                 cursor.close()
                 conn.close()
+    
+    def get_number_of_records(self, record=[]):
+        """Number of records
+        
+        Description:
+            This method computes for the number of records in the database. If the argument is none,
+            it computes for the overall total number of records. If not, it computes for the number of
+            records related to the supplied argument
+        
+        Args:
+            record (list): This is a list of values that corresponds to the records to fetch from the
+                            database. The first element must be the column label and the second element
+                            must be the value to search for. Example
+
+                            record = [lastname, Kay]
+
+                            This instructs the programme to search the lastname column and fetch all records
+                            that have 'Kay' as the last name. If either the list is empty or the first element
+                            is missing or the second element is mission, it will fetch all records.
+        
+        Returns:
+            Number of records found
+
+        """
+
+        query = ""
+
+        try:
+            conn = self.dbconnection()
+            cursor = conn.cursor()
+
+            if record == [] or record[0] == "" or record[1] == "":
+                query = "SELECT * FROM tactlist"
+            else:
+                query = "SELECT * FROM tactlist WHERE '"+record[0]+"' = '"+record[1]+"' "
+
+            cursor.execute(query)
+            records = cursor.fetchall()
+
+            total = len(records)
+
+            return total
+            
+        except sqlite3.Error as e:
+            print("\tFailed to fetch record: ", e)
+        finally:
+            if conn:
+                cursor.close()
+                conn.close()
