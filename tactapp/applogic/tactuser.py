@@ -2,7 +2,7 @@
     =======================     TACT APPLICATION     ===================================
     FILE:                   USER DIRECT MODULE
     DATE CREATED:           31-JAN-2023
-    LAST UPDATED:           31-JAN-2023
+    LAST UPDATED:           01-FEB-2023
     DEVELOPER:              EMMANUEL ENCHILL
 
     MODULE DESCRIPTION:     THIS MODULE PROVIDES METHODS FOR HANDLING THE INFORMATION OF 
@@ -23,7 +23,7 @@ class TactUserDirect:
         """Initialise module
 
         Description:
-            This method initialises the module with defauly values
+            This method initialises the module with default values
         
         Args:
             uniquecode (str): a unique code identifying this contact person
@@ -47,7 +47,7 @@ class TactUserDirect:
         
         Description:
             This method obtains the unique code associated with this contact information. It
-            can accessed by invoking the function through a dot-notation scheme without the
+            can be accessed by invoking the function through a dot-notation scheme without the
             parenthesis. Example:
 
             variable = tactuser_variable.uniquecode
@@ -67,12 +67,9 @@ class TactUserDirect:
         
         Args:
             new_code (str): the new code to update the unique code with. It can be set
-            by assigning by a dot notation. Example:
+                            by assignment with the dot notation. Example:
 
-            variable.uniquecode = <new_code>
-
-            The new_code value should rather be in quotes (single or double)
-            and not the < and >
+            variable.uniquecode = "new_code"
         
         Raises:
             TypeError if new_code value is not a string
@@ -111,18 +108,15 @@ class TactUserDirect:
             This method updates the last name of this contact information. It can be
             assigned by a dot notation. Example:
         
-            variable.lastname = <new_name>
-
-            The new_code value should rather be in quotes (single or double)
-            and not the < and >
+            variable.lastname = "new_name"
         
         Raises:
-            TypeError if type of last_name is not a string
+            TypeError if type of new_name is not a string
             ValueError if the length of new_name variable is zero
         """
 
         if not isinstance(new_name, str):
-            raise TypeError("'{}' must a string of characters".format(new_name))
+            raise TypeError("'{}' must a string.".format(new_name))
         elif len(new_name == 0):
             raise ValueError("Can't assign last name to empty value")
         else:
@@ -152,18 +146,15 @@ class TactUserDirect:
             This method updates the first name of this contact information. It can be
             assigned by a dot notation. Example:
         
-            variable.firstname = <new_name>
-
-            The new_code value should rather be in quotes (single or double)
-            and not the < and >
+            variable.firstname = "new_name"
         
         Raises:
-            TypeError if type of first_name is not a string
+            TypeError if type of new_name is not a string
             ValueError if the length of new_name variable is zero
         """
 
         if not isinstance(new_name, str):
-            raise TypeError("'{}' must a string of characters".format(new_name))
+            raise TypeError("'{}' must a string".format(new_name))
         elif len(new_name == 0):
             raise ValueError("Can't assign first name to empty value")
         else:
@@ -193,10 +184,7 @@ class TactUserDirect:
             This method updates the profession of this contact information. It can be
             assigned by a dot notation. Example:
         
-            variable.profession = <profession>
-
-            The profession value should rather be in quotes (single or double)
-            and not the < and >
+            variable.profession = "profession"
         
         Raises:
             TypeError if type of profession is not a string
@@ -204,7 +192,7 @@ class TactUserDirect:
         """
 
         if not isinstance(profession, str):
-            raise TypeError("'{}' must a string of characters".format(profession))
+            raise TypeError("'{}' must a string".format(profession))
         elif len(profession == 0):
             raise ValueError("Can't assign profession to empty value")
         else:
@@ -234,10 +222,7 @@ class TactUserDirect:
             This method updates the email of this contact information. It can be
             assigned by a dot notation. Example:
         
-            variable.email = <email>
-
-            The email value should rather be in quotes (single or double)
-            and not the < and >
+            variable.email = "email"
         
         Raises:
             TypeError if type of email is not a string
@@ -246,7 +231,7 @@ class TactUserDirect:
         """
 
         if not isinstance(email, str):
-            raise TypeError("'{}' must a string of characters".format(email))
+            raise TypeError("'{}' must a string".format(email))
         elif len(email == 0):
             raise ValueError("Can't assign email to empty value")
         elif email[-4:] is not ".com":
@@ -280,10 +265,7 @@ class TactUserDirect:
             This method updates the phone number of this contact information. It can be
             assigned by a dot notation. Example:
         
-            variable.phonenumber = <phone_number>
-
-            The phone number value should rather be in quotes (single or double)
-            and not the < and >
+            variable.phonenumber = "phone_number"
         
         Raises:
             ValueError if the length of phone number variable is zero
