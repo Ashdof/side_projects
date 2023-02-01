@@ -12,9 +12,7 @@
 #!/usr/bin/env python3
 
 from applogic.dbmanager import TactdbManager
-
-newpath="applogic/dbase/tactdbase.db"
-record = TactdbManager(dbpath=newpath)
+from applogic.tactication import Tactication
 
 class TactUserDirect:
     """Module to provide capabilities for managing the information of the user's contacts"""
@@ -277,3 +275,26 @@ class TactUserDirect:
             raise ValueError("'{}' is invalid. Please make sure phone number has 10 digits.".format(phone_number))
         else:
             self.__phonenumber = phone_number
+    
+    def commit_record(self):
+        """Save record
+        
+        Description:
+            This method invokes the save_record method from the dbmanager module and passes data
+            to it to be saved in the database.
+        """
+
+        try:
+            record = TactdbManager(dbpath="applogic/dbase/tactdbase.db")
+            tactuid = Tactication(username=self.lastname.lower() + self.firstname.lower())
+
+            tact_code = self.lastname[:2] + self.firstname[-2:]
+            tact_id = tactuid.getuuid()
+
+            save = record.save_record(tactid=tact_id, uniquecode=tact_code.lower(), lastname=self.lastname, firstname=self.firstname, prof=self.prof, email=self.email, phone=self.phonenumber)
+            if save == 1:
+                print("{}\'s data saved.".format(self.lastname))
+            else:
+                print("{}\'s data coult not be saved.".format(self.lastname))
+        except (ZeroDivisionError, ValueError, TypeError) as e:
+            print("Error! {}".format(e))
