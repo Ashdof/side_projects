@@ -197,3 +197,40 @@ class TactdbManager(TactRoot):
             if conn:
                 cursor.close()
                 conn.close()
+    
+    def save_record(self, tactid, uniquecode, lastname, firstname, prof, email, phone):
+        """Save record
+        
+        Description:
+            This method commits the record of a contact to the database
+        
+        Args:
+            uniquecode (str): the unique code of this contact
+            lastname (str): the lastname of this contact
+            firstname (str): the firstname of this contact
+            prof (str): the profession of this contact
+            email (str): the email address of this contact
+            phone (str): the phone number of this contact
+        
+        Returns:
+            1 if data is saved successfully
+            0 if it fails
+        """
+
+        try:
+            conn = self.dbconnection()
+            cursor = conn.cursor()
+
+            query = "INSERT INTO tactlist (tactid, uniquecode, lastname, firstname, profession, email, phone)\
+                VALUES (?, ?, ?, ?, ?, ?, ?)"
+            querytuple = (tactid, uniquecode, lastname, firstname, prof, email, phone)
+            cursor.execute(query,querytuple)
+
+            conn.commit()
+            if conn:
+                return 1
+            else:
+                return 0
+        
+        except sqlite3.Error as e:
+            print("Error! {}".format(e))
