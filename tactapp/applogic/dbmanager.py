@@ -13,6 +13,7 @@
 
 import sqlite3
 from applogic.tactroot import TactRoot
+from texttable import Texttable
 
 class TactdbManager(TactRoot):
     """Database management module"""
@@ -235,6 +236,38 @@ class TactdbManager(TactRoot):
         except sqlite3.Error as e:
             print("Error! {}".format(e))
         
+        finally:
+            if conn:
+                cursor.close()
+                conn.close()
+
+    def display_detail_records(self):
+        """Display records
+        
+        Description:
+            This method fetches and display all records in the specified table
+
+        """
+        try:
+            conn = self.dbconnection()
+            cursor = conn.cursor()
+            query = "SELECT * FROM tactlist"
+            cursor.execute(query)
+            records = cursor.fetchall()
+
+            table = Texttable()
+            table.header(["\tUnique Code", "Last name", "First name", "Profession", "Email", "Phone number"])
+            table.set_cols_dtype(['t', 't', 't', 't', 't', 't'])
+
+            for record in records:
+                table.add_row([record[1], record[2], record[3], record[4], record[5], record[6]])
+
+            print(table.draw())
+            print("\n\tNumber of records found: ", self.get_number_of_records())
+
+        except sqlite3.Error as e:
+            print("\tError: {}".format(e))
+
         finally:
             if conn:
                 cursor.close()
