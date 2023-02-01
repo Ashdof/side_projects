@@ -79,7 +79,7 @@ class TactUserDirect:
 
         if not isinstance(new_code, str):
             raise TypeError("\t'{}' must be a string".format(new_code))
-        elif len(new_code == 0):
+        elif len(new_code) == 0:
             raise ValueError("Can't assign unique code to empty value")
         else:
             self.__uniquecode = new_code
@@ -117,7 +117,7 @@ class TactUserDirect:
 
         if not isinstance(new_name, str):
             raise TypeError("'{}' must a string.".format(new_name))
-        elif len(new_name == 0):
+        elif len(new_name) == 0:
             raise ValueError("Can't assign last name to empty value")
         else:
             self.__lastname = new_name
@@ -155,7 +155,7 @@ class TactUserDirect:
 
         if not isinstance(new_name, str):
             raise TypeError("'{}' must a string".format(new_name))
-        elif len(new_name == 0):
+        elif len(new_name) == 0:
             raise ValueError("Can't assign first name to empty value")
         else:
             self.__firstname = new_name
@@ -193,7 +193,7 @@ class TactUserDirect:
 
         if not isinstance(profession, str):
             raise TypeError("'{}' must a string".format(profession))
-        elif len(profession == 0):
+        elif len(profession) == 0:
             raise ValueError("Can't assign profession to empty value")
         else:
             self.__prof = profession
@@ -232,9 +232,9 @@ class TactUserDirect:
 
         if not isinstance(email, str):
             raise TypeError("'{}' must a string".format(email))
-        elif len(email == 0):
+        elif len(email) == 0:
             raise ValueError("Can't assign email to empty value")
-        elif email[-4:] is not ".com":
+        elif email[-4:] != ".com":
             raise ValueError("'{}' is invalid. Please supply a complete email address with a '.com'".format(email))
         elif "@" not in email:
             raise ValueError("'{}' is missing the '@' character.".format(email))
@@ -271,7 +271,7 @@ class TactUserDirect:
             ValueError if the length of phone number variable is zero
         """
 
-        if len(phone_number == 0):
+        if len(phone_number) == 0:
             raise ValueError("Can't assign phone number to empty value")
         elif len(phone_number) != 10 or len(phone_number) > 10:
             raise ValueError("'{}' is invalid. Please make sure phone number has 10 digits.".format(phone_number))
