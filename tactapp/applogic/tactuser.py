@@ -14,6 +14,8 @@
 from applogic.dbmanager import TactdbManager
 from applogic.tactication import Tactication
 
+record = TactdbManager(dbpath="applogic/dbase/tactdbase.db")
+
 class TactUserDirect:
     """Module to provide capabilities for managing the information of the user's contacts"""
 
@@ -285,7 +287,6 @@ class TactUserDirect:
         """
 
         try:
-            record = TactdbManager(dbpath="applogic/dbase/tactdbase.db")
             tactuid = Tactication(username=self.lastname.lower() + self.firstname.lower())
 
             tact_code = self.lastname[:2] + self.firstname[-2:]
@@ -298,3 +299,36 @@ class TactUserDirect:
                 print("{}\'s data coult not be saved.".format(self.lastname))
         except (ZeroDivisionError, ValueError, TypeError) as e:
             print("Error! {}".format(e))
+    
+    def get_record(self):
+        """Display Records
+        
+        Description:
+            This method displays various records based on options selected by the user. The
+            options are numbered and the user only has to select a number. Example
+
+            1. Detail records
+            2. Names and phone numbers
+            3. Names and email address
+
+            If user selects 1, a detail record will be displayed in table powered by texttable
+        """
+        
+        done = False
+
+        print("\n\tSelect the number for a corresponding record to display\n")
+        print("\t1: Detail record\n\t2: Names and phone numbers\n\t3. Names and profession")
+        print("\t4: Names and email addresses\n\t5: Unique codes and names")
+        
+        while not done:
+            qtn = input("\n\tNumber ?>: ")
+
+            if qtn == "":
+                print("\tDisplay process cancelled")
+                done = True
+                
+            else:
+                match qtn:
+                    case "1":
+                        record.display_detail_records()
+                        done = True
