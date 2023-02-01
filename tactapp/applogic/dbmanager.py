@@ -234,3 +234,8 @@ class TactdbManager(TactRoot):
         
         except sqlite3.Error as e:
             print("Error! {}".format(e))
+        
+        finally:
+            if conn:
+                cursor.close()
+                conn.close()
