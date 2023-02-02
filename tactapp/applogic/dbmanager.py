@@ -492,3 +492,59 @@ class TactdbManager(TactRoot):
             if conn:
                 cursor.close()
                 conn.close()
+    
+    def get_codes(self):
+        """Select uniquecodes
+
+        Description:
+            This method selectes all unique codes from the database
+        """
+        try:
+            uniq_codes = []
+
+            conn = self.dbconnection()
+            cursor = conn.cursor()
+            query = "SELECT uniquecode FROM tactlist"
+            cursor.execute(query)
+            records = cursor.fetchall()
+
+            for record in records:
+                uniq_codes.append(record)
+
+            return uniq_codes
+            
+        except sqlite3.Error as e:
+            print("\tFailed to fetch records: ", e)
+
+        finally:
+            if conn:
+                cursor.close()
+                conn.close()
+    
+    def get_ids(self, lastname, firstname):
+        """Select uniquecodes
+
+        Description:
+            This method selectes all unique codes from the database
+        """
+        try:
+            uniq_codes = []
+
+            conn = self.dbconnection()
+            cursor = conn.cursor()
+            query = "SELECT tactid FROM tactlist WHERE lastname = '"+lastname+"' AND firstname = '"+firstname+"' "
+            cursor.execute(query)
+            records = cursor.fetchall()
+
+            for record in records:
+                uniq_codes.append(record)
+
+            return uniq_codes
+            
+        except sqlite3.Error as e:
+            print("\tFailed to fetch records: ", e)
+
+        finally:
+            if conn:
+                cursor.close()
+                conn.close()
