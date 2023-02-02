@@ -242,7 +242,7 @@ class TactdbManager(TactRoot):
                 conn.close()
 
     def display_detail_records(self):
-        """Display records
+        """Display detail records
         
         Description:
             This method fetches and display all records in the specified table
@@ -275,7 +275,7 @@ class TactdbManager(TactRoot):
                 conn.close()
     
     def display_names_and_numbers(self):
-        """Display Records
+        """Display names and phone numbers
 
         Description:
             This method fetches firstname, lastname and phone numbers from the database
@@ -307,7 +307,7 @@ class TactdbManager(TactRoot):
                 conn.close()
     
     def display_names_and_profession(self):
-        """Display Records
+        """Display names and profession
 
         Description:
             This method fetches firstname, lastname and profession from the database
@@ -339,7 +339,7 @@ class TactdbManager(TactRoot):
                 conn.close()
         
     def display_names_and_emails(self):
-        """Display Records
+        """Display names and emails
 
         Description:
             This method fetches firstname, lastname and email addresses from the database
@@ -354,6 +354,38 @@ class TactdbManager(TactRoot):
 
             table = Texttable()
             table.header(["Last name", "First name", "Email address"])
+            table.set_cols_dtype(['t', 't', 't'])
+
+            for record in records:
+                table.add_row([record[0], record[1], record[2]])
+
+            print()
+            print(table.draw())
+            print("\n\tNumber of records found: ", self.get_number_of_records())
+            
+        except sqlite3.Error as e:
+            print("\n\tFailed to fetch record: ", e)
+        finally:
+            if conn:
+                cursor.close()
+                conn.close()
+        
+    def display_names_and_codes(self):
+        """Display unique codes and names
+
+        Description:
+            This method fetches firstname, lastname and uniquecode from the database
+
+        """
+        try:
+            conn = self.dbconnection()
+            cursor = conn.cursor()
+            query = "SELECT uniquecode, lastname, firstname FROM tactlist"
+            cursor.execute(query)
+            records = cursor.fetchall()
+
+            table = Texttable()
+            table.header(["Code", "Last name", "First name"])
             table.set_cols_dtype(['t', 't', 't'])
 
             for record in records:
