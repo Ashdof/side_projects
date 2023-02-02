@@ -337,6 +337,38 @@ class TactdbManager(TactRoot):
             if conn:
                 cursor.close()
                 conn.close()
+        
+    def display_names_and_emails(self):
+        """Display Records
+
+        Description:
+            This method fetches firstname, lastname and email addresses from the database
+
+        """
+        try:
+            conn = self.dbconnection()
+            cursor = conn.cursor()
+            query = "SELECT lastname, firstname, email FROM tactlist"
+            cursor.execute(query)
+            records = cursor.fetchall()
+
+            table = Texttable()
+            table.header(["Last name", "First name", "Email address"])
+            table.set_cols_dtype(['t', 't', 't'])
+
+            for record in records:
+                table.add_row([record[0], record[1], record[2]])
+
+            print()
+            print(table.draw())
+            print("\n\tNumber of records found: ", self.get_number_of_records())
+            
+        except sqlite3.Error as e:
+            print("\n\tFailed to fetch record: ", e)
+        finally:
+            if conn:
+                cursor.close()
+                conn.close()
     
     def get_number_of_records(self, record=[]):
         """Number of records

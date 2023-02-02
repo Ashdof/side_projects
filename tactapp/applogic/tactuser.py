@@ -338,3 +338,6 @@ class TactUserDirect:
                     case "3":
                         record.display_names_and_profession()
                         done = True
+                    case "4":
+                        record.display_names_and_emails()
+                        done = True
