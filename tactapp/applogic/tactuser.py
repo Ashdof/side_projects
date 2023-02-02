@@ -278,6 +278,72 @@ class TactUserDirect:
         else:
             self.__phonenumber = phone_number
     
+    def get_userinput(self):
+        """Get user input
+
+        Description:
+            This method, when invoked requests inputs from the user and assign them to the
+            initialised class parameters
+        """
+
+        done = False
+        faults = [" ", "@", "/", "?",";", ":", "#", "%", "&", "!", "$", "^", "*", "(", ")", "'", "~", "`"]
+        emaults = [" ", "/", "?",";", ":", "#", "%", "&", "!", "$", "^", "*", "(", ")", "'", "~", "`"]
+
+        while not done:
+            last_name = input("\n\tLast name: ")
+            if last_name in faults:
+                print("\t{} is not allowed".format(last_name))
+            
+            elif last_name == "":
+                print("\tNew record entry process cancelled")
+                done = True
+            
+            else:
+                first_name = input("\tFirst name: ")
+                if first_name in faults:
+                    print("\t{} is not allowed".format(first_name))
+                
+                elif first_name == "":
+                    print("\tNew record entry process cancelled")
+                    done = True
+                
+                else:
+                    prof = input("\tProfession: ")
+                    if self.profession in faults:
+                        print("\t{} is not allowed".format(prof))
+                    
+                    elif prof == "":
+                        print("\tNew record entry process cancelled")
+                        done = True
+
+                    else:
+                        mail = input("\tEmail address: ")
+                        if mail in emaults:
+                            print("\t{} is not allowed".format(mail))
+                    
+                        elif mail == "":
+                            print("\tNew record entry process cancelled")
+                            done = True
+                        
+                        else:
+                            phone = input("\tPhone number: ")
+                            if phone in faults:
+                                print("\t{} is not allowed".format(phone))
+                            
+                            elif phone == "":
+                                print("\tNew record entry process cancelled")
+                                done = True
+                            
+                            else:
+                                self.lastname = last_name
+                                self.firstname = first_name
+                                self.profession = prof
+                                self.email = mail
+                                self.phonenumber = phone
+
+                                break
+
     def commit_record(self):
         """Save record
         
@@ -286,74 +352,19 @@ class TactUserDirect:
             to it to be saved in the database.
         """
 
+        #   Inovke method to request for user input
+        self.get_userinput()
+
         try:
-            #   User to provide information about contact
-            done = False
-            faults = [" ", "@", "/", "?",";", ":", "#", "%", "&", "!", "$", "^", "*", "(", ")", "'", "~", "`"]
-            emaults = [" ", "/", "?",";", ":", "#", "%", "&", "!", "$", "^", "*", "(", ")", "'", "~", "`"]
-
-            while not done:
-                last_name = input("\n\tLast name: ")
-                if last_name in faults:
-                    print("\t{} is not allowed".format(last_name))
-                
-                elif last_name == "":
-                    print("\tNew record entry process cancelled")
-                    done = True
-                
-                else:
-                    first_name = input("\tFirst name: ")
-                    if first_name in faults:
-                        print("\t{} is not allowed".format(first_name))
-                    
-                    elif first_name == "":
-                        print("\tNew record entry process cancelled")
-                        done = True
-                    
-                    else:
-                        prof = input("\tProfession: ")
-                        if self.profession in faults:
-                            print("\t{} is not allowed".format(prof))
-                        
-                        elif prof == "":
-                            print("\tNew record entry process cancelled")
-                            done = True
-
-                        else:
-                            mail = input("\tEmail address: ")
-                            if mail in emaults:
-                                print("\t{} is not allowed".format(mail))
-                        
-                            elif mail == "":
-                                print("\tNew record entry process cancelled")
-                                done = True
-                            
-                            else:
-                                phone = input("\tPhone number: ")
-                                if phone in faults:
-                                    print("\t{} is not allowed".format(phone))
-                                
-                                elif phone == "":
-                                    print("\tNew record entry process cancelled")
-                                    done = True
-                                
-                                else:
-                                    self.lastname = last_name
-                                    self.firstname = first_name
-                                    self.profession = prof
-                                    self.email = mail
-                                    self.phonenumber = phone
-
-                                    tactuid = Tactication(username=self.lastname.lower() + self.firstname.lower())
-
-                                    tact_code = self.lastname[:2] + self.firstname[-2:]
-                                    tact_id = tactuid.getuuid()
-
-                                    save = record.save_record(tactid=tact_id, uniquecode=tact_code.upper(), lastname=self.lastname, firstname=self.firstname, prof=self.profession, email=self.email, phone=self.phonenumber)
-                                    if save == 1:
-                                        print("\t{}\'s data saved.".format(self.lastname))
-                                    else:
-                                        print("\t{}\'s data coult not be saved.".format(self.lastname))
+            tactuid = Tactication(username=self.lastname.lower() + self.firstname.lower())
+            tact_id = tactuid.getuuid()
+            tact_code = self.lastname[:2] + self.firstname[-2:]
+            save = record.save_record(tactid=tact_id, uniquecode=tact_code.upper(), lastname=self.lastname, firstname=self.firstname, prof=self.profession, email=self.email, phone=self.phonenumber)
+            
+            if save == 1:
+                print("\t{}\'s data saved.".format(self.lastname))
+            else:
+                print("\t{}\'s data coult not be saved.".format(self.lastname))
 
         except (ZeroDivisionError, ValueError, TypeError) as e:
             print("Error! {}".format(e))
