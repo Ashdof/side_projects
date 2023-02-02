@@ -256,7 +256,7 @@ class TactdbManager(TactRoot):
             records = cursor.fetchall()
 
             table = Texttable()
-            table.header(["\tUnique Code", "Last name", "First name", "Profession", "Email", "Phone number"])
+            table.header(["Unique Code", "Last name", "First name", "Profession", "Email", "Phone number"])
             table.set_cols_dtype(['t', 't', 't', 't', 't', 't'])
 
             for record in records:
@@ -289,7 +289,39 @@ class TactdbManager(TactRoot):
             records = cursor.fetchall()
 
             table = Texttable()
-            table.header(["\tLast name", "First name", "Phone number"])
+            table.header(["Last name", "First name", "Phone number"])
+            table.set_cols_dtype(['t', 't', 't'])
+
+            for record in records:
+                table.add_row([record[0], record[1], record[2]])
+
+            print()
+            print(table.draw())
+            print("\n\tNumber of records found: ", self.get_number_of_records())
+            
+        except sqlite3.Error as e:
+            print("\n\tFailed to fetch record: ", e)
+        finally:
+            if conn:
+                cursor.close()
+                conn.close()
+    
+    def display_names_and_profession(self):
+        """Display Records
+
+        Description:
+            This method fetches firstname, lastname and profession from the database
+
+        """
+        try:
+            conn = self.dbconnection()
+            cursor = conn.cursor()
+            query = "SELECT lastname, firstname, profession FROM tactlist"
+            cursor.execute(query)
+            records = cursor.fetchall()
+
+            table = Texttable()
+            table.header(["Last name", "First name", "Profession"])
             table.set_cols_dtype(['t', 't', 't'])
 
             for record in records:
