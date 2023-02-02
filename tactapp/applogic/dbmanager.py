@@ -282,6 +282,34 @@ class TactdbManager(TactRoot):
             if conn:
                 cursor.close()
                 conn.close()
+    
+    def delete_record(self, uid):
+        """Delete record
+
+        Description:
+            This method deletes a record of the id passed as parameter
+        """
+        try:
+            conn = self.dbconnection()
+            cursor = conn.cursor()
+            query = "DELETE FROM tactlist WHERE tactid = ?"
+           
+            cursor.execute(query, (uid,))
+            conn.commit()
+            
+            qty = conn.total_changes
+            if qty == 0:
+                return (1)
+            else:
+                return (0)
+
+        except sqlite3.Error as e:
+            print("\tFailed to delete record: ", e)
+            
+        finally:
+            if conn:
+                cursor.close()
+                conn.close()
 
     def display_detail_records(self):
         """Display detail records
