@@ -262,6 +262,7 @@ class TactdbManager(TactRoot):
             for record in records:
                 table.add_row([record[1], record[2], record[3], record[4], record[5], record[6]])
 
+            print()
             print(table.draw())
             print("\n\tNumber of records found: ", self.get_number_of_records())
 
@@ -292,14 +293,14 @@ class TactdbManager(TactRoot):
             table.set_cols_dtype(['t', 't', 't'])
 
             for record in records:
-                table.add_row([record[2], record[3], record[6]])
-                table.set_deco(Texttable.HEADER)
+                table.add_row([record[0], record[1], record[2]])
 
+            print()
             print(table.draw())
             print("\n\tNumber of records found: ", self.get_number_of_records())
             
         except sqlite3.Error as e:
-            print("\tFailed to fetch record: ", e)
+            print("\n\tFailed to fetch record: ", e)
         finally:
             if conn:
                 cursor.close()

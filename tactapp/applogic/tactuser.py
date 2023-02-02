@@ -332,3 +332,6 @@ class TactUserDirect:
                     case "1":
                         record.display_detail_records()
                         done = True
+                    case "2":
+                        record.display_names_and_numbers()
+                        done = True
