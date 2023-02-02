@@ -292,7 +292,7 @@ class TactUserDirect:
             tact_code = self.lastname[:2] + self.firstname[-2:]
             tact_id = tactuid.getuuid()
 
-            save = record.save_record(tactid=tact_id, uniquecode=tact_code.lower(), lastname=self.lastname, firstname=self.firstname, prof=self.profession, email=self.email, phone=self.phonenumber)
+            save = record.save_record(tactid=tact_id, uniquecode=tact_code.upper(), lastname=self.lastname, firstname=self.firstname, prof=self.profession, email=self.email, phone=self.phonenumber)
             if save == 1:
                 print("{}\'s data saved.".format(self.lastname))
             else:
