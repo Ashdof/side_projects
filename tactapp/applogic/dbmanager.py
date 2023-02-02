@@ -240,6 +240,48 @@ class TactdbManager(TactRoot):
             if conn:
                 cursor.close()
                 conn.close()
+    
+    def edit_record(self, tactid, uniquecode, lastname, firstname, prof, email, phone):
+        """Update record
+        
+        Description:
+            This method updates the record of a contact
+        
+        Args:
+            uniquecode (str): the unique code of this contact
+            lastname (str): the lastname of this contact
+            firstname (str): the firstname of this contact
+            prof (str): the profession of this contact
+            email (str): the email address of this contact
+            phone (str): the phone number of this contact
+        
+        Returns:
+            1 if data is updated successfully
+            0 if it fails
+        """
+        try:
+            conn = self.dbconnection()
+            cursor = conn.cursor()
+
+            query = "UPDATE myprocons SET uniquecode = ?, lastname = ?, firstname = ?, profession = ?, email = ?, phone = ? WHERE tactid = ? "
+            data = (tactid, uniquecode, lastname, firstname, prof, email, phone)
+
+            cursor.execute(query, data)
+            conn.commit()
+            
+            qty = conn.total_changes
+            if qty == 0:
+                return 1
+            else:
+                return 0
+            
+        except sqlite3.Error as e:
+            print("\tFailed to update record: {}".format(e))
+
+        finally:
+            if conn:
+                cursor.close()
+                conn.close()
 
     def display_detail_records(self):
         """Display detail records
