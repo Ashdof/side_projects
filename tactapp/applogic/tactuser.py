@@ -277,7 +277,77 @@ class TactUserDirect:
             raise ValueError("'{}' is invalid. Please make sure phone number has 10 digits.".format(phone_number))
         else:
             self.__phonenumber = phone_number
-    
+      
+    def get_record(self):
+        """Display Records
+        
+        Description:
+            This method displays various records based on options selected by the user. The
+            options are numbered and the user only has to select a number. Example
+
+            1. Detail records
+            2. Names and phone numbers
+            3. Names and email address
+
+            If user selects 1, a detail record will be displayed in table powered by texttable
+        """
+        
+        done = False
+
+        print("\n\tSelect the number for a corresponding record to display\n")
+        print("\t1: Detail record\n\t2: Names and phone numbers\n\t3. Names and profession")
+        print("\t4: Names and email addresses\n\t5: Unique codes and names")
+        
+        while not done:
+            qtn = input("\n\tNumber ?>: ")
+
+            if qtn == "":
+                print("\tDisplay process cancelled")
+                done = True
+                
+            else:
+                match qtn:
+                    case "1":
+                        record.display_detail_records()
+                        done = True
+                    case "2":
+                        record.display_names_and_numbers()
+                        done = True
+                    case "3":
+                        record.display_names_and_profession()
+                        done = True
+                    case "4":
+                        record.display_names_and_emails()
+                        done = True
+                    case "5":
+                        record.display_names_and_codes()
+                        done = True
+
+    def commit_record(self):
+        """Save record
+        
+        Description:
+            This method invokes the save_record method from the dbmanager module and passes data
+            to it to be saved in the database.
+        """
+
+        #   Inovke method to request for user input
+        self.get_userinput()
+
+        try:
+            tactuid = Tactication(username=self.lastname.lower() + self.firstname.lower())
+            tact_id = tactuid.getuuid()
+            tact_code = self.lastname[:2] + self.firstname[-2:]
+            save = record.save_record(tactid=tact_id, uniquecode=tact_code.upper(), lastname=self.lastname, firstname=self.firstname, prof=self.profession, email=self.email, phone=self.phonenumber)
+            
+            if save == 1:
+                print("\t{}\'s data saved.".format(self.lastname))
+            else:
+                print("\t{}\'s data coult not be saved.".format(self.lastname))
+
+        except (ZeroDivisionError, ValueError, TypeError) as e:
+            print("Error! {}".format(e)) 
+      
     def get_userinput(self):
         """Get user input
 
@@ -343,73 +413,3 @@ class TactUserDirect:
                                 self.phonenumber = phone
 
                                 break
-
-    def commit_record(self):
-        """Save record
-        
-        Description:
-            This method invokes the save_record method from the dbmanager module and passes data
-            to it to be saved in the database.
-        """
-
-        #   Inovke method to request for user input
-        self.get_userinput()
-
-        try:
-            tactuid = Tactication(username=self.lastname.lower() + self.firstname.lower())
-            tact_id = tactuid.getuuid()
-            tact_code = self.lastname[:2] + self.firstname[-2:]
-            save = record.save_record(tactid=tact_id, uniquecode=tact_code.upper(), lastname=self.lastname, firstname=self.firstname, prof=self.profession, email=self.email, phone=self.phonenumber)
-            
-            if save == 1:
-                print("\t{}\'s data saved.".format(self.lastname))
-            else:
-                print("\t{}\'s data coult not be saved.".format(self.lastname))
-
-        except (ZeroDivisionError, ValueError, TypeError) as e:
-            print("Error! {}".format(e))
-    
-    def get_record(self):
-        """Display Records
-        
-        Description:
-            This method displays various records based on options selected by the user. The
-            options are numbered and the user only has to select a number. Example
-
-            1. Detail records
-            2. Names and phone numbers
-            3. Names and email address
-
-            If user selects 1, a detail record will be displayed in table powered by texttable
-        """
-        
-        done = False
-
-        print("\n\tSelect the number for a corresponding record to display\n")
-        print("\t1: Detail record\n\t2: Names and phone numbers\n\t3. Names and profession")
-        print("\t4: Names and email addresses\n\t5: Unique codes and names")
-        
-        while not done:
-            qtn = input("\n\tNumber ?>: ")
-
-            if qtn == "":
-                print("\tDisplay process cancelled")
-                done = True
-                
-            else:
-                match qtn:
-                    case "1":
-                        record.display_detail_records()
-                        done = True
-                    case "2":
-                        record.display_names_and_numbers()
-                        done = True
-                    case "3":
-                        record.display_names_and_profession()
-                        done = True
-                    case "4":
-                        record.display_names_and_emails()
-                        done = True
-                    case "5":
-                        record.display_names_and_codes()
-                        done = True
