@@ -11,6 +11,8 @@
 
 #!/usr/bin/env python3
 
+from applogic.tactuser import TactUserDirect
+
 class TactAppHome:
 
     def __init__(self):
@@ -27,7 +29,8 @@ class TactAppHome:
 
         print("\t\t\tTactApp Application")
         print(f"\t\tManage {username}'s Professional Contacts")
-        print("\tThis application is powered by commands. Use the following to \n\tperform most common tasks. Use tactman for more.")
+        print("\tThis application is powered by commands. Use the following to")
+        print("\tperform most common tasks. Use tactman for more.")
         print("\t______________________________________________________________")
     
     def main(self, username):
@@ -37,6 +40,7 @@ class TactAppHome:
             This is the main method of the module. All other methods are access
             from here
         """
+        user = TactUserDirect()
 
         print()
         self.title(username=username)
@@ -44,7 +48,7 @@ class TactAppHome:
         print("\t\t__________________________________________")
 
         done = False
-        cmds = ["add", "adds", "dit", "dits", "del", "dels", "ds", "dss", "manpro", "done"]
+        cmds = ["add", "dit", "del", "ds", "tactman", "done"]
 
         while not done:
             print()
@@ -58,3 +62,10 @@ class TactAppHome:
                 print("\n\tAPPLICATION EXIT")
                 done = True
                 exit(0)
+            
+            else:
+                match activity:
+                    case "add":
+                        user.commit_record()
+                    case "ds":
+                        user.get_record()
