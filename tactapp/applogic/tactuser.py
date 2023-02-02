@@ -323,7 +323,7 @@ class TactUserDirect:
                         record.display_names_and_codes()
                         done = True
 
-    def commit_record(self):
+    def commit_record(self, method=""):
         """Save record
         
         Description:
@@ -335,10 +335,20 @@ class TactUserDirect:
         self.get_userinput()
 
         try:
-            tactuid = Tactication(username=self.lastname.lower() + self.firstname.lower())
-            tact_id = tactuid.getuuid()
             tact_code = self.lastname[:2] + self.firstname[-2:]
-            save = record.save_record(tactid=tact_id, uniquecode=tact_code.upper(), lastname=self.lastname, firstname=self.firstname, prof=self.profession, email=self.email, phone=self.phonenumber)
+
+            if method == "add":
+                tactuid = Tactication(username=self.lastname.lower() + self.firstname.lower())
+                tact_id = tactuid.getuuid()
+                save = record.save_record(tactid=tact_id, uniquecode=tact_code.upper(), lastname=self.lastname, firstname=self.firstname, prof=self.profession, email=self.email, phone=self.phonenumber)
+            
+            elif method == "dit":
+                tactuid = record.get_ids(self.lastname, self.firstname)
+                save = record.edit_record(tactid=tactuid, uniquecode=tact_code.upper(), lastname=self.lastname, firstname=self.firstname, prof=self.profession, email=self.email, phone=self.phonenumber)
+                
+            else:
+                print("\n\tNo method to execute. Exiting!")
+                exit(0)
             
             if save == 1:
                 print("\t{}\'s data saved.".format(self.lastname))
