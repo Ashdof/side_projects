@@ -556,8 +556,6 @@ class TactdbManager(TactRoot):
             This method selectes all unique codes from the database
         """
         try:
-            uniq_codes = []
-
             conn = self.dbconnection()
             cursor = conn.cursor()
             query = "SELECT tactid FROM tactlist WHERE lastname = '"+lastname+"' AND firstname = '"+firstname+"' "
@@ -565,9 +563,8 @@ class TactdbManager(TactRoot):
             records = cursor.fetchall()
 
             for record in records:
-                uniq_codes.append(record)
-
-            return uniq_codes
+                for ids in record:
+                    return ids
             
         except sqlite3.Error as e:
             print("\tFailed to fetch records: ", e)
