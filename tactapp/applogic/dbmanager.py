@@ -241,7 +241,7 @@ class TactdbManager(TactRoot):
                 cursor.close()
                 conn.close()
     
-    def edit_record(self, tactid, uniquecode, lastname, firstname, prof, email, phone):
+    def edit_record(self, values):
         """Update record
         
         Description:
@@ -262,18 +262,38 @@ class TactdbManager(TactRoot):
         try:
             conn = self.dbconnection()
             cursor = conn.cursor()
+            choice = values[0]
+            query = ""
+            data = ""
 
-            query = "UPDATE myprocons SET uniquecode = ?, lastname = ?, firstname = ?, profession = ?, email = ?, phone = ? WHERE tactid = ? "
-            data = (tactid, uniquecode, lastname, firstname, prof, email, phone)
+            match choice:
+                case "A":
+                    query = "UPDATE tactlist SET uniquecode = ?, lastname = ?, firstname = ?, profession = ?, email = ?, phone = ? WHERE tactid = ? "
+                    data = (values[1], values[2], values[3], values[4], values[5], values[6], values[7])
+                case "F":
+                    query = "UPDATE tactlist SET firstname = ? WHERE tactid = ? "
+                    data = (values[1], values[2])
+                case "L":
+                    query = "UPDATE tactlist SET lastname = ? WHERE tactid = ? "
+                    data = (values[0], values[1])
+                case "P":
+                    query = "UPDATE tactlist SET profession = ? WHERE tactid = ? "
+                    data = (values[0], values[1])
+                case "E":
+                    query = "UPDATE tactlist SET email = ? WHERE tactid = ? "
+                    data = (values[0], values[1])
+                case "PH":
+                    query = "UPDATE tactlist SET phone = ? WHERE tactid = ? "
+                    data = (values[0], values[1])
 
             cursor.execute(query, data)
             conn.commit()
             
             qty = conn.total_changes
-            if qty == 0:
+            if qty == 0:    # Failed to update record
                 return 1
             else:
-                return 0
+                return 0    # Updated successfully
             
         except sqlite3.Error as e:
             print("\tFailed to update record: {}".format(e))
