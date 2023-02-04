@@ -2,7 +2,7 @@
     =======================     TACT APPLICATION     ===================================
     FILE:                   USER AUTHENTICATION MODULE
     DATE CREATED:           25-JAN-2023
-    LAST UPDATED:           30-JAN-2023
+    LAST UPDATED:           04-FEB-2023
     DEVELOPER:              EMMANUEL ENCHILL
 
     MODULE DESCRIPTION:     THIS MODULE PROVIDES USER AUTHENTICATION METHODS
@@ -227,17 +227,7 @@ class Tactication(TactRoot):
         Returns:
             A string representation of the computed uuid
         """
-        try:
-            length_of_username = len(self.username)
-            uid = uuid.uuid4().hex
-            half_value = int((len(uid) / length_of_username) * 3)
-            first_uuid_part = uid[:half_value]
-            second_uuid_part = uid[half_value:]
-            userid = self.username[0] + str(first_uuid_part) + self.username[1:3] + str(second_uuid_part) + self.username[3:]
-
-            return userid
-
-        except (ZeroDivisionError, ValueError, TypeError) as e:
-            print("Error!", e)
+        uid = uuid.uuid4().hex
+        return str(uid)
 
         

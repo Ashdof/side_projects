@@ -66,6 +66,6 @@ class TactAppHome:
             else:
                 match activity:
                     case "add":
-                        user.commit_record()
+                        user.commit_record("add")
                     case "ds":
                         user.get_record()
