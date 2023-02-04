@@ -2,7 +2,7 @@
     =======================     TACT APPLICATION     ===================================
     FILE:                   USER DIRECT MODULE
     DATE CREATED:           31-JAN-2023
-    LAST UPDATED:           02-FEB-2023
+    LAST UPDATED:           04-FEB-2023
     DEVELOPER:              EMMANUEL ENCHILL
 
     MODULE DESCRIPTION:     THIS MODULE PROVIDES METHODS FOR HANDLING THE INFORMATION OF 
