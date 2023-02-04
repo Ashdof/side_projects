@@ -241,19 +241,25 @@ class TactdbManager(TactRoot):
                 cursor.close()
                 conn.close()
     
-    def edit_record(self, values):
+    def edit_record(self, values=[]):
         """Update record
         
         Description:
-            This method updates the record of a contact
-        
+            This method updates the record of a contact. A list object is passed
+            as a parameter with the following elements:
+            
+            value[0]: The 1st element of the list determines whether to update all
+                        data of record (row), only first name, or last name, or profession,
+                        or email or phone number. If the first element is an option to
+                        update all data of a row, the list should have additional five
+                        elements for firstname, lastname, profession, email and phone number
+
         Args:
-            uniquecode (str): the unique code of this contact
-            lastname (str): the lastname of this contact
-            firstname (str): the firstname of this contact
-            prof (str): the profession of this contact
-            email (str): the email address of this contact
-            phone (str): the phone number of this contact
+            values (list): a list of options and arguments as explained below
+
+            values[0]: Option to either update all data of a row or a single data column
+            values[1]: the id of the record to update
+            values[2]: the value to update the data with
         
         Returns:
             1 if data is updated successfully
@@ -282,7 +288,7 @@ class TactdbManager(TactRoot):
                 case "E":
                     query = "UPDATE tactlist SET email = ? WHERE tactid = ? "
                     data = (values[0], values[1])
-                case "PH":
+                case "N":
                     query = "UPDATE tactlist SET phone = ? WHERE tactid = ? "
                     data = (values[0], values[1])
 
