@@ -322,6 +322,47 @@ class TactUserDirect:
                     case "5":
                         record.display_names_and_codes()
                         done = True
+    
+    def delete_record(self):
+        """Delete record
+        
+        Description:
+            This method deletes a record from the database
+        """
+        done = False
+
+        while not done:
+            lastname = input("\n\tLast name: ")
+
+            if lastname == "":
+                print("\tDelete process cancelled")
+                done = True
+                break
+            else:
+                firstname = input("\tFirst name: ")
+                
+                if firstname == "":
+                    print("\tDelete process cancelled")
+                    done = True
+                    break
+                
+                else:
+                    try:
+                        tactuid = record.get_ids(lastname, firstname)
+                        del_info = record.delete_record(tactuid)
+
+                        if del_info == 0:
+                            print("\t{}'s record deleted.".format(lastname))
+                            done = True
+                            break
+                        else:
+                            print("\tFailed to delete record")
+                            done = True
+                            break
+
+                    except ValueError as e:
+                        print("Error! {}".format(e))
+        
 
     def commit_record(self, method=""):
         """Save record

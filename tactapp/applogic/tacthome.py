@@ -44,7 +44,7 @@ class TactAppHome:
 
         print()
         self.title(username=username)
-        print("\tNew: add\tEdit: dit\tDelete: del\tDisplay: dis")
+        print("\tNew: add\tEdit: dit\tDelete: del\tDisplay: ds")
         print("\t\t__________________________________________")
 
         done = False
@@ -69,3 +69,5 @@ class TactAppHome:
                         user.commit_record("add")
                     case "ds":
                         user.get_record()
+                    case "del":
+                        user.delete_record()
