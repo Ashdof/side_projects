@@ -15,6 +15,4 @@ This is a simple commandline based application for storing the contact informati
 ## mydiary application
 This is a web application powered by **Django.** It is used for creating and managing memorable events in a person's life. 
 
-<br /><img src="mydiaryapp/resources/dashboard.png" alt="mydiary application dashboard"></br />
-
-
+<br /><img src="mydiaryapp/resources/dashboard.png" alt="mydiary application dashboard"><br />
