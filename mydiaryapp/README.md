@@ -25,10 +25,10 @@ This describes the process I used to create the application.
 ### Requirements Analysis
 The project began with the analysis of requirements and specifications of the system. As a web application, it will be accessed mainly on mobile phones, tablets, laptops and desktop computers. 
 
-**Usuage Requirements**
+**Usuage Requirements**<br />
 The application will require users to be authenticated anytime they want to access the platform. The user must therefore create an account with the system before proceeding with anything else.
 
-**Typical Execution Process**
+**Typical Execution Process**<br />
 For a user accessing the platform for the first time, the typical process follows the steps below:
 
 - User accesses the main page with the platform's domain address
@@ -78,3 +78,31 @@ The final stage in the development timeline is testing the completed platform to
 ---
 ## Application Domains
 This section describes the various parts of the platform
+
+### User Authentication
+This is used to verify the identity of the user to grant access to the platform. There is no external authentication and the user will be required to either sign up or provide a username and password to login to the system.
+
+### Dashboard
+This is the main access point of the application. A successful login will bring the user to the dashboard. All features of the application can be accessed from here. The features include: *settings, help/support, story details, new story, user profile and logout*
+
+### Settings
+This provide application based setup utilities and management. It also enables a user to delete his account.
+
+### Help
+This section provides a list of help topics and instructions on navigating the platform
+
+### Story Details
+This section enables the user to access the details of a story. It can be accessed by either clicking on the **title** of a story or the **Read** button of each story card on the dashboard
+
+### New Story
+This section has a form and enables a user to create a new post. It can be accessed from the navigation bar
+
+### User Profile
+This section permits a user to access and manage his information.
+
+## Other Features
+
+### Search
+This widget enables a user to search for a particular post from a sea of  stories. It is found on the navigation bar of the dashboard
+
+*Have fun exploring*
