@@ -11,3 +11,8 @@ This is a word game in which the user is challenged to guess and present the cor
 This is a simple commandline based application for storing the contact information of people in my professional network. 
 
 <br /><img src="tactapp/applogic/img/main.png" alt="tactapp home section"><br />
+
+## mydiary application
+This is a web application powered by **Django.** It is used for creating and managing memorable events in a person's life. 
+
+<br /><img src="mydiaryapp/img/dashboard.png" alt="mydiary application dashboard"></br />
