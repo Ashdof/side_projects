@@ -40,3 +40,41 @@ For a user accessing the platform for the first time, the typical process follow
 - Using the link provided in the instructions, user accesses the platform’s **login** page
 - User provides username and password to login
 - If successful, user lands on the application’s **dashboard**
+
+### System Design
+At this stage, I converted the specifications and requirements into layout designs, showing where buttons, textboxes, textfields, and other widgets will be placed on the platform. Also, colours and how the platform's various parts can be accessed through navigation.
+
+### Application Development
+The next stage in the timeline is development of the platform. At this stage, I turned the design layouts, system requirements and specifications into source code using the specified tools and technologies for the project.
+
+### Testing and Deployment
+The final stage in the development timeline is testing the completed platform to ensure it produces the expected output. Finally, the platform was deployed to Heroku for the world to see.
+
+*Note:*
+**The link of the platform will be shared when development is complete**
+
+---
+## Application Domains
+This section describes the various parts of the platform
+
+### User Authentication
+This is used to verify the identity of the user to grant access to the platform. There is no external authentication and the user will be required to either sign up or provide a username and password to login to the system.
+
+### Dashboard
+This is the main access point of the application. A successful login will bring the user to the dashboard. All features of the application can be accessed from here. The features include: *members, member details, new member, user profile and logout*
+
+### Member Details
+This section enables the user to access the details of a member. It can be accessed by either clicking on the **name**, or **photo** of a member
+
+### New Member
+This section has a form and enables a user to create a new object. It can be accessed from the navigation bar by clicking on the **New Member** button
+
+### User Profile
+This section permits a user to access and manage his or her information.
+
+## Other Features
+
+### Search
+This widget enables a user to search for a particular member from a sea of  members. It is found on the navigation bar of the dashboard. Search for a member can be done by either **last name, first name, age, gender** or **status**
+
+*Have fun exploring*
