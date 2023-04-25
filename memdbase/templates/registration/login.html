@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% load static %}
+{% block title %}Login{% endblock title %}
+
+{% block content %}
+
+<div class="container-fluid border-bottom py-3 ">
+    <div class="row">
+        <div class="fs-4 text-start text-uppercase text-primary">
+            Members Database Management -
+            <span class="text-dark text-capitalize text-sm">Keep track of members information</span>
+        </div>
+    </div>
+</div>
+<section class="py-5">
+    <div class="container align-items-center justify-content-center w-25">
+        <div class="row mt-5 p-3 rounded-3 border text-start">
+            <div class="py-3">
+                <div class="text-center text-primary text-uppercase mb-3">
+                    <p class="fs-4 mb-0">Login</p>
+                </div>
+                <form method="POST">
+                    {% csrf_token %}
+                    <div class="row">
+                        <div class="form-group">
+                            {{ form.username | as_crispy_field }}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group">
+                            {{ form.password | as_crispy_field }}
+                        </div>
+                    </div>
+                    <button class="btn btn-primary w-100 mt-3" type="submit">Login</button>
+                    <div class="clearfix">
+                        <a href="{% url 'password_reset' %}" class="float-right">Forgot your password?</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock content %}

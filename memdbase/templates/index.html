@@ -1,0 +1,17 @@
+{% load static %}
+{% include "dry/header.html" %} 
+    {% if user.is_authenticated %}
+    <div class="container">
+        {% include "dry/nav.html" %}
+        <!-- PAGE SECTIONS -->
+        <div class="page">
+            {% block content %}
+                Welcome <b>{{ user.username }}</b> to the index page
+            {% endblock content %}
+            {% include "dry/footer.html" %}
+        </div>
+    </div>
+{% else %}
+    {% include "dry/welcome.html" %}
+{% endif %}
+{% include "dry/bottom.html" %}
