@@ -21,13 +21,13 @@ This is a web application powered by Django. It is used to create and manage the
 <img src="https://github.com/devicons/devicon/blob/master/icons/vim/vim-original.svg" title="Vim" alt="Vim" width="40" height="40"/>&nbsp;
 <img src="https://github.com/devicons/devicon/blob/master/icons/vscode/vscode-original.svg" title="VS Code" alt="VS Code" width="40" height="40"/>&nbsp;
 
-# Application Development Timeline
+## Application Development Timeline
 This describes the process I used to create the application.
 
 ### Requirements Analysis
 The project began with the analysis of requirements and specifications of the system. As a web application, it will be accessed mainly on mobile phones, tablets, laptops and desktop computers. 
 
-**Usuage Requirements**<br />
+**Usage Requirements**<br />
 The application will require users to be authenticated anytime they want to access the platform. The user must therefore create an account with the system before proceeding with anything else.
 
 **Typical Execution Process**<br />
