@@ -16,7 +16,7 @@ class MembersData(models.Model):
     member_data = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     last_name = models.CharField(verbose_name="last name", max_length=50)
     first_name = models.CharField(verbose_name="first name", max_length=50)
-    gender = models.CharField(verbose_name="gender", max_length=1, choices=GENDER)
+    gender = models.CharField(verbose_name="gender", max_length=8, choices=GENDER)
     date_of_birth = models.DateField(verbose_name="birth date", max_length=8)
     age = models.PositiveIntegerField(verbose_name="age")
     postal_address = models.CharField(verbose_name="postal address", max_length=50, null=True, blank=True)

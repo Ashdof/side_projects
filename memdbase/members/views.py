@@ -1,5 +1,7 @@
 from django.shortcuts import render
-from django.views.generic import View, ListView
+from django.urls import reverse_lazy
+from django.views.generic import View, ListView, DetailView, DeleteView, CreateView
+from django.views.generic.edit import UpdateView
 
 from members.models import MembersData
 from members.forms import MemberCreateForm
@@ -16,5 +18,88 @@ class MembersDataDisplayView(ListView):
     """
 
     model = MembersData
-    template_name = "members/members_panel.html"
+    template_name = "index.html"
     context_object_name = "mems"
+
+
+class MembersDataDetailView(DetailView):
+    """
+    Member Detail View
+
+    Description:
+    This class fetches and displays the detail of a member object from the
+    database
+
+    """
+
+    model = MembersData
+    template_name = "members/members_detail.html"
+    context_object_name = "mems"
+
+
+class MembersDataDeleteView(DeleteView):
+    """
+    Member Delete View
+
+    Description:
+    This class deletes a member object from the database
+
+    """
+
+    model = MembersData
+    template_name = "members/member_delete.html"
+    context_object_name = "mems"
+    success_url = reverse_lazy("index")
+
+
+class MembersDataUpdateView(UpdateView):
+    """
+    Member Update View
+
+    Description:
+    This class updates the data of a member object in the database
+
+    """
+
+    model = MembersData
+    template_name = "members/member_update.html"
+    fields = [
+        "last_name",
+        "first_name",
+        "gender",
+        "date_of_birth",
+        "age",
+        "postal_address",
+        "email_address",
+        "phone_number",
+        "is_active",
+        "image"
+    ]
+    success_url = reverse_lazy("index")
+
+
+class MembersDataCreateView(CreateView):
+    """
+    Create New Member Object
+
+    Description:
+    This class creates a new member object
+
+    """
+
+    model = MembersData
+    # form_class = MemberCreateForm
+    fields = [
+        "created_at",
+        "last_name",
+        "first_name",
+        "gender",
+        "date_of_birth",
+        "age",
+        "postal_address",
+        "email_address",
+        "phone_number",
+        "image"
+    ]
+    template_name = "members/member_new.html"
+    success_url = reverse_lazy("members:member_new")

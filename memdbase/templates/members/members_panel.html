@@ -3,18 +3,17 @@
  
 {% block content %}
 <section>
-    </div>
     <div class="container">
         <div class="row"> 
             {% for person in mems %}
                 <div class="col-lg-2 col-md-2 col-sm-3">
                     <div class="align-items-center justify-content-center text-center"> 
-                        <a href="#">
+                        <a href="{% url 'members:members_detail' pk=person.pk %}">
                             <img src="{{ person.image.url }}" class="rounded img-fluid img-thumbnail" alt="{{ person.last_name }}'s photo">
                         </a>
                     </div>
                     <div class="text-center fw-bold p-2 mt-2">
-                        <a class="h5 text-decoration-none" href="#">
+                        <a class="h5 text-decoration-none" href="{% url 'members:members_detail' pk=person.pk %}">
                             {{ person.last_name }}, {{ person.first_name }}
                         </a>
                     </div>

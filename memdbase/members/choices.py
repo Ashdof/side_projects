@@ -3,7 +3,7 @@ Choice Options
 """
 
 GENDER = (
-    ("M", "Male"),
-    ("F", "Female"),
-    ("O", "Other"),
+    ("Male", "Male"),
+    ("Female", "Female"),
+    ("Other", "Other"),
 )
