@@ -42,7 +42,19 @@ For a user accessing the platform for the first time, the typical process follow
 - If successful, user lands on the application’s **dashboard**
 
 ### System Design
-At this stage, I converted the specifications and requirements into layout designs, showing where buttons, textboxes, textfields, and other widgets will be placed on the platform. Also, colours and how the platform's various parts can be accessed through navigation.
+At this stage, I converted the specifications and requirements into layout designs, showing where buttons, textboxes, textfields, and other widgets will be placed on the platform. Also, colours and how the platform's various parts can be accessed through navigation. The following screenshots show the designs of the major parts of the application
+
+**Landing page**<br />
+<img src="resources/landing_page.png" title="Sign up page" alt="landing page"/><br />
+
+**Sign up page**<br />
+<img src="resources/signup.png" title="Sign up page" alt="signup page"/><br />
+
+**Login page**<br />
+<img src="resources/login.png" title="Login page" alt="login page"/><br />
+
+**Forgot password page**<br />
+<img src="resources/forgot_password.png" title="Password reset page" alt="password reset page"/><br />
 
 ### Application Development
 The next stage in the timeline is development of the platform. At this stage, I turned the design layouts, system requirements and specifications into source code using the specified tools and technologies for the project.
