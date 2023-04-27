@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.urls import reverse_lazy
+from django.db.models import Q
 from django.views.generic import View, ListView, DetailView, DeleteView, CreateView
 from django.views.generic.edit import UpdateView
 
@@ -103,3 +104,30 @@ class MembersDataCreateView(CreateView):
     ]
     template_name = "members/member_new.html"
     success_url = reverse_lazy("members:member_new")
+
+
+class MembersDataSearchView(ListView):
+    """
+    Member Search View
+
+    Description:
+    This class searches for a specified member object
+
+    """
+
+    model = MembersData
+    template_name = "members/member_search.html"
+
+    def get_queryset(self):
+        qs = super().get_queryset()
+        search_term = self.request.GET.get("q")
+
+        if search_term:
+            qs = qs.filter(
+                Q(last_name__icontains=search_term) |
+                Q(first_name__icontains=search_term) |
+                Q(age__icontains=search_term) |
+                Q(gender__icontains=search_term)
+            )
+        
+        return qs 

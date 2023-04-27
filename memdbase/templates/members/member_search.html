@@ -1,0 +1,39 @@
+{% extends "index.html" %}
+{% load crispy_forms_tags %}
+{% load static %}
+
+{% block content %}
+<!-- NAME TITLE SECTION -->
+<section>
+    <div class="container bg-white px-5">
+        <!-- NAME OF PERSON AS TITLE OF PAGE -->
+        <div class="row">
+            <div class="col col-lg-12 col-md-12 col-sm-14 mb-3 border-bottom">
+                <p class="fs-3 fw-bold text-start text-uppercase text-primary mb-0">
+                    Member Search Results
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+<section>
+    <div class="container">
+        <div class="row"> 
+            {% for person in object_list %}
+                <div class="col-lg-2 col-md-2 col-sm-3">
+                    <div class="align-items-center justify-content-center text-center"> 
+                        <a href="{% url 'members:members_detail' pk=person.pk %}">
+                            <img src="{{ person.image.url }}" class="rounded img-fluid img-thumbnail" alt="{{ person.last_name }}'s photo">
+                        </a>
+                    </div>
+                    <div class="text-center fw-bold p-2 mt-2">
+                        <a class="h5 text-decoration-none" href="{% url 'members:members_detail' pk=person.pk %}">
+                            {{ person.last_name }}, {{ person.first_name }}
+                        </a>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endblock content %}

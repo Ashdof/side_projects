@@ -10,8 +10,8 @@
               <li><a href="{% url 'members:member_new' %}" class="nav-link px-2 link-dark">New Member</a></li>
             </ul>
     
-            <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3">
-              <input type="search" class="form-control" placeholder="Search..." aria-label="Search">
+            <form action="{% url 'members:member_search' %}" method="GET" class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" id="search-form">
+              <input type="search" class="form-control" placeholder="Search..." aria-label="Search" id="search-input" name="q">
             </form>
     
             <div class="dropdown text-end">
@@ -20,9 +20,9 @@
                 {{ user.username }}
               </a>
               <ul class="dropdown-menu text-small" aria-labelledby="dropdownUser1">
-                <li><a class="dropdown-item" href="#">Profile</a></li>
-                <li><a class="dropdown-item" href="#">Update Profile</a></li>
-                <li><a class="dropdown-item" href="#">Change Password</a></li>
+                <li><a class="dropdown-item" href="{% url 'accounts:profile' username=user.username %}">Profile</a></li>
+                <li><a class="dropdown-item" href="{% url 'accounts:profile_update' username=user.username %}">Update Profile</a></li>
+                <li><a class="dropdown-item" href="{% url 'password_change' %}">Change Password</a></li>
                 <li><hr class="dropdown-divider"></li>
                 <li><a class="dropdown-item" href="{% url 'logout' %}">Sign out</a></li>
               </ul>
