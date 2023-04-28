@@ -4,6 +4,18 @@
 
 {% block content %}
 <!-- NAME TITLE SECTION -->
+{% if not object_list %}
+    <div class="container bg-white px-5 py-5 border-top border-bottom rounded-3">
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12">
+                <p class="text-center text-secondary fs-5 ">
+                    Cannot find what you're searching for. Please try searching again.
+                    <br />You can search by last name, first name gender or age. 
+                </p>
+            </div>
+        </div>
+    </div>
+{% else %}
 <section>
     <div class="container bg-white px-5">
         <!-- NAME OF PERSON AS TITLE OF PAGE -->
@@ -33,7 +45,9 @@
                     </div>
                 </div>
             {% endfor %}
+            
         </div>
     </div>
 </section>
+{% endif %}
 {% endblock content %}
