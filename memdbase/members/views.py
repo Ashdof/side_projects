@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.db.models import Q
 from django.views.generic import View, ListView, DetailView, DeleteView, CreateView
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic.edit import UpdateView
 
 from members.models import MembersData
@@ -9,7 +10,7 @@ from members.forms import MemberCreateForm
 
 
 # Create your views here.
-class MembersDataDisplayView(ListView):
+class MembersDataDisplayView(LoginRequiredMixin, ListView):
     """
     Display Member Data
 
@@ -23,7 +24,7 @@ class MembersDataDisplayView(ListView):
     context_object_name = "mems"
 
 
-class MembersDataDetailView(DetailView):
+class MembersDataDetailView(LoginRequiredMixin, DetailView):
     """
     Member Detail View
 
@@ -38,7 +39,7 @@ class MembersDataDetailView(DetailView):
     context_object_name = "mems"
 
 
-class MembersDataDeleteView(DeleteView):
+class MembersDataDeleteView(LoginRequiredMixin, DeleteView):
     """
     Member Delete View
 
@@ -53,7 +54,7 @@ class MembersDataDeleteView(DeleteView):
     success_url = reverse_lazy("index")
 
 
-class MembersDataUpdateView(UpdateView):
+class MembersDataUpdateView(LoginRequiredMixin, UpdateView):
     """
     Member Update View
 
@@ -79,7 +80,7 @@ class MembersDataUpdateView(UpdateView):
     success_url = reverse_lazy("index")
 
 
-class MembersDataCreateView(CreateView):
+class MembersDataCreateView(LoginRequiredMixin, CreateView):
     """
     Create New Member Object
 
@@ -89,7 +90,6 @@ class MembersDataCreateView(CreateView):
     """
 
     model = MembersData
-    # form_class = MemberCreateForm
     fields = [
         "created_at",
         "last_name",
@@ -106,7 +106,7 @@ class MembersDataCreateView(CreateView):
     success_url = reverse_lazy("members:member_new")
 
 
-class MembersDataSearchView(ListView):
+class MembersDataSearchView(LoginRequiredMixin, ListView):
     """
     Member Search View
 

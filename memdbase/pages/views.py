@@ -1,10 +1,11 @@
 from django.shortcuts import render
 from django.views.generic import TemplateView, ListView
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 from members.models import MembersData
 
 # Create your views here.
-class HomePageView(ListView):
+class HomePageView(LoginRequiredMixin, ListView):
     """
     Display Member Data
 
