@@ -31,4 +31,7 @@ int processInput(char *);
 /* function to compute */
 float computeResult(const char *);
 
+/* function to check digits of the decimal part of a number */
+int checkDecDigits(float);
+
 #endif /* ASHCULATOR */

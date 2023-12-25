@@ -26,8 +26,8 @@
  */
 int processInput(char *line)
 {
-	float ans;
-	__attribute__((unused)) int int_part, dec_part;
+	float ans, dec_part;
+	int int_part, state;
 	char *p;
 
 	/* get rid of the newline character */
@@ -38,7 +38,14 @@ int processInput(char *line)
 	}
 
 	ans = computeResult(line);
-	printf(":) %.2f\n", ans);
+	int_part = (int) ans;
+	dec_part = ans - int_part;
+
+	state = checkDecDigits(dec_part);
+	if (state == 1)
+		printf(":) %f\n", ans);
+	else
+		printf(":) %d\n", int_part);
 
 	return (1);
 }
@@ -107,4 +114,22 @@ float computeResult(const char *line)
 	}
 
 	return (result);
+}
+
+/**
+ * checkDecDigits - check decimal digits
+ * @value: number with floating point values
+ *
+ * Return: 1 if a digit is greater 0, 0 if all digits are 0
+ */
+int checkDecDigits(float value)
+{
+	while (value != (int) value)
+	{
+		value *= 10;
+		if (value > 0)
+			return (1);
+	}
+
+	return (0);
 }
