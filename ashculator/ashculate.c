@@ -27,6 +27,8 @@ int main(void)
 	do {
 		printf("ashculate ?> ");
 		len = readLine(&args, len);
+		if (strcmp(args, "exit\n") == 0)
+			break;
 		strcmp(args, "\n") == 0 ? printf(":( [%s]\n", args) : 
 			printf(":) [%s]\n", args);
 		status = 1;	
