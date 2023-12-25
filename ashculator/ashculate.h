@@ -14,8 +14,21 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <ctype.h>
+
+/* error messages */
+#define ERR_INPUT(n) printf(":( Error: invalid input [%c]\n", (n))
+#define ERR_BAD_OPERAND(n) printf(":( Error: invalid operand [%f]\n", (n))
+#define ERR_BAD_OPERATOR(n) printf(":( Error: invalid operator [%c]\n", (n))
+#define ERR_ZERO_DIVISION ":( Error: division by zero\n"
 
 /* readLine function */
 ssize_t readLine(char **, size_t);
+
+/* function to parse the input */
+int processInput(char *);
+
+/* function to compute */
+float computeResult(const char *);
 
 #endif /* ASHCULATOR */
