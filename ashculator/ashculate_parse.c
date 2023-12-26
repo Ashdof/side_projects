@@ -37,6 +37,9 @@ int processInput(char *line)
 			*p = '\0';
 	}
 
+	if (strcmp(line, "exit") == 0)
+		return (0);
+
 	ans = computeResult(line);
 	int_part = (int) ans;
 	dec_part = ans - int_part;
@@ -69,12 +72,11 @@ double computeResult(const char *line)
 			i++;
 		}
 
-		if (isdigit(line[i]) || (line[i] == '-' && !isdigit(line[i - 1]) && line[i] != '.'))
+		if (isdigit(line[i]) || (line[i] == '-' && !isdigit(line[i - 1])))
 		{
 			if (sscanf(line + i, "%lf", &operand) != 1) {
 				ERR_BAD_OPERAND(operand);
-				result = 0.0;
-				return (result);
+				return (0);
 			}
 
 			switch (op) {
@@ -90,8 +92,7 @@ double computeResult(const char *line)
                 		case '/':
                     			if (operand == 0.0) {
                         			printf(ERR_ZERO_DIVISION);
-						result = 0.0;
-						return (result);
+						return (0);
                     			}
                     			result /= operand;
                     			break;
@@ -99,16 +100,14 @@ double computeResult(const char *line)
 					if (operand == 0.0)
 					{
 						printf(ERR_ZERO_DIVISION);
-						result = 0.0;
-						return (result);
+						return (0);
 					}
 
 					result = handleModDiv(result, operand);
 					break;
                 		default:
 					ERR_BAD_OPERATOR(line[i]);
-					result = 0.0;
-					return (result);
+					return (0);
             		}
 
             		while (isdigit(line[i]) || line[i] == '.') {
@@ -118,8 +117,7 @@ double computeResult(const char *line)
 		else
 		{
 			ERR_INPUT(line[i]);
-			result = 0.0;
-			return (result);
+			return (0);
         	}
 	}
 

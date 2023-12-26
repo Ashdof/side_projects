@@ -27,8 +27,6 @@ int main(void)
 	do {
 		printf("ashculate ?> ");
 		len = readLine(&args, len);
-		if (strcmp(args, "exit\n") == 0)
-			break;
 		status = processInput(args);
 	} while (status);
 	
