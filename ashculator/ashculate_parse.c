@@ -63,8 +63,13 @@ double computeResult(const char *line)
     	int i = 0;
 
     	while (line[i] != '\0') {
-        	if (isdigit(line[i]) || (line[i] == '-'
-		    && (i == 0 || !isdigit(line[i - 1]))))
+		if (line[i] == '+' || line[i] == '-' || line[i] == '*' || line[i] == '/' || line[i] == '%')
+		{
+			op = line[i];
+			i++;
+		}
+
+		if (isdigit(line[i]) || (line[i] == '-' && !isdigit(line[i - 1]) && line[i] != '.'))
 		{
 			if (sscanf(line + i, "%lf", &operand) != 1) {
 				ERR_BAD_OPERAND(operand);
@@ -106,14 +111,9 @@ double computeResult(const char *line)
 					return (result);
             		}
 
-            		while (isdigit(line[i]) || line[i] == '-' || line[i] == '.') {
+            		while (isdigit(line[i]) || line[i] == '.') {
                 		i++;
             		}
-        	}
-		else if (line[i] == '+' || line[i] == '-' || line[i] == '*' || line[i] == '/' || line[i] == '%')
-		{
-            		op = line[i];
-            		i++;
         	}
 		else
 		{
