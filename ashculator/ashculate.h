@@ -29,9 +29,12 @@ ssize_t readLine(char **, size_t);
 int processInput(char *);
 
 /* function to compute */
-float computeResult(const char *);
+double computeResult(const char *);
 
 /* function to check digits of the decimal part of a number */
-int checkDecDigits(float);
+int checkDecDigits(double);
+
+/* function to handle modulo division */
+double handleModDiv(double, double);
 
 #endif /* ASHCULATOR */

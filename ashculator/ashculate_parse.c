@@ -26,7 +26,7 @@
  */
 int processInput(char *line)
 {
-	float ans, dec_part;
+	double ans, dec_part;
 	int int_part, state;
 	char *p;
 
@@ -56,7 +56,7 @@ int processInput(char *line)
  *
  * Return: the results of the computation
  */
-float computeResult(const char *line)
+double computeResult(const char *line)
 {
 	double operand, result = 0.0;
     	char op = '+';
@@ -69,7 +69,6 @@ float computeResult(const char *line)
 			if (sscanf(line + i, "%lf", &operand) != 1) {
 				ERR_BAD_OPERAND(operand);
 				break;
-				/*exit(EXIT_FAILURE);*/
 			}
 
 			switch (op) {
@@ -86,21 +85,28 @@ float computeResult(const char *line)
                     			if (operand == 0.0) {
                         			printf(ERR_ZERO_DIVISION);
 						break;
-                        			/*exit(EXIT_FAILURE);*/
                     			}
                     			result /= operand;
                     			break;
+				case '%':
+					if (operand == 0.0)
+					{
+						printf(ERR_ZERO_DIVISION);
+						break;
+					}
+
+					result = handleModDiv(result, operand);
+					break;
                 		default:
 					ERR_BAD_OPERATOR(line[i]);
 					break;
-                    			/*exit(EXIT_FAILURE);*/
             		}
 
             		while (isdigit(line[i]) || line[i] == '-' || line[i] == '.') {
                 		i++;
             		}
         	}
-		else if (line[i] == '+' || line[i] == '-' || line[i] == '*' || line[i] == '/')
+		else if (line[i] == '+' || line[i] == '-' || line[i] == '*' || line[i] == '/' || line[i] == '%')
 		{
             		op = line[i];
             		i++;
@@ -109,7 +115,6 @@ float computeResult(const char *line)
 		{
 			ERR_INPUT(line[i]);
 			break;
-           	 	/*exit(EXIT_FAILURE);*/
         	}
 	}
 
@@ -122,7 +127,7 @@ float computeResult(const char *line)
  *
  * Return: 1 if a digit is greater 0, 0 if all digits are 0
  */
-int checkDecDigits(float value)
+int checkDecDigits(double value)
 {
 	while (value != (int) value)
 	{
@@ -132,4 +137,24 @@ int checkDecDigits(float value)
 	}
 
 	return (0);
+}
+
+/**
+ * handleModDiv - handle modulo division
+ * @value: the value to be divided
+ * @operand: the number to divide the value
+ *
+ * description: this function handles modulo division
+ *
+ * Return: the result of the division
+ */
+double handleModDiv(double value, double operand)
+{
+	double quo, div, ans;
+
+	quo = value / operand;
+	div = (double)((long) quo);
+	ans = value - operand * div;
+
+	return (ans);
 }
