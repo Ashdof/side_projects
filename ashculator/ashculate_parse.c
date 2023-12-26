@@ -68,7 +68,8 @@ double computeResult(const char *line)
 		{
 			if (sscanf(line + i, "%lf", &operand) != 1) {
 				ERR_BAD_OPERAND(operand);
-				break;
+				result = 0.0;
+				return (result);
 			}
 
 			switch (op) {
@@ -84,7 +85,8 @@ double computeResult(const char *line)
                 		case '/':
                     			if (operand == 0.0) {
                         			printf(ERR_ZERO_DIVISION);
-						break;
+						result = 0.0;
+						return (result);
                     			}
                     			result /= operand;
                     			break;
@@ -92,14 +94,16 @@ double computeResult(const char *line)
 					if (operand == 0.0)
 					{
 						printf(ERR_ZERO_DIVISION);
-						break;
+						result = 0.0;
+						return (result);
 					}
 
 					result = handleModDiv(result, operand);
 					break;
                 		default:
 					ERR_BAD_OPERATOR(line[i]);
-					break;
+					result = 0.0;
+					return (result);
             		}
 
             		while (isdigit(line[i]) || line[i] == '-' || line[i] == '.') {
@@ -114,7 +118,8 @@ double computeResult(const char *line)
 		else
 		{
 			ERR_INPUT(line[i]);
-			break;
+			result = 0.0;
+			return (result);
         	}
 	}
 
