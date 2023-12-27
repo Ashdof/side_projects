@@ -39,7 +39,9 @@ typedef struct info
 
 	/* error message */
 	int err_code;
+	int err_input; /* the input bug */
 	char *err_msg;
+	
 
 	/* user input data */
 	char *args;
@@ -47,7 +49,7 @@ typedef struct info
 } info_t;
 
 /* initializer for struct */
-#define INFO_T_INIT {0.0, 0, NULL, NULL, 0}
+#define INFO_T_INIT {0.0, 0, 0, NULL, NULL, 0}
 
 /* readLine function */
 ssize_t readLine(info_t *);

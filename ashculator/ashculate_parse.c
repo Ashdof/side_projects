@@ -47,7 +47,8 @@ int processInput(info_t *info)
 	ans = computeResult(info);
 	if (info->err_code != 0)
 	{
-		printf("%s\n", info->err_msg);
+		printf("%s [%c]", info->err_msg, info->err_input);
+		printf("\n");
 		return (1);
 	}
 
@@ -87,6 +88,7 @@ double computeResult(info_t *info)
 		{
 			if (sscanf(line + i, "%lf", &operand) != 1) {
 				info->err_code = ERR_BAD_OPERAND_CODE;
+				info->err_input = operand;
 				info->err_msg = ERR_BAD_OPERAND;
 				return (0);
 			}
@@ -104,6 +106,7 @@ double computeResult(info_t *info)
                 		case '/':
                     			if (operand == 0.0) {
 						info->err_code = ERR_ZERO_DIVISION_CODE;
+						info->err_input = operand;
                         			info->err_msg = ERR_ZERO_DIVISION;
 						return (0);
                     			}
@@ -113,6 +116,7 @@ double computeResult(info_t *info)
 					if (operand == 0.0)
 					{
 						info->err_code = ERR_ZERO_DIVISION_CODE;
+						info->err_input = operand;
 						info->err_msg = ERR_ZERO_DIVISION;
 						return (0);
 					}
@@ -121,6 +125,7 @@ double computeResult(info_t *info)
 					break;
                 		default:
 					info->err_code = ERR_BAD_OPERATOR_CODE;
+					info->err_input = op;
 					info->err_msg = ERR_BAD_OPERATOR;
 					return (0);
             		}
@@ -132,6 +137,7 @@ double computeResult(info_t *info)
 		else
 		{
 			info->err_code = ERR_INVALID_INPUT_CODE;
+			info->err_input = line[i];
 			info->err_msg = ERR_INVALID_INPUT;
 			return (0);
         	}
