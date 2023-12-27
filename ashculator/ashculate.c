@@ -1,7 +1,7 @@
 /**
  * file: ashculate.c
  * date created: 25-Dec-2023
- * date updated: 25-Dec-2023
+ * date updated: 27-Dec-2023
  * author: Emmanuel Enchill
  *
  * description: this file contains the main entry point for the
@@ -20,17 +20,16 @@
  */
 int main(void)
 {
-	size_t len = 0;
+	info_t info[] = { INFO_T_INIT };
 	int status;
-	char *args = NULL;
 
 	do {
 		printf("ashculate ?> ");
-		len = readLine(&args, len);
-		status = processInput(args);
+		readLine(info);
+		status = processInput(info);
 	} while (status);
 	
-	free(args);
+	free(info->args);
 
 	return (0);
 }

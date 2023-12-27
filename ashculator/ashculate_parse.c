@@ -1,7 +1,7 @@
 /**
  * file: ashculate_parse.c
  * date created: 25-Dec-2023
- * date updated: 25-Dec-2023
+ * date updated: 27-Dec-2023
  * author: Emmanuel Enchill
  *
  * description: this file contains functions that checks for errors
@@ -10,13 +10,17 @@
  * Functions:
  * @processInput
  * @computeResult
+ * @checkDecDigits
+ * @handleModDiv
+ *
  */
 
 #include "ashculate.h"
 
 /**
  * processInput - parse input
- * @line: a pointer to the input data
+ * @info: a pointer to a space in memory where a struct of data
+ * information is stored.
  *
  * description: this function takes the input data, checks for
  * invalid input(non-digits and missing operation sign) and
@@ -24,23 +28,29 @@
  *
  * Return: Always 1
  */
-int processInput(char *line)
+int processInput(info_t *info)
 {
 	double ans, dec_part;
 	int int_part, state;
 	char *p;
 
 	/* get rid of the newline character */
-	for (p = line; *p != '\0'; p++)
+	for (p = info->args; *p != '\0'; p++)
 	{
 		if (*p == '\n')
 			*p = '\0';
 	}
 
-	if (strcmp(line, "exit") == 0)
+	if (strcmp(info->args, "exit") == 0)
 		return (0);
 
-	ans = computeResult(line);
+	ans = computeResult(info);
+	if (info->err_code != 0)
+	{
+		printf("%s\n", info->err_msg);
+		return (1);
+	}
+
 	int_part = (int) ans;
 	dec_part = ans - int_part;
 
@@ -55,14 +65,15 @@ int processInput(char *line)
 
 /**
  * computeResult - execute arithmetic computation
- * @line - a pointer to the input data
+ * @info: a pointer to a space in memory where a struct of data
+ * information is stored
  *
  * Return: the results of the computation
  */
-double computeResult(const char *line)
+double computeResult(info_t *info)
 {
 	double operand, result = 0.0;
-    	char op = '+';
+    	char op = '+', *line = info->args;
     	int i = 0;
 
     	while (line[i] != '\0') {
@@ -75,7 +86,8 @@ double computeResult(const char *line)
 		if (isdigit(line[i]) || (line[i] == '-' && !isdigit(line[i - 1])))
 		{
 			if (sscanf(line + i, "%lf", &operand) != 1) {
-				ERR_BAD_OPERAND(operand);
+				info->err_code = ERR_BAD_OPERAND_CODE;
+				info->err_msg = ERR_BAD_OPERAND;
 				return (0);
 			}
 
@@ -91,7 +103,8 @@ double computeResult(const char *line)
                    			break;
                 		case '/':
                     			if (operand == 0.0) {
-                        			printf(ERR_ZERO_DIVISION);
+						info->err_code = ERR_ZERO_DIVISION_CODE;
+                        			info->err_msg = ERR_ZERO_DIVISION;
 						return (0);
                     			}
                     			result /= operand;
@@ -99,14 +112,16 @@ double computeResult(const char *line)
 				case '%':
 					if (operand == 0.0)
 					{
-						printf(ERR_ZERO_DIVISION);
+						info->err_code = ERR_ZERO_DIVISION_CODE;
+						info->err_msg = ERR_ZERO_DIVISION;
 						return (0);
 					}
 
 					result = handleModDiv(result, operand);
 					break;
                 		default:
-					ERR_BAD_OPERATOR(line[i]);
+					info->err_code = ERR_BAD_OPERATOR_CODE;
+					info->err_msg = ERR_BAD_OPERATOR;
 					return (0);
             		}
 
@@ -116,7 +131,8 @@ double computeResult(const char *line)
         	}
 		else
 		{
-			ERR_INPUT(line[i]);
+			info->err_code = ERR_INVALID_INPUT_CODE;
+			info->err_msg = ERR_INVALID_INPUT;
 			return (0);
         	}
 	}

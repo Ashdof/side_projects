@@ -1,7 +1,7 @@
 /**
  * file: ashculate_io.c
  * date created: 25-Dec-2023
- * date updated: 25-Dec-2023
+ * date updated: 27-Dec-2023
  * author: Emmanuel Enchill
  *
  * description: this file contains functions that perform input
@@ -18,11 +18,11 @@
  *
  * Return: the line of input read
  */
-ssize_t readLine(char **line, size_t n)
+ssize_t readLine(info_t *info)
 {
 	ssize_t len;
 
-	len = getline(line, &n, stdin);
+	len = getline(&info->args, &info->len, stdin);
 	if (len == -1)
 	{
 		if (feof(stdin))
