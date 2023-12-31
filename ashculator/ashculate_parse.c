@@ -1,20 +1,3 @@
-/**
- * file: ashculate_parse.c
- * date created: 25-Dec-2023
- * date updated: 27-Dec-2023
- * author: Emmanuel Enchill
- *
- * description: this file contains functions that checks for errors
- * in the data supplied by the user
- *
- * Functions:
- * @processInput
- * @computeResult
- * @checkDecDigits
- * @handleModDiv
- *
- */
-
 #include "ashculate.h"
 
 /**
@@ -22,13 +5,9 @@
  * @info: a pointer to a space in memory where a struct of data
  * information is stored.
  *
- * description: this function takes the input data, checks for
- * invalid input(non-digits and missing operation sign) and
- * invokes other functions to execute the arithmetic computation
- *
  * Return: Always 1
  */
-int processInput(info_t *info)
+int processInput(INFO *info)
 {
 	double ans, dec_part;
 	int int_part, state;
@@ -46,140 +25,121 @@ int processInput(info_t *info)
 
 	ans = computeResult(info);
 	if (info->err_code != 0)
+		printf("%s [%c]\n", info->err_msg, info->err_input);
+	else
 	{
-		printf("%s [%c]", info->err_msg, info->err_input);
-		printf("\n");
-		return (1);
+		int_part = (int) ans;
+		dec_part = ans - int_part;
+		
+		state = checkDecDigits(dec_part);
+		if (state == 1)
+			printf(":) %f\n", ans);
+		else
+			printf(":) %d\n", int_part);
 	}
 
-	int_part = (int) ans;
-	dec_part = ans - int_part;
-
-	state = checkDecDigits(dec_part);
-	if (state == 1)
-		printf(":) %f\n", ans);
-	else
-		printf(":) %d\n", int_part);
+	info->result = 0.0;
+	info->index = 0;
+	info->err_code = 0;
+	info->err_input = 0;
+	info->err_msg = NULL;
 
 	return (1);
 }
 
 /**
- * computeResult - execute arithmetic computation
- * @info: a pointer to a space in memory where a struct of data
- * information is stored
+ * handleBrackets - handle brackets
+ * @info: a pointer to a space in memory where a struct of data is
+ * stored
+ * @args: a pointer to the line of input
+ * @index: a pointer to the index of the value
  *
- * Return: the results of the computation
+ * Return: result of computation or a converted number
  */
-double computeResult(info_t *info)
+double handleBrackets(INFO *info, const char *args, int *index)
 {
-	double operand, result = 0.0;
-    	char op = '+', *line = info->args;
-    	int i = 0;
+	double result;
+	
+	if (args[*index] == '(')
+	{
+		(*index)++;
 
-    	while (line[i] != '\0') {
-		if (line[i] == '+' || line[i] == '-' || line[i] == '*' || line[i] == '/' || line[i] == '%')
+		result = handleAddSub(info, args, index);
+        
+		if (args[*index] == ')')
 		{
-			op = line[i];
-			i++;
+			(*index)++;
+			return (result);
 		}
-
-		if (isdigit(line[i]) || (line[i] == '-' && !isdigit(line[i - 1])))
-		{
-			if (sscanf(line + i, "%lf", &operand) != 1) {
-				info->err_code = ERR_BAD_OPERAND_CODE;
-				info->err_input = operand;
-				info->err_msg = ERR_BAD_OPERAND;
-				return (0);
-			}
-
-			switch (op) {
-                		case '-':
-                    			result -= operand;
-                    			break;
-                		case '+':
-                    			result += operand;
-                    			break;
-                		case '*':
-                    			result *= operand;
-                   			break;
-                		case '/':
-                    			if (operand == 0.0) {
-						info->err_code = ERR_ZERO_DIVISION_CODE;
-						info->err_input = operand;
-                        			info->err_msg = ERR_ZERO_DIVISION;
-						return (0);
-                    			}
-                    			result /= operand;
-                    			break;
-				case '%':
-					if (operand == 0.0)
-					{
-						info->err_code = ERR_ZERO_DIVISION_CODE;
-						info->err_input = operand;
-						info->err_msg = ERR_ZERO_DIVISION;
-						return (0);
-					}
-
-					result = handleModDiv(result, operand);
-					break;
-                		default:
-					info->err_code = ERR_BAD_OPERATOR_CODE;
-					info->err_input = op;
-					info->err_msg = ERR_BAD_OPERATOR;
-					return (0);
-            		}
-
-            		while (isdigit(line[i]) || line[i] == '.') {
-                		i++;
-            		}
-        	}
 		else
 		{
-			info->err_code = ERR_INVALID_INPUT_CODE;
-			info->err_input = line[i];
-			info->err_msg = ERR_INVALID_INPUT;
+			info->err_code = ERR_MISSING_PARENTHESIS_CODE;
+			info->err_input = ')';
+			info->err_msg = ERR_MISSING_PARENTHESIS;
+
 			return (0);
-        	}
+		}
 	}
-
-	return (result);
+	else
+		return handleSubstrToNumber(info, args, index);
 }
 
 /**
- * checkDecDigits - check decimal digits
- * @value: number with floating point values
+ * computeResult - evaluate and compute result
+ * @info: a pointer to a space in memory where a struct of data
+ * is stored
  *
- * Return: 1 if a digit is greater 0, 0 if all digits are 0
+ * Return: result of computation
  */
-int checkDecDigits(double value)
+double computeResult(INFO *info)
 {
-	while (value != (int) value)
+	return handleAddSub(info, info->args, &info->index);
+}
+
+/**
+ * handleSubstrToNumber - convert a sub-string to a double
+ * @info: a pointer to a space in memory where a struct of data is
+ * stored
+ * @args: a pointer to the line of input
+ * @index: a pointer to the index of the value
+ *
+ * Return: the converted value
+ */
+double handleSubstrToNumber(INFO *info, const char *args, int *index)
+{
+	double result = 0.0, frac = 0.1;
+	int isNegative = 0;
+	
+	if (args[*index] == '-')
 	{
-		value *= 10;
-		if (value > 0)
-			return (1);
+		isNegative = 1;
+		(*index)++;
 	}
 
-	return (0);
-}
-
-/**
- * handleModDiv - handle modulo division
- * @value: the value to be divided
- * @operand: the number to divide the value
- *
- * description: this function handles modulo division
- *
- * Return: the result of the division
- */
-double handleModDiv(double value, double operand)
-{
-	double quo, div, ans;
-
-	quo = value / operand;
-	div = (double)((long) quo);
-	ans = value - operand * div;
-
-	return (ans);
+	/* handle digits before the dot */
+	while (isdigit(args[*index]))
+	{
+		result = result * 10.0 + (args[*index] - '0');
+		(*index)++;
+	}
+	
+	/* handle digits after the dot in a floating point number */
+	if (args[*index] == '.')
+	{
+		(*index)++;
+		while (isdigit(args[*index]))
+		{
+			result += (args[*index] - '0') * frac;
+			frac /= 10.0;
+			(*index)++;
+		}
+	}
+	
+	if (isNegative)
+		result = -result;
+	
+	if (args[*index] == '(') 
+		result *= handleBrackets(info, args, index);
+	
+	return (result);
 }

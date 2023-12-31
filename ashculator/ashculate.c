@@ -20,7 +20,7 @@
  */
 int main(void)
 {
-	info_t info[] = { INFO_T_INIT };
+	INFO info[] = { INFO_T_INIT };
 	int status;
 
 	do {

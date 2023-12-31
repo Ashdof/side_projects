@@ -15,10 +15,11 @@
 
 /**
  * readLine - read a line of input
+ * @info: a pointer to a space in memory to store data
  *
  * Return: the line of input read
  */
-ssize_t readLine(info_t *info)
+ssize_t readLine(INFO *info)
 {
 	ssize_t len;
 
