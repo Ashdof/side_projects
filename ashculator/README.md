@@ -13,5 +13,5 @@ The screenshot below shows the **ASHCulator** in use to perform basic arithmetic
 <br /><img src="img/ashculate_process.png" alt="ashculate process"><br />
 
 ## Issues
-ASHCulator has minor issue with subtraction operation. In a typical subtraction operation of a double digit number with a floating point value as the second operand after the operator leaves the application suspended as shown below:
-<br /><img src="img/ashculate_suspension.png" alt="ashculate suspension"><br />
+The suspension issue has been resolved. However, the following are the current issues:
+- Fails to handle blanks and texts inputs
