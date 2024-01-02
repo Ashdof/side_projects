@@ -1,16 +1,3 @@
-/**
- * file: ashculate.c
- * date created: 25-Dec-2023
- * date updated: 27-Dec-2023
- * author: Emmanuel Enchill
- *
- * description: this file contains the main entry point for the
- * application
- *
- * Functions:
- * @main
- */
-
 #include "ashculate.h"
 
 /**
@@ -28,7 +15,7 @@ int main(void)
 		readLine(info);
 		status = processInput(info);
 	} while (status);
-	
+
 	free(info->args);
 
 	return (0);

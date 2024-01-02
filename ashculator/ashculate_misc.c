@@ -30,11 +30,11 @@ int checkDecDigits(double value)
  */
 double handleModDiv(double value, double operand)
 {
-        double quo, div, ans;
+	double quo, div, ans;
 
-        quo = value / operand;
-        div = (double)((long) quo);
-        ans = value - operand * div;
+	quo = value / operand;
+	div = (double)((long) quo);
+	ans = value - operand * div;
 
-        return (ans);
+	return (ans);
 }

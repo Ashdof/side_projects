@@ -30,7 +30,7 @@ int processInput(INFO *info)
 	{
 		int_part = (int) ans;
 		dec_part = ans - int_part;
-		
+
 		state = checkDecDigits(dec_part);
 		if (state == 1)
 			printf(":) %f\n", ans);
@@ -38,7 +38,6 @@ int processInput(INFO *info)
 			printf(":) %d\n", int_part);
 	}
 
-	info->result = 0.0;
 	info->index = 0;
 	info->err_code = 0;
 	info->err_input = 0;
@@ -59,13 +58,13 @@ int processInput(INFO *info)
 double handleBrackets(INFO *info, const char *args, int *index)
 {
 	double result;
-	
+
 	if (args[*index] == '(')
 	{
 		(*index)++;
 
 		result = handleAddSub(info, args, index);
-        
+
 		if (args[*index] == ')')
 		{
 			(*index)++;
@@ -81,7 +80,7 @@ double handleBrackets(INFO *info, const char *args, int *index)
 		}
 	}
 	else
-		return handleSubstrToNumber(info, args, index);
+		return (handleSubstrToNumber(info, args, index));
 }
 
 /**
@@ -93,7 +92,21 @@ double handleBrackets(INFO *info, const char *args, int *index)
  */
 double computeResult(INFO *info)
 {
-	return handleAddSub(info, info->args, &info->index);
+	char *p = info->args;
+
+	for (; *p != '\0'; p++)
+	{
+		if (*p == ' ')
+		{
+			info->err_code = ERR_INVALID_INPUT_CODE;
+			info->err_input = *p;
+			info->err_msg = ERR_INVALID_INPUT;
+
+			return (1);
+		}
+	}
+
+	return (handleAddSub(info, info->args, &info->index));
 }
 
 /**
@@ -109,7 +122,7 @@ double handleSubstrToNumber(INFO *info, const char *args, int *index)
 {
 	double result = 0.0, frac = 0.1;
 	int isNegative = 0;
-	
+
 	if (args[*index] == '-')
 	{
 		isNegative = 1;
@@ -122,7 +135,7 @@ double handleSubstrToNumber(INFO *info, const char *args, int *index)
 		result = result * 10.0 + (args[*index] - '0');
 		(*index)++;
 	}
-	
+
 	/* handle digits after the dot in a floating point number */
 	if (args[*index] == '.')
 	{
@@ -134,12 +147,12 @@ double handleSubstrToNumber(INFO *info, const char *args, int *index)
 			(*index)++;
 		}
 	}
-	
+
 	if (isNegative)
 		result = -result;
-	
-	if (args[*index] == '(') 
+
+	if (args[*index] == '(')
 		result *= handleBrackets(info, args, index);
-	
+
 	return (result);
 }

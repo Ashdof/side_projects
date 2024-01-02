@@ -2,6 +2,8 @@
 
 /**
  * handleAddSub - implement addition and subtraction computations
+ * @info: a pointer to a space in memory where a struct of data is
+ * stored
  * @args: a pointer to the line of input
  * @index: a pointer to the index of the value
  *
@@ -61,7 +63,7 @@ double handleMulDivMod(INFO *info, const char *args, int *index)
 				if (operand == 0.0)
 				{
 					info->err_code = ERR_ZERO_DIVISION_CODE;
-					info->err_input = operand;
+					info->err_input = '0';
 					info->err_msg = ERR_ZERO_DIVISION;
 
 					return (0);
@@ -73,7 +75,7 @@ double handleMulDivMod(INFO *info, const char *args, int *index)
 				if (operand == 0.0)
 				{
 					info->err_code = ERR_ZERO_DIVISION_CODE;
-					info->err_input = operand;
+					info->err_input = '0';
 					info->err_msg = ERR_ZERO_DIVISION;
 
 					return (0);
