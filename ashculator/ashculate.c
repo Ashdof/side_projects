@@ -1,5 +1,7 @@
 #include "ashculate.h"
 
+void ashculateInfo(void) __attribute__((constructor));
+
 /**
  * main - execute simple arithmetic computations
  *
@@ -19,4 +21,15 @@ int main(void)
 	free(info->args);
 
 	return (0);
+}
+
+/**
+ * ashculateInfo - information about program
+ *
+ * Return: nothing
+ */
+void ashculateInfo(void)
+{
+	printf("***** ASHCulator 0.0.1 (Jan 02, 2024) *****\n");
+	printf("Perform Basic BODMAS Arithmetic Computations\n\n");
 }
