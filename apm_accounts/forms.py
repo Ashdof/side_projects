@@ -7,6 +7,7 @@ gathering data about users
 """
 
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
+from django import forms
 
 from apm_accounts.models import ASHPenser
 
@@ -22,14 +23,36 @@ class ASHPenserCreationForm(UserCreationForm):
     class Meta(UserCreationForm):
         model = ASHPenser
         fields = (
-            "username",
-            "email",
             "last_name",
             "first_name",
+            "username",
+            "email",
+            "password1",
+            "password2",
             "security_question",
             "security_answer",
             "image",
         )
+    
+    def clean_ashpenser_username(self):
+        """
+        Unique Username
+
+        Description:
+        This method eliminates duplicate usernames. It prompts the user for
+        an attempt to provide a duplicate username
+        
+        Returns:
+        The username
+        """
+
+        username = self.clean_data.get("username")
+        err_msg = f"{username} already taken.\nPlease choose a different username."
+
+        if ASHPenser.objects.filter(username=username).exists():
+            raise forms.ValidationError(err_msg)
+        
+        return username
 
 
 class ASHPenserChangeForm(UserChangeForm):
@@ -43,10 +66,10 @@ class ASHPenserChangeForm(UserChangeForm):
     class Meta:
         model = ASHPenser
         fields = (
-            "username",
-            "email",
             "last_name",
             "first_name",
+            "username",
+            "email",
             "security_question",
             "security_answer",
             "image",

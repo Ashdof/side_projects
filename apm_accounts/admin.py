@@ -28,6 +28,7 @@ class ASHPenserAdminPanel(UserAdmin):
         "first_name",
         "security_question",
         "security_answer",
+        "is_active",
         "image",
         "is_staff",
     ]
@@ -52,10 +53,14 @@ class ASHPenserAdminPanel(UserAdmin):
         ("Staff Information", {
             "fields": ("is_staff",),
             "description": "User staff status",
+        }),
+        ("Miscellaneous", {
+            "fields": ("is_active",),
+            "description": "Current status of user",
         })
     )
 
-    list_filter = ("last_name", "first_name")
+    list_filter = ("last_name", "first_name", "is_active")
     ordering = ("last_name", "first_name")
     search_fields = ("last_name", "first_name")
 
