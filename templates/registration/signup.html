@@ -1,11 +1,33 @@
 {% extends "auth_base.html" %}
+{% load crispy_forms_tags %}
 
 {% block title %}ASHPense | Signup{% endblock title %}
 
 {% block content %}
-<h2>Ready to transform the way you manage your finances?</h2>
-<form method="POST">{% csrf_token %}
+<div class="signup-form">
+    <div class="card">
+        <div class="card-body">
+            <form method="POST">
+                {% csrf_token %}
+                <h1 style="text-align: center; font-family: sans-serif; font-size: 40px; font-weight: bold; letter-spacing: -4.0px; color: #0072dd; margin-bottom: 35px; padding: 0rem;">
+                    ASHPense Manager
+                </h1>
+                {{ form | crispy }}
+                <button class="btn btn-primary btn-block" type="submit">Register</button>
+                <div class="clearfix">
+                    Already have an account, <a href="{% url 'login' %}" class="float-right">login here</a>
+                </div>
+            </form>
+        </div>
+        <div>
+            <a href="{% url 'home' %}">Home</a>
+        </div>
+    </div>
+</div>
+
+
+{% comment %} <form method="POST">{% csrf_token %}
     {{ form.as_p }}
-    <button type="submit"> Register </button>
-</form>
+    <button class="btn btn-primary btn-block" type="submit"> Register </button>
+</form> {% endcomment %}
 {% endblock content %}

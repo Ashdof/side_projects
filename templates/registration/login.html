@@ -1,13 +1,34 @@
 {% extends "auth_base.html" %}
+{% load crispy_forms_tags %}
+{% comment %} {% load static %} {% endcomment %}
 
 {% block title %}ASHPense | Login{% endblock title %}
 
 {% block content %}
-<h2>Welcome back, login to proceed</h2>
-<form method="POST">{% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit"> Login </button>
-</form>
+<div class="login-form">
+    <div class="card">
+        <div class="card-body">
+            <form method="POST">
+                {% csrf_token %}
+                {% comment %} <h3 style="text-align: center; font-family: 'Courier New', Courier, monospace; font-size: 15px; font-weight: lighter; letter-spacing: -0.5px; word-spacing: -5.0px; margin: -0.5rem; padding: -0.5rem;">
+                    Streamlined Solution for Effective Finance Management
+                </h3> {% endcomment %}
+                <h1 style="text-align: center; font-family: sans-serif; font-size: 40px; font-weight: bold; letter-spacing: -4.0px; color: #0072dd; margin-bottom: 35px; padding: 0rem;">
+                    ASHPense Manager
+                </h1>
+                {{ form | crispy }}
+                <button class="btn btn-primary btn-block" type="submit">Login</button>
+                <div class="clearfix">
+                    <a href="#" class="float-right">Forgot your password?</a>
+                </div>
+            </form>
+        </div>
+        <div>
+            <a href="{% url 'home' %}">Home</a>
+        </div>
+        {% comment %} <div class="card-footer">
 
-<a href="{% url 'home' %}">Home</a>
+        </div> {% endcomment %}
+    </div>
+</div>
 {% endblock content %}

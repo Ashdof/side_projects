@@ -41,6 +41,10 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    # 3rd Party apps
+    "crispy_forms",
+    "crispy_bootstrap5",
+
     # Local apps
     "apm_accounts.apps.ApmAcountsConfig",
     "apm_pages.apps.ApmPagesConfig",
@@ -138,4 +142,8 @@ MEDIA_URL = "/media/"
 
 # Page redirections after authenticaton: login and logout
 LOGIN_REDIRECT_URL = "home"
-LOGOUT_REDIRECT_URL = "home" 
+LOGOUT_REDIRECT_URL = "home"
+
+# Crispy Bootstrap templates
+CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
+CRISPY_TEMPLATE_PACK = "bootstrap5"
