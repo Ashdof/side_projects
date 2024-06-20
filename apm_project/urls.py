@@ -23,5 +23,4 @@ urlpatterns = [
     path("apm_accounts/", include("apm_accounts.urls")),
     path("apm_accounts/", include("django.contrib.auth.urls")),
     path("", TemplateView.as_view(template_name="home.html"), name="home"),
-    # path("", TemplateView.as_view(template_name="index.html"), name="index"),
 ]

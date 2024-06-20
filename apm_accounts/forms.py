@@ -23,15 +23,10 @@ class ASHPenserCreationForm(UserCreationForm):
     class Meta(UserCreationForm):
         model = ASHPenser
         fields = (
-            "last_name",
-            "first_name",
             "username",
             "email",
             "password1",
             "password2",
-            "security_question",
-            "security_answer",
-            "image",
         )
     
     def clean_ashpenser_username(self):
