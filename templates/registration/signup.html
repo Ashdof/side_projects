@@ -1,0 +1,11 @@
+{% extends "auth_base.html" %}
+
+{% block title %}ASHPense | Signup{% endblock title %}
+
+{% block content %}
+<h2>Ready to transform the way you manage your finances?</h2>
+<form method="POST">{% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit"> Register </button>
+</form>
+{% endblock content %}
