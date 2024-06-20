@@ -43,6 +43,7 @@ INSTALLED_APPS = [
 
     # Local apps
     "apm_accounts.apps.ApmAcountsConfig",
+    "apm_pages.apps.ApmPagesConfig",
 ]
 
 MIDDLEWARE = [
