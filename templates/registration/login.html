@@ -14,12 +14,12 @@
                     Streamlined Solution for Effective Finance Management
                 </h3> {% endcomment %}
                 <h1 style="text-align: center; font-family: sans-serif; font-size: 40px; font-weight: bold; letter-spacing: -4.0px; color: #0072dd; margin-bottom: 35px; padding: 0rem;">
-                    ASHPense Manager
+                    <a href="{% url 'home' %}">ASHPense Manager</a>
                 </h1>
                 {{ form | crispy }}
                 <button class="btn btn-primary btn-block" type="submit">Login</button>
                 <div class="clearfix">
-                    <a href="#" class="float-right">Forgot your password?</a>
+                    <a href="{% url 'password_reset' %}" class="float-right">Forgot your password?</a>
                 </div>
             </form>
         </div>
