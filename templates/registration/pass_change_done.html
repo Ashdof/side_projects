@@ -1,19 +1,19 @@
 {% extends "auth_base.html" %}
 
-{% block title %}ASHPense | Instructions Sent{% endblock title %}
+{% block title %}ASHPense | Change Password Success{% endblock title %}
 
 {% block content %}
 <div class="card-body">
     <h4 class="card-title text-primary text-center">
-        Check your inbox
+        Success!
     </h4>
     <p class="card-text text-muted text-center" style="font-size: 1em">
-        Instructions to reset your password has been sent to the email address provided. 
+        Your password has been changed. 
     </p>
 </div>
 <div class="text-center border-top border-radius-3">
     <p class="mt-3 mb-3 text-muted ">
-        <a href="{% url 'index' %}" style="text-decoration: none;">Go home</a>
+        <a href="{% url 'login' %}" style="text-decoration: none;">Go home</a>
     </p>
 </div>
-{% endblock content %} 
+{% endblock content %}

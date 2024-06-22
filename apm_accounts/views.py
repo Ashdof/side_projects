@@ -11,10 +11,16 @@ from django.shortcuts import render
 from django.urls import reverse_lazy, reverse
 from django.views.generic import CreateView
 from django.http import HttpResponseRedirect
-from django.contrib.auth.views import LogoutView
+from django.views.generic.edit import FormView
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.views import PasswordResetView
 
-from apm_accounts.forms import ASHPenserCreationForm, ASHPenserLoginForm
+from apm_accounts.forms import (
+    ASHPenserCreationForm,
+    ASHPenserLoginForm,
+    ASHPenserPassChangeForm,
+)
 
 
 class ASHPenserSignupView(CreateView):
@@ -92,7 +98,6 @@ class ASHPenserLoginView(View):
         return render(request, self.template_name, {"form": form})
 
 
-# Create your views here. 
 class ASHPenseLogoutView(View):
     """
     Logout View
@@ -118,3 +123,27 @@ class ASHPenseLogoutView(View):
         logout(request)
 
         return HttpResponseRedirect(reverse_lazy("index"))
+
+
+class ASHPenserPassChangeView(LoginRequiredMixin, FormView):
+    """
+    Password Change Form
+
+    Description:
+    Creates a form with custom fields for changing passwords
+    """
+
+    template_name = "registration/pass_change_form.html"
+    form_class = ASHPenserPassChangeForm
+    success_url = reverse_lazy("pass_change_done")
+
+    def get_form_kwargs(self):
+        kwargs = super().get_form_kwargs()
+        kwargs["user"] = self.request.user
+
+        return kwargs
+    
+    def form_valid(self, form):
+        form.save()
+
+        return super().form_valid(form)
