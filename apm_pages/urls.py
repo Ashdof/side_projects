@@ -6,10 +6,13 @@ This specifies the paths for page switching
 """
 from django.urls import path
 
-
-from apm_pages.views import ASHPenserHomePageView
+from apm_pages.views import (
+    ASHPenserDashboardView,
+    ASHPenserIndexPageView
+)
 
 
 urlpatterns = [
-    path("", ASHPenserHomePageView.as_view(), name="home"),
+    path("", ASHPenserIndexPageView.as_view(), name="index"),
+    path("home/", ASHPenserDashboardView.as_view(), name="home"),
 ]

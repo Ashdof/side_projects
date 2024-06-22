@@ -127,6 +127,10 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
 STATIC_URL = 'static/'
+STATICFILES_DIRS = [os.path.join(BASE_DIR, "static"),]
+
+# In production environment, uncomment next line before deploying
+# STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
@@ -142,7 +146,7 @@ MEDIA_URL = "/media/"
 
 # Page redirections after authenticaton: login and logout
 LOGIN_REDIRECT_URL = "home"
-LOGOUT_REDIRECT_URL = "home"
+LOGOUT_REDIRECT_URL = "index"
 
 # Crispy Bootstrap templates
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"

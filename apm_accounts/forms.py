@@ -1,8 +1,8 @@
 """
-Form Fields
+Form Module
 
 Description:
-This module specifies the in-built form elements for
+This module specifies the in-built and custom form elements for
 gathering data about users
 """
 
@@ -69,3 +69,15 @@ class ASHPenserChangeForm(UserChangeForm):
             "security_answer",
             "image",
         )
+
+
+class ASHPenserLoginForm(forms.Form):
+    """
+    Login User
+
+    Description:
+    This class creates a custom login feature to authenticate users
+    """
+
+    email = forms.EmailField()
+    password = forms.CharField(widget=forms.PasswordInput)
