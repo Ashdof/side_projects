@@ -36,6 +36,20 @@ class ASHPenserCreationForm(UserCreationForm):
             "password1",
             "password2",
         )
+        
+        widgets = {
+            'username': forms.TextInput(attrs={'placeholder': 'Username'}),
+            'email': forms.EmailInput(attrs={'placeholder': 'Email'}),
+            'password1': forms.PasswordInput(attrs={'placeholder': 'Password'}),
+            'password2': forms.PasswordInput(attrs={'placeholder': 'Confirm Password'}),
+        }
+
+        help_texts = {
+            'username': None,
+            'email': None,
+            'password1': None,
+            'password2': None,
+        }
     
     def clean_ashpenser_username(self):
         """
@@ -55,7 +69,7 @@ class ASHPenserCreationForm(UserCreationForm):
         if ASHPenser.objects.filter(username=username).exists():
             raise forms.ValidationError(err_msg)
         
-        return username
+        return username 
 
 
 class ASHPenserChangeForm(LoginRequiredMixin, UserChangeForm):

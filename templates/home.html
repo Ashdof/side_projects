@@ -4,20 +4,12 @@
 
 {% block content %}
 
-{% if user.is_authenticated %}
-
-    Welcome <b>{{ user.username }}!</b> to the
-    <h1>dashboard</h1>
-    <p> of <b>ASHPense Manager</b></p>
-
-    <p>Done managing your accounts?</p>
-    <form method="POST" action="{% url 'logout' %}">
-        {% csrf_token %}
-        <button type="submit">Logout</button>
-    </form>
-    <p>Update Password</p>
-    <a href="{% url 'pass_change' %}">Change password</a>
-
-{% endif %}
+    <p>
+        Welcome <b>{{ user.username }}!</b> to <strong>APM Dahsboard</strong>
+    </p>
+    <p>
+        Update your password | 
+        <a href="{% url 'pass_change' %}" class="text-decoration-none">Change password</a>
+    </p>
 
 {% endblock content %}
