@@ -7,6 +7,7 @@ Create an administration panel for superuser
 
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
+from django.contrib.auth.models import Group
 
 from apm_accounts.forms import ASHPenserCreationForm, ASHPenserChangeForm
 from apm_accounts.models import ASHPenser
@@ -64,4 +65,6 @@ class ASHPenserAdminPanel(UserAdmin):
     ordering = ("last_name", "first_name")
     search_fields = ("last_name", "first_name")
 
+admin.site.site_header = "User Account Administration Panel"
 admin.site.register(ASHPenser, ASHPenserAdminPanel)
+admin.site.unregister(Group)

@@ -10,3 +10,8 @@ SECURITY_QUESTIONS = (
     ("Maternal grandmother", "What is your maternal grandmother's maiden name?"),
     ("Grade school mentor", "What was the last name of your grade school mentor?"),
 )
+
+CATEGORY_TYPE = (
+    ("Incomes", "Incomes"),
+    ("Expense", "Expenses"),
+)

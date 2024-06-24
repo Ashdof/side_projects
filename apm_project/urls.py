@@ -25,7 +25,9 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path("apm_accounts/", include("apm_accounts.urls")),
     path("apm_accounts/", include("django.contrib.auth.urls")),
+    path("apm_categories/", include("apm_categories.urls")), 
     path("", include("apm_pages.urls")),
+    
 ]
 
 if settings.DEBUG:
