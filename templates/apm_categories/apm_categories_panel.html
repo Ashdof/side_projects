@@ -9,22 +9,103 @@
         <h1 class="h2">Categories</h1>
     </div>
 </section>
-<section>
-    {% for cat in apm_categories %}
-    <div class="card">
-        <div class="card-header">
-            <span class="font-weight-bold">{{ cat.category_name }}</span> &middot;
-            <span class="text-muted">by {{ cat.ashpenser_data }} |
-            {{ cat.date_created }}</span>
-        </div>
-        <div class="card-body">
-            {{ cat.description }}
-        </div>
-        <div class="card-footer text-center text-muted">
-            <a href="#">Edit</a> | <a href="#">Delete</a>
+<!-- TABULAR LIST OF CATEGORIES -->
+<section class="pt-5">
+    <h4>List of Categories</h4>
+    <div class="container my-2 px-3 pb-5">
+        <div class="row">
+            <div class="col col-lg-9 col-md-9 col-sm-12">
+                <div class="table-responsive">
+                    <table class="table table-sm">
+                        <thead>
+                            <tr>
+                                <th scope="col">Name</th>
+                                <th scope="col">Type</th>
+                                <th scope="col">Description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for cat in apm_categories %}
+                            <tr>
+                                <td><a href="{% url 'apm_categories:apm_category_detail' pk=cat.pk %}" type="submit" class="text-primary text-decoration-none">{{ cat.category_name }}</a></td>
+                                <td>{{ cat.category_type }}</td>
+                                <td>{{ cat.description }}</td>
+                                <td class="py-2"><a href="#" type="submit" class="bg-success py-2 px-3 text-white text-decoration-none">Edit</a></td>
+                                <td class="py-2"><a href="#" type="submit" class="bg-danger py-2 px-3 text-white text-decoration-none">Delete</a></td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </div>
     </div>
-    <br />
-    {% endfor %}
+</section>
+
+<!-- TABULAR LIST OF SUB-CATEGORIES -->
+<section>
+    <h4>List of Sub-categories</h4>
+    <div class="container my-2 px-3 pb-5">
+        <div class="row">
+            <div class="col col-lg-9 col-md-9 col-sm-12">
+                <div class="table-responsive">
+                    <table class="table table-sm">
+                        <thead>
+                            <tr>
+                                <th scope="col">Name</th>
+                                <th scope="col">Category</th>
+                                <th scope="col">Type</th>
+                                <th scope="col">Description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for subcat in apm_subcategories %}
+                            <tr>
+                                <td><a href="{% url 'apm_categories:apm_subcategory_detail' pk=subcat.pk %}" type="submit" class="text-primary text-decoration-none">{{ subcat.subcategory_name }}</a></td>
+                                <td>{{ subcat.category_data }}</td>
+                                <td>{{ subcat.subcategory_type }}</td>
+                                <td>{{ subcat.description }}</td>
+                                <td class="py-2"><a href="#" type="submit" class="bg-success py-2 px-3 text-white text-decoration-none">Edit</a></td>
+                                <td class="py-2"><a href="#" type="submit" class="bg-danger py-2 px-3 text-white text-decoration-none">Delete</a></td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- TABULAR LIST OF PYAMENT METHODS -->
+<section>
+    <h4>List of Payment Methods</h4>
+    <div class="container my-2 px-3 pb-5">
+        <div class="row">
+            <div class="col col-lg-9 col-md-9 col-sm-12">
+                <div class="table-responsive">
+                    <table class="table table-sm">
+                        <thead>
+                            <tr>
+                                <th scope="col">Name</th>
+                                <th scope="col">Description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for pay in apm_paymethods %}
+                            <tr>
+                                <td><a href="{% url 'apm_categories:apm_paymethod_detail' pk=pay.pk %}" type="submit" class="text-primary text-decoration-none">{{ pay.paymethod_name }}</a></td>
+                                <td>{{ pay.date_created }}</td>
+                                <td>{{ pay.description }}</td>
+                                <td class="py-2"><a href="#" type="submit" class="bg-success py-2 px-3 text-white text-decoration-none">Edit</a></td>
+                                <td class="py-2"><a href="#" type="submit" class="bg-danger py-2 px-3 text-white text-decoration-none">Delete</a></td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
 </section>
 {% endblock content %}

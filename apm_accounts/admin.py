@@ -65,6 +65,6 @@ class ASHPenserAdminPanel(UserAdmin):
     ordering = ("last_name", "first_name")
     search_fields = ("last_name", "first_name")
 
-admin.site.site_header = "User Account Administration Panel"
+admin.site.site_header = "ASHPense Administration Panel"
 admin.site.register(ASHPenser, ASHPenserAdminPanel)
 admin.site.unregister(Group)
