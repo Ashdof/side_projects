@@ -8,7 +8,7 @@ payment methods
 
 from django.db import models
 from django.conf import settings
-from django.shortcuts import reverse
+from django.urls import reverse
 
 import uuid
 import django_filters
@@ -42,7 +42,7 @@ class ASHPenserCategories(models.Model):
         return f"{self.category_name}"
     
     def get_absolute_url(self):
-        return reverse("apm_categories:categories_detail", kwargs={"pk": self.pk})
+        return reverse("apm_categories:apm_category_detail", kwargs={"pk": self.pk})
 
 
 class ASHPenserCategoriesFilter(django_filters.FilterSet):
@@ -86,7 +86,7 @@ class ASHPenserSubCategories(models.Model):
         return f"{self.subcategory_name}"
     
     def get_absolute_url(self):
-        return reverse("apm_categories:categories_detail", kwargs={"pk": self.pk})
+        return reverse("apm_categories:apm_subcategory_detail", kwargs={"pk": self.pk})
 
     def save(self, *args, **kwargs):
         """
@@ -142,7 +142,7 @@ class ASHPenserPaymentMethod(models.Model):
         return f"{self.paymethod_name}"
     
     def get_absolute_url(self):
-        return reverse("apm_categories:categories_detail", kwargs={"pk": self.pk})
+        return reverse("apm_categories:apm_paymethod_detail", kwargs={"pk": self.pk})
 
 
 class ASHPenserPaymentMethodFilter(django_filters.FilterSet):
