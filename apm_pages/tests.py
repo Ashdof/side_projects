@@ -25,7 +25,7 @@ class ASHPenserHomePageTest(SimpleTestCase):
         Test for the homepage view name and the correct template used
         """
 
-        response = self.client.get(reverse("home"))
+        response = self.client.get(reverse("index")) 
         self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, "home.html")
-        self.assertContains(response, "Home")
+        self.assertTemplateUsed(response, "index.html")
+        self.assertContains(response, "Welcome")
