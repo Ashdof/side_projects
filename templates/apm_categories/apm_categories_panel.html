@@ -27,14 +27,20 @@
             <div class="col-lg-9 col-md-9 col-sm-9">
                 <div class="row">
                     <div class="col-lg-3 col-md-3 col-sm-3 pb-2">
-                        <a href="#" type="button" class="btn btn-primary w-100">New Pay Method</a>
-                    </div>
-                    <div class="col-lg-3 col-md-3 col-sm-3 pb-2">
-                        <a href="#" type="button" class="btn btn-primary w-100">New Category</a>
+                        <a href="{% url 'apm_categories:apm_category_new' %}" type="button" class="btn btn-primary w-100">
+                            New Category
+                        </a>
                     </div>
                     <div class="col-lg-3 col-md-3 col-sm-3">
-                        <a href="#" type="button" class="btn btn-primary w-100">New Sub-category</a>
+                        <a href="{% url 'apm_categories:apm_subcategory_new' %}" type="button" class="btn btn-primary w-100">
+                            New Sub-category
+                        </a>
                     </div>
+                    <div class="col-lg-3 col-md-3 col-sm-3 pb-2">
+                        <a href="{% url 'apm_categories:apm_paymethod_new' %}" type="button" class="btn btn-primary w-100">
+                            New Pay Method
+                        </a>
+                    </div>                    
                 </div>
             </div>
         </div>
@@ -150,7 +156,6 @@
                             {% for pay in apm_paymethods %}
                             <tr>
                                 <td><a href="{% url 'apm_categories:apm_paymethod_detail' pk=pay.pk %}" type="submit" class="text-primary text-decoration-none">{{ pay.paymethod_name }}</a></td>
-                                <td>{{ pay.date_created }}</td>
                                 <td>{{ pay.description }}</td>
                                 <td class="py-2">
                                     <a href="{% url 'apm_categories:apm_paymethod_update' pk=pay.pk %}" type="submit" class="bg-success py-2 px-3 text-white text-decoration-none">

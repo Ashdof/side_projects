@@ -21,14 +21,10 @@ class ASHPenserCategoriesAdmin(admin.ModelAdmin):
     Customises the admin panel for categories
     """
 
-    list_display = ["category_name", "category_type", "date_created", "description", "ashpenser_data"]
-    list_filter = ("category_name", "category_type", "date_created", "ashpenser_data")
+    list_display = ["category_name", "category_type", "description", "ashpenser_data"]
+    list_filter = ("category_name", "category_type", "ashpenser_data")
     search_fields = ["category_name", "ashpenser_data"]
     fieldsets = (
-        ("Period", {
-            "fields": ("date_created", ),
-            "description": "Current date and time for creating category",
-        }),
         ("Category Particulars", {
             "fields": ("category_name", "category_type", "description", "ashpenser_data",),
             "description": "Category details",
@@ -45,14 +41,10 @@ class ASHPenserSubCategoriesAdmin(admin.ModelAdmin):
     Customises the admin panel for sub-categories
     """
 
-    list_display = ["subcategory_name", "category_data", "subcategory_type", "date_created", "description", "ashpenser_data"]
-    list_filter = ("subcategory_name", "date_created", "category_data", "ashpenser_data")
+    list_display = ["subcategory_name", "category_data", "subcategory_type", "description", "ashpenser_data"]
+    list_filter = ("subcategory_name", "category_data", "ashpenser_data")
     search_fields = ["subcategory_name", "category_data", "ashpenser_data"]
     fieldsets = (
-        ("Period", {
-            "fields": ("date_created",),
-            "description": "Current date and time"
-        }),
         ("Sub-category Particulars", {
             "fields": ("category_data", "subcategory_name", "description", "ashpenser_data")
         }), 
@@ -68,18 +60,11 @@ class ASHPenserPaymentMethodAdmin(admin.ModelAdmin):
     Customises the admin panel for Payment Methods
     """
 
-    list_display = ["paymethod_name", "date_created", "description", "ashpenser_data"]
-    list_filter = ("paymethod_name", "date_created", "ashpenser_data")
+    list_display = ["paymethod_name", "description", "ashpenser_data"]
+    list_filter = ("paymethod_name", "ashpenser_data")
     search_fields = ["paymethod_name", "ashpenser_data"]
     fieldsets = (
-        ("Period", {
-            "fields": ("date_created",),
-            "description": "Current date and time"
-        }),
         ("Sub-category Particulars", {
             "fields": ("paymethod_name", "description", "ashpenser_data")
         }), 
     )
-
-
-# admin.site.site_header = "Categories Administration Section"

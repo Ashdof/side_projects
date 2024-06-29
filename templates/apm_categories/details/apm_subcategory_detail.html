@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% load static %}
 
-{% block title %}ASHPense | Category Detail {% endblock title %}
+{% block title %}ASHPense | Sub-ategory Detail {% endblock title %}
 
 {% block content %}
 <div class="bg-gray-200 text-sm">
@@ -14,12 +14,14 @@
                 <li class="breadcrumb-item"><a class="fw-light text-decoration-none" href="{% url 'home' %}">Home</a></li>
                 <li class="breadcrumb-item active fw-light" aria-current="page">
                     <a class="text-decoration-none" href="{% url 'apm_categories:apm_categories_panel' %}">Categories</a> / 
-                    {{ object.paymethod_name }} Details
+                    {{ object.subcategory_name }} Details
                 </li>
             </ol>
         </nav>
     </div>
 </div>
+<p>Currently logged in user</p>
+<p>{{ object.ashpenser_data }}</p>
 
 <!-- CATEORY DETAIL -->
 <section class="mb-4">
@@ -51,14 +53,6 @@
                     </div>
                     <div class="col-lg-9 col-md-9 col-sm-9">
                         <p class="fs-5 text-start text-dark">{{ object.subcategory_type }}</p>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-lg-3 col-md-3 col-sm-3">
-                        <p class="fs-5 text-start text-secondary">Date created: </p>
-                    </div>
-                    <div class="col-lg-9 col-md-9 col-sm-9">
-                        <p class="fs-5 text-start text-dark">{{ object.date_created }}</p>
                     </div>
                 </div>
                 <div class="row">
