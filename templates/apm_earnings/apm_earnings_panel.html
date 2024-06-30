@@ -1,0 +1,94 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}ASHPense | Earnings {% endblock title %}
+
+{% block content %}
+<div class="bg-gray-200 text-sm">
+    <div class="container-fluid mb-5 border-bottom">
+        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap pt-3">
+            <h1 class="h2">Income Earnings</h1>
+        </div>
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb mb-0">
+                <li class="breadcrumb-item">
+                    <a class="fw-light text-decoration-none" href="{% url 'home' %}">
+                        Home
+                    </a>
+                </li>
+                <li class="breadcrumb-item active fw-light" aria-current="page">
+                    List of Earnings 
+                </li>
+            </ol>
+        </nav>
+    </div>
+</div>
+
+<!-- BUTTONS SECTION -->
+ <section>
+    <div class="container px-3">
+        <div class="row">
+            <div class="col-lg-9 col-md-9 col-sm-9">
+                <div class="row">
+                    <div class="col-lg-3 col-md-3 col-sm-3 pb-2">
+                        <a href="{% url 'apm_earnings:apm_earnings_new' %}" type="button" class="btn btn-success w-100">
+                            New Earning
+                        </a>
+                    </div>                    
+                </div>
+            </div>
+        </div>
+    </div>
+ </section>
+
+<!-- TABULAR LIST OF EARNINGS -->
+<section class="pt-5">
+    <div class="container my-2 px-3 pb-3">
+        <h4>List of Income Earnings</h4>
+        <div class="row">
+            <div class="col col-lg-9 col-md-9 col-sm-12">
+                <div class="table-responsive">
+                    <table class="table table-sm">
+                        <thead>
+                            <tr>
+                                <th scope="col">Amount</th>
+                                <th scope="col">Date</th>
+                                <th scope="col">Category</th>
+                                <th scope="col">Payer</th>
+                                <th scope="col">Payment Method</th>
+                                <th scope="col">Description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for earn in apm_earnings %}
+                            <tr>
+                                <td>
+                                    <a href="{% url 'apm_earnings:apm_earnings_detail' pk=earn.pk %}" type="submit" class="text-primary text-decoration-none">
+                                        {{ earn.amount }}
+                                    </a>
+                                </td>
+                                <td>{{ earn.date }}</td>
+                                <td>{{ earn.category }}</td>
+                                <td>{{ earn.payer }}</td>
+                                <td>{{ earn.payment_method }}</td>
+                                <td>{{ earn.description }}</td>
+                                <td class="py-2">
+                                    <a href="{% url 'apm_earnings:apm_earnings_update' pk=earn.pk %}" type="submit" class="bg-primary py-2 px-3 text-white text-decoration-none">
+                                        Edit
+                                    </a>
+                                </td>
+                                <td class="py-2">
+                                    <a href="{% url 'apm_earnings:apm_earnings_delete' pk=earn.pk %}" type="submit" class="bg-danger py-2 px-3 text-white text-decoration-none">
+                                        Delete
+                                    </a>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock content %}

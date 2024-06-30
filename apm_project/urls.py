@@ -26,6 +26,7 @@ urlpatterns = [
     path("apm_accounts/", include("apm_accounts.urls")),
     path("apm_accounts/", include("django.contrib.auth.urls")),
     path("apm_categories/", include("apm_categories.urls")), 
+    path("apm_earnings/", include("apm_earnings.urls")),
     path("", include("apm_pages.urls")),
     
 ]
