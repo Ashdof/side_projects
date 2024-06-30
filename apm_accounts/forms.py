@@ -6,7 +6,6 @@ This module specifies the in-built and custom form elements for
 gathering data about users
 """
 
-from typing import Any
 from django import forms
 from django.contrib.auth.mixins import LoginRequiredMixin
 
