@@ -45,13 +45,13 @@ INSTALLED_APPS = [
     "crispy_forms",
     "crispy_bootstrap5",
     "django_filters",
-    "widget_tweaks",
 
     # Local apps
     "apm_accounts.apps.ApmAcountsConfig",
     "apm_pages.apps.ApmPagesConfig",
     "apm_categories.apps.ApmCategoriesConfig",
     "apm_earnings.apps.ApmEarningsConfig",
+    "apm_expenses.apps.ApmExpensesConfig",
 ]
 
 MIDDLEWARE = [

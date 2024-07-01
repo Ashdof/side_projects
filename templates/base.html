@@ -80,13 +80,19 @@
                                 <hr>
                             </li>
                             <li class="nav-item">
+                                <a class="nav-link" href="{% url 'home' %}">
+                                    <span data-feather="house"></span>
+                                    Home
+                                </a>
+                            </li>
+                            <li class="nav-item">
                                 <a class="nav-link" href="{% url 'apm_earnings:apm_earnings_panel' %}">
                                     <span data-feather="file"></span>
                                     Earnings
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#">
+                                <a class="nav-link" href="{% url 'apm_expenses:apm_expenses_panel' %}">
                                     <span data-feather="shopping-cart"></span>
                                     Expenses
                                 </a>

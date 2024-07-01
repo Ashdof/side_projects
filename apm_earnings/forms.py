@@ -8,7 +8,6 @@ Specify form fields for tracking income earnings
 from django import forms
 
 from apm_earnings.models import ASHPenserEarnings
-# from apm_categories.models import ASHPenserCategories
 
 
 class DateInput(forms.DateInput):

@@ -1,0 +1,108 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}ASHPense | Expense Details {% endblock title %}
+
+{% block content %}
+<div class="bg-gray-200 text-sm">
+    <div class="container-fluid border-bottom">
+        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap pt-3">
+            <h1 class="h2">Expense Details</h1>
+        </div>
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb mb-0">
+                <li class="breadcrumb-item"><a class="fw-light text-decoration-none" href="{% url 'home' %}">Home</a></li>
+                <li class="breadcrumb-item active fw-light" aria-current="page">
+                    <a class="text-decoration-none" href="{% url 'apm_expenses:apm_expenses_panel' %}">Expenses</a> / 
+                    {{ object.amount }} Expense Details
+                </li>
+            </ol>
+        </nav>
+    </div>
+</div>
+<!-- CATEORY DETAIL -->
+<section class="mb-4">
+    <div class="container bg-white pt-4 pb-3">
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 rounded-top-3 mb-3">
+                <p class="fs-4 text-start text-primary mb-0">{{ object.amount }} Expense Details </p>
+            </div>
+            <div class="col-lg-9 col-md-9 col-sm-12">
+                <div class="row">
+                    <div class="col-lg-3 col-md-3 col-sm-3">
+                        <p class="fs-5 text-start text-secondary">Date: </p>
+                    </div>
+                    <div class="col-lg-9 col-md-9 col-sm-9">
+                        <p class="fs-5 text-start text-dark">{{ object.date }}</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-3 col-md-3 col-sm-3">
+                        <p class="fs-5 text-start text-secondary">Category: </p>
+                    </div>
+                    <div class="col-lg-9 col-md-9 col-sm-9">
+                        <p class="fs-5 text-start text-dark">{{ object.category }}</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-3 col-md-3 col-sm-3">
+                        <p class="fs-5 text-start text-secondary">Sub-category: </p>
+                    </div>
+                    <div class="col-lg-9 col-md-9 col-sm-9">
+                        <p class="fs-5 text-start text-dark">{{ object.subcategory }}</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-3 col-md-3 col-sm-3">
+                        <p class="fs-5 text-start text-secondary">Payee: </p>
+                    </div>
+                    <div class="col-lg-9 col-md-9 col-sm-9">
+                        <p class="fs-5 text-start text-dark">{{ object.payee }}</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-3 col-md-3 col-sm-3">
+                        <p class="fs-5 text-start text-secondary">Payment Method: </p>
+                    </div>
+                    <div class="col-lg-9 col-md-9 col-sm-9">
+                        <p class="fs-5 text-start text-dark">{{ object.payment_method }}</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-3 col-md-3 col-sm-3">
+                        <p class="fs-5 text-start text-secondary">Amount: </p>
+                    </div>
+                    <div class="col-lg-9 col-md-9 col-sm-9">
+                        <p class="fs-5 text-start text-dark">{{ object.amount }}</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-3 col-md-3 col-sm-3">
+                        <p class="fs-5 text-start text-secondary">Description: </p>
+                    </div>
+                    <div class="col-lg-9 col-md-9 col-sm-9">
+                        <p class="fs-5 text-start text-dark">{{ object.description }}</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-3 col-md-3 col-sm-3">
+                    </div>
+                    <div class="col-lg-9 col-md-9 col-sm-9">
+                        <div class="row">
+                            <div class="col-lg-3 col-md-3 col-sm-3 pb-2">
+                                <a href="{% url 'apm_expenses:apm_expenses_update' pk=object.pk %}" type="button" class="btn btn-primary w-100">
+                                    Edit
+                                </a>
+                            </div>
+                            <div class="col-lg-3 col-md-3 col-sm-3">
+                                <a href="{% url 'apm_expenses:apm_expenses_delete' pk=object.pk %}" type="button" class="btn btn-danger w-100">
+                                    Delete
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock content %}
