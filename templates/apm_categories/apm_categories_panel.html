@@ -46,7 +46,20 @@
         </div>
     </div>
  </section>
+
 <!-- TABULAR LIST OF CATEGORIES -->
+{% if not apm_categories %}
+<div class="container bg-white px-5 py-5 border-top mt-5 rounded-3">
+   <div class="row">
+       <div class="col-lg-12 col-md-12 col-sm-12">
+           <p class="text-center text-secondary fs-5 ">
+               You are all caught up. There are no categories to display.<br />
+               <span>Use the button to start tracking categories</span>
+           </p>
+       </div>
+   </div>
+</div>
+{% else %}
 <section class="pt-5">
     <div class="container my-2 px-3 pb-3">
         <h4 class="pb-3">List of Categories</h4>
@@ -90,8 +103,21 @@
         </div>
     </div>
 </section>
+{% endif %}
 
 <!-- TABULAR LIST OF SUB-CATEGORIES -->
+{% if not apm_subcategories %}
+<div class="container bg-white px-5 py-5 border-top mt-5 rounded-3">
+   <div class="row">
+       <div class="col-lg-12 col-md-12 col-sm-12">
+           <p class="text-center text-secondary fs-5 ">
+               You are all caught up. There are no sub-categories to display.<br />
+               <span>Use the button to start tracking sub-categories </span>
+           </p>
+       </div>
+   </div>
+</div>
+{% else %}
 <section>
     <div class="container my-2 px-3 pb-3">
         <h4>List of Sub-categories</h4>
@@ -137,8 +163,21 @@
         </div>
     </div>
 </section>
+{% endif %}
 
 <!-- TABULAR LIST OF PYAMENT METHODS -->
+{% if not apm_paymethods %}
+<div class="container bg-white px-5 py-5 border-top mt-5 rounded-3">
+   <div class="row">
+       <div class="col-lg-12 col-md-12 col-sm-12">
+           <p class="text-center text-secondary fs-5 ">
+               You are all caught up. There are no payment methods to display.<br />
+               <span>Use the button to start tracking payment methods</span>
+           </p>
+       </div>
+   </div>
+</div>
+{% else %}
 <section>
     <div class="container my-2 px-3 pb-3">
         <h4>List of Payment Methods</h4>
@@ -176,4 +215,6 @@
         </div>
     </div>
 </section>
+{% endif %}
+
 {% endblock content %}
