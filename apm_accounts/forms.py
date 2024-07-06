@@ -82,13 +82,8 @@ class ASHPenserChangeForm(LoginRequiredMixin, UserChangeForm):
     class Meta:
         model = ASHPenser
         fields = (
-            "last_name",
-            "first_name",
             "username",
             "email",
-            "security_question",
-            "security_answer",
-            "image",
         )
 
 

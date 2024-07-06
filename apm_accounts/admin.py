@@ -21,35 +21,35 @@ class ASHPenserAdminPanel(UserAdmin):
 
     add_form = ASHPenserCreationForm
     form = ASHPenserChangeForm
-    nodel = ASHPenser
+    model = ASHPenser
     list_display = [
+        "lastname",
+        "firstname",
         "username",
         "email",
-        "last_name",
-        "first_name",
         "security_question",
         "security_answer",
-        "is_active",
         "image",
+        "is_active",
         "is_staff",
     ]
 
     fieldsets = (
         ("Personal Information", {
-            "fields": ("last_name", "first_name"),
+            "fields": ("lastname", "firstname",),
             "description": "User's personal information",
         }),
         ("Authentication Information", {
-            "fields": ("username", "email"),
+            "fields": ("username", "email",),
             "description": "User's authentication information",
         }),
         ("Security Information", {
-            "fields": ("security_question", "security_answer"),
-            "description": "Security information for password reset",
+            "fields": ("security_question", "security_answer",),
+            "description": "User's authentication security query",
         }),
-        ("Media Information", {
+        ("Media", {
             "fields": ("image",),
-            "description": "The photo of the user",
+            "description": "User's profile photo",
         }),
         ("Staff Information", {
             "fields": ("is_staff",),
@@ -60,10 +60,6 @@ class ASHPenserAdminPanel(UserAdmin):
             "description": "Current status of user",
         })
     )
-
-    list_filter = ("last_name", "first_name", "is_active")
-    ordering = ("last_name", "first_name")
-    search_fields = ("last_name", "first_name")
 
 admin.site.site_header = "ASHPense Administration Panel"
 admin.site.register(ASHPenser, ASHPenserAdminPanel)

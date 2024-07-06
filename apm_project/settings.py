@@ -52,6 +52,7 @@ INSTALLED_APPS = [
     "apm_categories.apps.ApmCategoriesConfig",
     "apm_earnings.apps.ApmEarningsConfig",
     "apm_expenses.apps.ApmExpensesConfig",
+    "ashpensers.apps.AshpensersConfig",
 ]
 
 MIDDLEWARE = [
