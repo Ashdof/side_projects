@@ -12,9 +12,8 @@ from django.urls import reverse_lazy, reverse
 from django.views.generic import CreateView
 from django.http import HttpResponseRedirect
 from django.views.generic.edit import FormView
-from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth import authenticate, login, logout
-from django.contrib.auth.views import PasswordResetView
 
 from apm_accounts.forms import (
     ASHPenserCreationForm,
@@ -44,7 +43,6 @@ class ASHPenserLoginView(View):
     Creates a login view for user login
     """
 
-    form_class = ASHPenserLoginForm
     template_name = "login.html"
 
     def get(self, request):
@@ -61,7 +59,7 @@ class ASHPenserLoginView(View):
         The login form
         """
 
-        form = self.form_class()
+        form = ASHPenserLoginForm
 
         return render(request, self.template_name, {"form": form})
     
@@ -81,8 +79,8 @@ class ASHPenserLoginView(View):
         message
         """
 
-        form = self.form_class(request.POST)
-        err_msg = "Invalid email address or password. Please correct the error"
+        form = ASHPenserLoginForm(self.request.POST)
+        err_msg = "Invalid email address or password. Please correct the error."
 
         if form.is_valid():
             email = form.cleaned_data["email"]
@@ -93,6 +91,7 @@ class ASHPenserLoginView(View):
                 form.add_error(None, err_msg)
             else:
                 login(request=request, user=user)
+                
                 return HttpResponseRedirect(reverse("home"))
         
         return render(request, self.template_name, {"form": form})

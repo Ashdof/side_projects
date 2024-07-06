@@ -50,6 +50,14 @@ class ASHPenserCreationForm(UserCreationForm):
             'password2': None,
         }
     
+    def __init__(self, *args, **kwargs):
+            user = kwargs.get("user")
+            super(ASHPenserCreationForm, self).__init__(*args, **kwargs)
+            
+            # Override the custom help texts
+            self.fields['password1'].help_text = ""
+            self.fields['password2'].help_text = ""
+    
     def clean_ashpenser_username(self):
         """
         Unique Username
@@ -112,16 +120,16 @@ class ASHPenserPassChangeForm(LoginRequiredMixin, PasswordChangeForm):
 
     def __init__(self, *args, **kwargs):
         user = kwargs.get("user")
-        super().__init__(*args, **kwargs)
+        super(ASHPenserPassChangeForm, self).__init__(*args, **kwargs)
 
         if user:
             self.fields["security_question"].initial = user.security_question
-        
+
         # Override the custom help texts
         self.fields['old_password'].help_text = ""
         self.fields['new_password1'].help_text = ""
         self.fields['new_password2'].help_text = ""
-    
+
     def clean_security_answer(self):
         user = self.user
         security_answer = self.cleaned_data.get("security_answer")
