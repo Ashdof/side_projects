@@ -3,33 +3,367 @@
 <html lang="en">
     <head>
         <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="viewport" content="width=device-width, initial-scale=1 shrink-to-fit=no">
         <meta name="description" content="ASHPense Manager">
-        <meta name="author" content="Emmanuel Amoaful Enchill">
-        <title>ASHPense | Welcome </title>
+        <meta name="author" content="Emmanuel Enchill">
+        <title>ASHPense Management | Welcome</title>
 
-        <!-- Bootstrap CSS CDN -->
-        {% comment %} <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous"> {% endcomment %}
-        
-        <!-- Bootstarp CSS-->
-        <link href="{% static 'css/bootstrap-grid.css' %}" rel="stylesheet">
-        <link href="{% static 'css/bootstrap-grid.min.css' %}" rel="stylesheet">
-        <link href="{% static 'css/bootstrap-utilities.css' %}" rel="stylesheet">
-        <link href="{% static 'css/bootstrap-utilities.min.css' %}" rel="stylesheet">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700">
+        <link rel="stylesheet" href="{% static 'fonts/icomoon/style.css' %}">
+
         <link href="{% static 'css/bootstrap.css' %}" rel="stylesheet">
         <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
-    </head>
-    <body>
-        <main>
-            <p>Welcome to <b>ASHPense Manager</b> landing page</p>
-            <p>Already have an account, <a href="{% url 'login' %}">login here</a></p>
-            <p>New user, <a href="{% url 'signup' %}">click here</a> to signup</p>
-        </main>
 
-        <!-- JavaScript -->
-        {% comment %} <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script> {% endcomment %}
-        <script src="{% static 'js/dashboard/bootstrap.bundle.min.js' %}"></script>
-        <script src="https://cdn.jsdelivr.net/npm/feather-icons@4.28.0/dist/feather.min.js" integrity="sha384-uO3SXW5IuS1ZpFPKugNNWqTZRRglnUJK6UAZ/gxOX80nxEkN9NcGZTftn6RzhGWE" crossorigin="anonymous"></script><script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js" integrity="sha384-zNy6FEbO50N+Cg5wap8IKA4M/ZnLJgzc6w2NqACZaK0u0FXfOWRRJOnQtpZun8ha" crossorigin="anonymous"></script>
-        <script src="{% static 'js/dashboard/dashboard.js' %}"></script>
+        <link href="{% static 'css/jquery-ui.css' %}" rel="stylesheet">
+        <link href="{% static 'css/owl.carousel.min.css' %}" rel="stylesheet" >
+        <link href="{% static 'css/owl.theme.default.min.css' %}" rel="stylesheet" >
+        <link href="{% static 'css/jquery.fancybox.min.css' %}" rel="stylesheet">
+        <link href="{% static 'font/flaticon.css' %}" rel="stylesheet">
+        <link href="{% static 'css/aos.css' %}" rel="stylesheet">
+
+        <link href="{% static 'css/style.css' %}" rel="stylesheet">
+    </head>
+    <body data-spy="scroll" data-target=".site-navbar-target" data-offset="300">
+  <div class="site-wrap">
+    <div class="site-mobile-menu site-navbar-target">
+      <div class="site-mobile-menu-header">
+        <div class="site-mobile-menu-close mt-3">
+          <span class="icon-close2 js-menu-toggle"></span>
+        </div>
+      </div>
+      <div class="site-mobile-menu-body"></div>
+    </div>
+
+    <!-- HEADER SECTION -->
+
+    <header class="site-navbar js-sticky-header site-navbar-target" role="banner">
+      <div class="container">
+        <div class="row align-items-center">
+          <div class="col-6 col-xl-2">
+            <h1 class="mb-0 site-logo"><a href="{% url 'index' %}" class="h2 mb-0 text-decoration-none">ASHPense</a></h1>
+          </div>
+          <div class="col-12 col-md-10 d-none d-xl-block">
+            <nav class="site-navigation position-relative text-right" role="navigation">
+                <ul class="site-menu main-menu js-clone-nav mr-auto d-none d-lg-block">
+                    <li><a href="#home-section" class="nav-link">Home</a></li>
+                    <li class="has-children">
+                        <a href="#about-section" class="nav-link">About Us</a>
+                        <ul class="dropdown">
+                            <li><a href="#services-section" class="nav-link">Services</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#contact-section" class="nav-link">Contact</a></li>
+                    <li><a href="{% url 'login' %}" class="nav-link border-left ml-3">Login</a></li>
+                    <li><a href="{% url 'signup' %}" class="nav-link">Sign up</a></li>
+                </ul>
+            </nav>
+          </div>
+          <div class="col-6 d-inline-block d-xl-none ml-md-0 py-3" style="position: relative; top: 3px;"><a href="#" class="site-menu-toggle js-menu-toggle float-right"><span class="icon-menu h3"></span></a></div>
+        </div>
+      </div>
+    </header>
+
+    <!-- BANKGROUND TOP BANNERS -->
+    <div class="site-blocks-cover overlay" style="background-image: url({% static 'images/hero_2.jpg' %});" data-aos="fade" id="home-section">
+      <div class="container">
+        <div class="row align-items-center justify-content-center">
+          <div class="col-md-10 mt-lg-5 text-center">
+            <div class="single-text owl-carousel">
+              <div class="slide">
+                <h1 class="text-uppercase" data-aos="fade-up">Personal Fiance Solutions</h1>
+                <p class="mb-5 desc"  data-aos="fade-up" data-aos-delay="100">
+                    Tailored solutions for your personal financing needs.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="site-section cta-big-image" id="about-section">
+      <div class="container">
+        <div class="row mb-5 justify-content-center">
+          <div class="col-md-8 text-center">
+            <h2 class="section-title mb-3" data-aos="fade-up" data-aos-delay="">About Us</h2>
+            <p class="lead" data-aos="fade-up" data-aos-delay="100">
+                Our sole focus is to help you manage your personal finances more effectively with tailored solutions.
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-6 mb-5" data-aos="fade-up" data-aos-delay="">
+            <figure class="circle-bg">
+            <img src="{% static 'images/dashboard.png' %}" alt="Free Website Template by Free-Template.co" class="img-fluid">
+            </figure>
+          </div>
+          <div class="col-lg-5 ml-auto" data-aos="fade-up" data-aos-delay="100">
+            <h3 class="text-black mb-4">Unleash Your Management Skills</h3>
+            <p>
+                We believe you are capable of managing your finances as much as you manage your day-to-day
+                life. This is why we create the best tools to help you take your financial managements skills
+                to the next level.
+            </p>
+            <p>
+                ASHPense Fiance solutions enable you to track every penny you earn and spend.
+            </p>
+          </div>
+        </div>    
+        
+      </div>  
+    </div>
+
+    <!-- OUR SERVICES -->
+    <section class="site-section border-bottom bg-light py-5" id="services-section">
+        <div class="container">
+          <div class="row mb-5">
+            <div class="col-12 text-center" data-aos="fade">
+              <h2 class="section-title mb-3">Our Services</h2>
+            </div>
+          </div>
+          <div class="row align-items-stretch">
+            <div class="col-md-6 col-lg-4 mb-4 mb-lg-4" data-aos="fade-up">
+              <div class="unit-4">
+                <div class="unit-4-icon">
+                  <img src="{% static 'images/flaticon-svg/svg/001-wallet.svg' %}" alt="Free Website Template by Free-Template.co" class="img-fluid w-25 mb-4">
+                </div>
+                <div>
+                  <h3>Expenses Monitoring</h3>
+                  <p>Track every penny that exits your purse. Utilize our solutions to monitor every expense your incur.</p>
+                  <p><a href="#">Learn More</a></p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6 col-lg-4 mb-4 mb-lg-4" data-aos="fade-up" data-aos-delay="100">
+              <div class="unit-4">
+                <div class="unit-4-icon">
+                  <img src="{% static 'images/flaticon-svg/svg/007-piggy-bank.svg' %}" alt="Free Website Template by Free-Template.co" class="img-fluid w-25 mb-4">
+                </div>
+                <div>
+                  <h3>Budget Management</h3>
+                  <p>Efficiently manage your budget with solutions tailored to your personal needs.</p>
+                  <p><a href="#">Learn More</a></p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6 col-lg-4 mb-4 mb-lg-4" data-aos="fade-up" data-aos-delay="200">
+              <div class="unit-4">
+                <div class="unit-4-icon">
+                  <img src="{% static 'images/flaticon-svg/svg/002-rich.svg' %}" alt="Free Website Template by Free-Template.co" class="img-fluid w-25 mb-4">
+                </div>
+                <div>
+                  <h3>Income Monitoring</h3>
+                  <p>Whether your earn a penny a day or an ocean of notes a season, our solutions help manage you income more effectively.</p>
+                  <p><a href="#">Learn More</a></p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+    </section>
+
+    <!-- GALLERY SECTION -->
+
+    <section class="site-section" id="gallery-section" data-aos="fade">
+        <div class="container">
+          <div class="row mb-3">
+            <div class="col-12 text-center">
+              <h2 class="section-title mb-3">Gallery</h2>
+            </div>
+          </div>
+          <div id="posts" class="row no-gutter">
+            <div class="item web col-sm-6 col-md-4 col-lg-4 col-xl-3 mb-4">
+              <a href="{% static 'images/cats.png' %}" class="item-wrap fancybox">
+                <span class="icon-search2"></span>
+                <img class="img-fluid" src="{% static 'images/cats.png' %}">
+              </a>
+            </div>
+            <div class="item web col-sm-6 col-md-4 col-lg-4 col-xl-3 mb-4">
+              <a href="{% static 'images/dashboard.png' %}" class="item-wrap fancybox" data-fancybox="gallery2">
+                <span class="icon-search2"></span>
+                <img class="img-fluid" src="{% static 'images/dashboard.png' %}">
+              </a>
+            </div>
+            <div class="item brand col-sm-6 col-md-4 col-lg-4 col-xl-3 mb-4">
+              <a href="{% static 'images/earnings.png' %}" class="item-wrap fancybox" data-fancybox="gallery2">
+                <span class="icon-search2"></span>
+                <img class="img-fluid" src="{% static 'images/earnings.png' %}">
+              </a>
+            </div>
+            <div class="item design col-sm-6 col-md-4 col-lg-4 col-xl-3 mb-4">
+              <a href="{% static 'images/expenses.png' %}" class="item-wrap fancybox" data-fancybox="gallery2">
+                <span class="icon-search2"></span>
+                <img class="img-fluid" src="{% static 'images/expenses.png' %}">
+              </a>
+            </div>
+            <div class="item web col-sm-6 col-md-4 col-lg-4 col-xl-3 mb-4">
+              <a href="{% static 'images/earnings_detail.png' %}" class="item-wrap fancybox" data-fancybox="gallery2">
+                <span class="icon-search2"></span>
+                <img class="img-fluid" src="{% static 'images/earnings_detail.png' %}">
+              </a>
+            </div>
+            <div class="item brand col-sm-6 col-md-4 col-lg-4 col-xl-3 mb-4">
+              <a href="{% static 'images/profile_page.png' %}" class="item-wrap fancybox" data-fancybox="gallery2">
+                <span class="icon-search2"></span>
+                <img class="img-fluid" src="{% static 'images/profile_page.png' %}">
+              </a>
+            </div>
+            <div class="item web col-sm-6 col-md-4 col-lg-4 col-xl-3 mb-4">
+              <a href="{% static 'images/earnings_delete.png' %}" class="item-wrap fancybox" data-fancybox="gallery2">
+                <span class="icon-search2"></span>
+                <img class="img-fluid" src="{% static 'images/earnings_delete.png' %}">
+              </a>
+            </div>
+            <div class="item design col-sm-6 col-md-4 col-lg-4 col-xl-3 mb-4">
+              <a href="{% static 'images/dashboard_empty.png' %}" class="item-wrap fancybox" data-fancybox="gallery2">
+                <span class="icon-search2"></span>
+                <img class="img-fluid" src="{% static 'images/dashboard_empty.png' %}">
+              </a>
+            </div>
+          </div>
+        </div>
+    </section>
+
+    <!-- CONTACT US SECTION -->
+
+    <section class="site-section bg-light" id="contact-section" data-aos="fade">
+      <div class="container">
+        <div class="row mb-5">
+          <div class="col-12 text-center">
+            <h2 class="section-title mb-3">Contact Us</h2>
+          </div>
+        </div>
+        <div class="row mb-5">
+          <div class="col-md-4 text-center">
+            <p class="mb-4">
+              <span class="icon-room d-block h2 text-primary"></span>
+              <span>Ashaley Botwe New Town, Accra Ghana</span>
+            </p>
+          </div>
+          <div class="col-md-4 text-center">
+            <p class="mb-4">
+              <span class="icon-phone d-block h2 text-primary"></span>
+              <a>+233-0248962743</a>
+            </p>
+          </div>
+          <div class="col-md-4 text-center">
+            <p class="mb-0">
+              <span class="icon-mail_outline d-block h2 text-primary"></span>
+              <a>mzigah4@gmail.com</a>
+            </p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12 mb-5">
+            <form action="#" class="p-5 bg-white">
+              <h2 class="h4 text-black mb-5">Contact Form</h2>
+              <div class="row form-group">
+                <div class="col-md-6 mb-3 mb-md-0">
+                  <label class="text-black" for="fname">First Name</label>
+                  <input type="text" id="fname" class="form-control">
+                </div>
+                <div class="col-md-6">
+                  <label class="text-black" for="lname">Last Name</label>
+                  <input type="text" id="lname" class="form-control">
+                </div>
+              </div>
+
+              <div class="row form-group">
+                
+                <div class="col-md-12">
+                  <label class="text-black" for="email">Email</label> 
+                  <input type="email" id="email" class="form-control">
+                </div>
+              </div>
+              <div class="row form-group">
+                <div class="col-md-12">
+                  <label class="text-black" for="subject">Subject</label> 
+                  <input type="subject" id="subject" class="form-control">
+                </div>
+              </div>
+              <div class="row form-group">
+                <div class="col-md-12">
+                  <label class="text-black" for="message">Message</label> 
+                  <textarea name="message" id="message" cols="30" rows="7" class="form-control mb-3" placeholder="Write your notes or questions here..."></textarea>
+                </div>
+              </div>
+              <div class="row form-group">
+                <div class="col-md-12">
+                  <input type="submit" value="Send Message" class="btn btn-primary btn-md text-white">
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    
+    <footer class="site-footer">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-9">
+            <div class="row">
+              <div class="col-md-5">
+                <h2 class="footer-heading mb-4">About Us</h2>
+                <p>
+                    We believe you are capable of managing your finances as much as you manage your day-to-day
+                    life. This is why we create the best tools to help you take your financial managements
+                    skills to the next level. 
+                </p>
+              </div>
+              <div class="col-md-3 ml-auto">
+                <h2 class="footer-heading mb-4">Quick Links</h2>
+                <ul class="list-unstyled">
+                  
+                  <li><a href="#about-section" class="smoothscroll text-decoration-none">About Us</a></li>
+                  <li><a href="#services-section" class="smoothscroll text-decoration-none">Services</a></li>
+                  <li><a href="#contact-section" class="smoothscroll text-decoration-none">Contact Us</a></li>
+                  <li><a href="{% url 'login' %}" class="smoothscroll text-decoration-none">Login</a></li>
+                  <li><a href="{% url 'signup' %}" class="smoothscroll text-decoration-none">Sign up</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <h2 class="footer-heading mb-4">Subscribe Newsletter</h2>
+            <form action="#" method="post" class="footer-subscribe">
+              <div class="input-group mb-3">
+                <input type="text" class="form-control border-secondary text-white bg-transparent" placeholder="Enter Email" aria-label="Enter Email" aria-describedby="button-addon2">
+                <div class="input-group-append">
+                  <button class="btn btn-primary text-black" type="button" id="button-addon2">Send</button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+        <div class="row pt-5 mt-5 text-center">
+          <div class="col-md-12">
+            <div class="border-top pt-5">
+              <p>
+                Copyright ASHPense Manager &copy; 2024 All rights reserved
+              </p>
+            </div>
+          </div>
+          
+        </div>
+      </div>
+    </footer>
+
+  </div> <!-- .site-wrap -->
+
+        <script src="{% static 'js/jquery-3.3.1.min.js' %}"></script>
+        <script src="{% static 'js/jquery-ui.js' %}"></script>
+        <script src="{% static 'js/popper.min.js' %}"></script>
+        <script src="{% static 'js/bootstrap.min.js' %}"></script>
+        <script src="{% static 'js/owl.carousel.min.js' %}"></script>
+        <script src="{% static 'js/jquery.countdown.min.js' %}"></script>
+        <script src="{% static 'js/jquery.easing.1.3.js' %}"></script>
+        <script src="{% static 'js/aos.js' %}"></script>
+        <script src="{% static 'js/jquery.fancybox.min.js' %}"></script>
+        <script src="{% static 'js/jquery.sticky.js' %}"></script>
+        <script src="{% static 'js/isotope.pkgd.min.js' %}"></script>
+        <script src="{% static 'js/main.js' %}"></script>
+
     </body>
 </html>
