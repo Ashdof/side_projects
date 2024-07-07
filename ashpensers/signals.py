@@ -11,4 +11,4 @@ from apm_accounts.models import ASHPenser
 def create_user_profile(sender, instance, created, **kwargs):
 
     if created:
-        ASHPenser.objects.create(penser_id=instance) 
+        ASHPenser.objects.create(ashpenser=instance)
