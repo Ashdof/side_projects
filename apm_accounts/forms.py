@@ -109,7 +109,7 @@ class ASHPenserLoginForm(forms.Form):
 
 class ASHPenserPassChangeForm(LoginRequiredMixin, PasswordChangeForm):
     """
-    Change Password
+    Change Password 
 
     Description:
     Includes custom fields on form for changing user's password

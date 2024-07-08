@@ -4,11 +4,11 @@ Admin panel for user profile
 
 from django.contrib import admin
 
-# from ashpensers.models import ASHPensersProfile
-from apm_accounts.models import ASHPenser
+from ashpensers.models import ASHPensersProfile
 from ashpensers.forms import ASHPensersProfileForm, ASHPensersProfileChangeForm
 
 # Register your models here.
+@admin.register(ASHPensersProfile)
 class ASHPensersProfileAdminPanel(admin.ModelAdmin):
     """
     Customize the admin panel for users profile
@@ -16,23 +16,16 @@ class ASHPensersProfileAdminPanel(admin.ModelAdmin):
 
     add_form = ASHPensersProfileForm
     form = ASHPensersProfileChangeForm
-    nodel = ASHPenser
+    moodel = ASHPensersProfile
     list_display = [
-        "lastname",
-        "firstname",
-        "security_question",
-        "security_answer",
+        "bio",
         "image",
     ]
 
     fieldsets = (
-        ("Personal Information", {
-            "fields": ("lastname", "firstname"),
-            "description": "User's personal information",
-        }),
-        ("Security Information", {
-            "fields": ("security_question", "security_answer"),
-            "description": "User authentication security information",
+        ("Bio Information", {
+            "fields": ("bio",),
+            "description": "User's about information",
         }),
         ("Media", {
             "fields": ("image",),

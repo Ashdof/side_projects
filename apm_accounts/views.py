@@ -126,7 +126,7 @@ class ASHPenseLogoutView(View):
 
 class ASHPenserPassChangeView(LoginRequiredMixin, FormView):
     """
-    Password Change Form
+    Password Change Form 
 
     Description:
     Creates a form with custom fields for changing passwords

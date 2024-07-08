@@ -1,5 +1,5 @@
 """
-User Profile URL Module
+User Profile URL Module 
 """
 
 from django.urls import path

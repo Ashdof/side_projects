@@ -5,9 +5,9 @@ Module for user profile
 from django.db import models
 from django.conf import settings
 
-from apm_accounts.choices import SECURITY_QUESTIONS
+from PIL import Image
 
-# Create your models here.
+# Create your models here. 
 class ASHPensersProfile(models.Model):
     """
     Create Profile
@@ -19,17 +19,28 @@ class ASHPensersProfile(models.Model):
     class Meta:
         verbose_name_plural = "ASHPensersProfile"
         db_table = "ashpensers_profiles"
-        ordering = ("lastname", "firstname",)
 
     ashpenser = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    lastname = models.CharField(max_length=50, blank=True, null=True)
-    firstname = models.CharField(max_length=50, blank=True, null=True)
-    security_question = models.CharField(max_length=255, choices=SECURITY_QUESTIONS, null=True, blank=True)
-    security_answer = models.CharField(max_length=500, null=True, blank=True)
+    bio = models.TextField(max_length=500, blank=True, null=True)
     image = models.ImageField(default="default/default.png", upload_to="apmenser/", max_length=255)
-    mfa = models.BooleanField(default=False)
 
     def __str__(self):
         """ Returns the username of this user """
 
-        return self.ashpenser.username
+        return f"{ self.ashpenser.username }"
+    
+    def save(self, *args, **kwargs):
+        """
+        Save Profile Object
+
+        Description:
+        Commits this user's profile object to the database
+        """
+
+        super().save()
+        img = Image.open(self.image.path)
+
+        if img.height > 300 and img.width > 300:
+            img_size = (300, 280)
+            img.thumbnail(img_size)
+            img.save(self.image.path)

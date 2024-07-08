@@ -29,7 +29,6 @@ class ASHPenserAdminPanel(UserAdmin):
         "email",
         "security_question",
         "security_answer",
-        "image",
         "is_active",
         "is_staff",
     ]
@@ -46,10 +45,6 @@ class ASHPenserAdminPanel(UserAdmin):
         ("Security Information", {
             "fields": ("security_question", "security_answer",),
             "description": "User's authentication security query",
-        }),
-        ("Media", {
-            "fields": ("image",),
-            "description": "User's profile photo",
         }),
         ("Staff Information", {
             "fields": ("is_staff",),
