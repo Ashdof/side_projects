@@ -5,7 +5,6 @@ from django.dispatch import receiver
 from django.conf import settings
 from django.contrib.auth import get_user_model
 
-# from apm_accounts.models import ASHPenser 
 from ashpensers.models import ASHPensersProfile
 
 User = get_user_model()

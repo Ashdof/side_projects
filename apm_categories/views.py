@@ -7,7 +7,7 @@ from django.contrib import messages
 from django.urls import reverse_lazy
 from django.db.models.base import Model as Model
 from django.views.generic import TemplateView, DetailView, UpdateView, DeleteView, CreateView
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 
 from apm_categories.models import (
     ASHPenserCategories,
@@ -69,7 +69,7 @@ class ASHPenserCategoryDetailView(LoginRequiredMixin, DetailView):
         return obj
 
 
-class ASHPenserCategoryUpdateView(LoginRequiredMixin, UpdateView):
+class ASHPenserCategoryUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     """
     Update Category Object Data
 
@@ -90,9 +90,21 @@ class ASHPenserCategoryUpdateView(LoginRequiredMixin, UpdateView):
         
         return obj
     
+    def test_func(self):
+        """
+        RestrictAccess
+        
+        Description:
+        Restricts updatinge an object to only those created by the currently
+        logged-in user
+        """
+        obj = self.get_object()
+
+        return obj.ashpenser_data == self.request.user
+    
 
 
-class ASHPenserCategoryDeleteView(DeleteView):
+class ASHPenserCategoryDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     """
     Delete an Object
 
@@ -121,6 +133,18 @@ class ASHPenserCategoryDeleteView(DeleteView):
         info_msg = "Category data deleted."
         messages.success(request, info_msg)
         return super().delete(request, *args, **kwargs)
+    
+    def test_func(self):
+        """
+        RestrictAccess
+        
+        Description:
+        Restricts updatinge an object to only those created by the currently
+        logged-in user
+        """
+        obj = self.get_object()
+
+        return obj.ashpenser_data == self.request.user
 
 
 class ASHPenserCategoryCreateView(LoginRequiredMixin, CreateView):
@@ -168,7 +192,7 @@ class ASHPenserSubCategoryDetailView(LoginRequiredMixin, DetailView):
         return obj
 
 
-class ASHPenserSubCategoryUpdateView(LoginRequiredMixin, UpdateView):
+class ASHPenserSubCategoryUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     """
     Update Sub-category Object Data
 
@@ -188,9 +212,21 @@ class ASHPenserSubCategoryUpdateView(LoginRequiredMixin, UpdateView):
             raise Http404("Error: Forbidden")
         
         return obj
+    
+    def test_func(self):
+        """
+        RestrictAccess
+        
+        Description:
+        Restricts updatinge an object to only those created by the currently
+        logged-in user
+        """
+        obj = self.get_object()
+
+        return obj.ashpenser_data == self.request.user
 
 
-class ASHPenserSubCategoryDeleteView(DeleteView):
+class ASHPenserSubCategoryDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     """
     Delete an Object
 
@@ -217,6 +253,18 @@ class ASHPenserSubCategoryDeleteView(DeleteView):
         info_msg = "Sub-category data deleted."
         messages.success(request, info_msg)
         return super().delete(request, *args, **kwargs)
+    
+    def test_func(self):
+        """
+        RestrictAccess
+        
+        Description:
+        Restricts updatinge an object to only those created by the currently
+        logged-in user
+        """
+        obj = self.get_object()
+
+        return obj.ashpenser_data == self.request.user
 
 
 class ASHPenserSubCategoryCreateView(LoginRequiredMixin, CreateView):
@@ -265,7 +313,7 @@ class ASHPenserPaymentMethodDetailView(LoginRequiredMixin, DetailView):
         return obj
 
 
-class ASHPenserPaymentMethodUpdateView(LoginRequiredMixin, UpdateView):
+class ASHPenserPaymentMethodUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     """
     Update Payment Method Object Data
 
@@ -285,9 +333,21 @@ class ASHPenserPaymentMethodUpdateView(LoginRequiredMixin, UpdateView):
             raise Http404("Error: Forbidden")
         
         return obj
+    
+    def test_func(self):
+        """
+        RestrictAccess
+        
+        Description:
+        Restricts updatinge an object to only those created by the currently
+        logged-in user
+        """
+        obj = self.get_object()
+
+        return obj.ashpenser_data == self.request.user
 
 
-class ASHPenserPaymentMethodDeleteView(DeleteView):
+class ASHPenserPaymentMethodDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     """
     Delete an Object
 
@@ -314,6 +374,18 @@ class ASHPenserPaymentMethodDeleteView(DeleteView):
         info_msg = "Payment method data deleted."
         messages.success(request, info_msg)
         return super().delete(request, *args, **kwargs)
+    
+    def test_func(self):
+        """
+        RestrictAccess
+        
+        Description:
+        Restricts updatinge an object to only those created by the currently
+        logged-in user
+        """
+        obj = self.get_object()
+
+        return obj.ashpenser_data == self.request.user
 
 
 class ASHPenserPaymentMethodCreateView(LoginRequiredMixin, CreateView):

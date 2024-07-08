@@ -24,8 +24,6 @@ class ASHPenserEarningsForm(forms.ModelForm):
     Creates a form for adding and editing incomes earnings
     """
 
-    # income_cats = forms.ModelChoiceField(queryset=ASHPenserCategories.objects.all(), label="Income category")
-
     class Meta:
         model = ASHPenserEarnings
         fields = ["date", "category", "payer", "payment_method", "amount", "description"]

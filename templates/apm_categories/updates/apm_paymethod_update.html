@@ -15,12 +15,13 @@
                 <li class="breadcrumb-item"><a class="fw-light text-decoration-none" href="{% url 'home' %}">Home</a></li>
                 <li class="breadcrumb-item active fw-light" aria-current="page">
                     <a class="text-decoration-none" href="{% url 'apm_categories:apm_categories_panel' %}">Categories</a> / 
-                    Update {{ object.paymethod_name }} Data 
+                    Update <strong>{{ object.paymethod_name }}</strong> Data 
                 </li>
             </ol>
         </nav>
     </div>
 </div>
+
 <!-- PAYMENT METHOD DETAIL -->
 <section class="mb-4">
     <div class="container bg-white pt-4 pb-3">

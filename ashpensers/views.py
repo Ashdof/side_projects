@@ -19,11 +19,7 @@ from ashpensers.forms import (
     ASHPenserForm,
     ASHPensersProfileChangeForm,
     ASHPenserPasswordChangeForm,
-    # ASHPensersProfilePasswordChangeForm
 )
-
-from apm_accounts.models import ASHPenser
-# from apm_accounts.forms import ASHPenserChangeForm
 
 
 class ASHPensersProfilePanelView(LoginRequiredMixin, TemplateView):
@@ -62,10 +58,6 @@ class ASHPensersPasswordChangeView(LoginRequiredMixin, PasswordChangeView):
     Descroption:
     Enables the currently logged-in user to change password
     """
-
-    # form_class = ASHPenserPasswordChangeForm
-    # template_name = "apm_mensers/registration/apm_mensers_password_change.html"
-    # success_url = reverse_lazy("apm_mensers:apm_mensers_panel")
 
     def get(self, request, *args, **kwargs):
         """Fetch resources of the currently logged-in user"""
@@ -112,14 +104,6 @@ class ASHPensersPasswordChangeView(LoginRequiredMixin, PasswordChangeView):
         """
         
         return self.request.user.is_authenticated and self.request.user.pk == self.get_object().user.pk
-    
-    # def get_context_data(self, **kwargs):
-    #     """Setup context data for the user object"""
-
-    #     context = super().get_context_data(**kwargs)
-    #     context["ashpenser_form"] = ASHPenserForm(instance=self.request.user)
-
-    #     return context
 
 
 class ASHPensersProfileUpdateView(LoginRequiredMixin, UpdateView):

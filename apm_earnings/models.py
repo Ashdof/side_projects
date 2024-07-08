@@ -12,7 +12,10 @@ from django.shortcuts import reverse
 
 import uuid
 
-from apm_categories.models import ASHPenserCategories, ASHPenserPaymentMethod
+from apm_categories.models import (
+    ASHPenserCategories,
+    ASHPenserPaymentMethod,
+)
 
 
 class ASHPenserEarnings(models.Model):

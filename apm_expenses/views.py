@@ -5,7 +5,7 @@ ASHPense Expenses View Module
 from django.http import Http404
 from django.contrib import messages
 from django.urls import reverse_lazy
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.views.generic import (
     TemplateView, 
     DetailView,
@@ -69,7 +69,7 @@ class ASHPenserExpensesDetailView(LoginRequiredMixin, DetailView):
         return obj
 
 
-class ASHPenserExpensesUpdateView(LoginRequiredMixin, UpdateView):
+class ASHPenserExpensesUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     """
     Update Expense Object Data
 
@@ -88,10 +88,22 @@ class ASHPenserExpensesUpdateView(LoginRequiredMixin, UpdateView):
         if obj.ashpenser_data != self.request.user:
             raise Http404("Error: Forbidden")
         
-        return obj
+        return 
+    
+    def test_func(self):
+        """
+        RestrictAccess
+        
+        Description:
+        Restricts updatinge an object to only those created by the currently
+        logged-in user
+        """
+        obj = self.get_object()
+
+        return obj.ashpenser_data == self.request.user
 
 
-class ASHPenserExpenseDeleteView(LoginRequiredMixin, DeleteView):
+class ASHPenserExpenseDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     """
     Delete an Object
 
@@ -109,7 +121,7 @@ class ASHPenserExpenseDeleteView(LoginRequiredMixin, DeleteView):
         obj = super().get_object(queryset)
         if obj.ashpenser_data != self.request.user:
             raise Http404("Error: Forbidden")
-        
+
         return obj
 
     def delete(self, request, *args, **kwargs):
@@ -118,6 +130,18 @@ class ASHPenserExpenseDeleteView(LoginRequiredMixin, DeleteView):
         info_msg = "Expense data deleted."
         messages.success(request, info_msg)
         return super().delete(request, *args, **kwargs)
+    
+    def test_func(self):
+        """
+        RestrictAccess
+        
+        Description:
+        Restricts updatinge an object to only those created by the currently
+        logged-in user
+        """
+        obj = self.get_object()
+
+        return obj.ashpenser_data == self.request.user
 
 
 class ASHPenserExpenseCreateView(LoginRequiredMixin, CreateView):

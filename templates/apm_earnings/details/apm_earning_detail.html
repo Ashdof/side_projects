@@ -14,7 +14,7 @@
                 <li class="breadcrumb-item"><a class="fw-light text-decoration-none" href="{% url 'home' %}">Home</a></li>
                 <li class="breadcrumb-item active fw-light" aria-current="page">
                     <a class="text-decoration-none" href="{% url 'apm_earnings:apm_earnings_panel' %}">Income Earnings</a> / 
-                    {{ object.amount }} Details
+                    <strong>{{ object.amount }}</strong> Details
                 </li>
             </ol>
         </nav>

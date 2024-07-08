@@ -4,9 +4,8 @@ ASHPense Earnings View
 
 from django.http import Http404
 from django.contrib import messages
-from django.shortcuts import render
 from django.urls import reverse_lazy
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.views.generic import (
     TemplateView, 
     DetailView,
@@ -70,7 +69,7 @@ class ASHPenserEarningsDetailView(LoginRequiredMixin, DetailView):
         return obj
 
 
-class ASHPenserEarningUpdateView(LoginRequiredMixin, UpdateView):
+class ASHPenserEarningUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     """
     Update Earning Object Data
 
@@ -90,9 +89,21 @@ class ASHPenserEarningUpdateView(LoginRequiredMixin, UpdateView):
             raise Http404("Error: Forbidden")
         
         return obj
+    
+    def test_func(self):
+        """
+        RestrictAccess
+        
+        Description:
+        Restricts updatinge an object to only those created by the currently
+        logged-in user
+        """
+        obj = self.get_object()
+
+        return obj.ashpenser_data == self.request.user
 
 
-class ASHPenserEarningDeleteView(LoginRequiredMixin, DeleteView):
+class ASHPenserEarningDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     """
     Delete an Object
 
@@ -119,6 +130,18 @@ class ASHPenserEarningDeleteView(LoginRequiredMixin, DeleteView):
         info_msg = "Category data deleted."
         messages.success(request, info_msg)
         return super().delete(request, *args, **kwargs)
+    
+    def test_func(self):
+        """
+        RestrictAccess
+        
+        Description:
+        Restricts updatinge an object to only those created by the currently
+        logged-in user
+        """
+        obj = self.get_object()
+
+        return obj.ashpenser_data == self.request.user
 
 
 class ASHPenserEarningCreateView(LoginRequiredMixin, CreateView):
