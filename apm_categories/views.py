@@ -25,7 +25,6 @@ class ASHPenserCategoryListView(LoginRequiredMixin, TemplateView):
     Creates a view for the display of categories list
     """
 
-    # model = ASHPenserCategories
     template_name = "apm_categories/apm_categories_panel.html"
 
     def get_queryset(self):
@@ -132,6 +131,7 @@ class ASHPenserCategoryDeleteView(LoginRequiredMixin, UserPassesTestMixin, Delet
 
         info_msg = "Category data deleted."
         messages.success(request, info_msg)
+        
         return super().delete(request, *args, **kwargs)
     
     def test_func(self):

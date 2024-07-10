@@ -88,7 +88,7 @@ class ASHPenserExpensesUpdateView(LoginRequiredMixin, UserPassesTestMixin, Updat
         if obj.ashpenser_data != self.request.user:
             raise Http404("Error: Forbidden")
         
-        return 
+        return obj
     
     def test_func(self):
         """
@@ -96,7 +96,7 @@ class ASHPenserExpensesUpdateView(LoginRequiredMixin, UserPassesTestMixin, Updat
         
         Description:
         Restricts updatinge an object to only those created by the currently
-        logged-in user
+        logged-in user 
         """
         obj = self.get_object()
 
@@ -129,6 +129,7 @@ class ASHPenserExpenseDeleteView(LoginRequiredMixin, UserPassesTestMixin, Delete
 
         info_msg = "Expense data deleted."
         messages.success(request, info_msg)
+
         return super().delete(request, *args, **kwargs)
     
     def test_func(self):
@@ -161,4 +162,5 @@ class ASHPenserExpenseCreateView(LoginRequiredMixin, CreateView):
         """Commit resources to the database by user"""
 
         form.instance.ashpenser_data = self.request.user
+        
         return super().form_valid(form)
