@@ -33,7 +33,7 @@ SECRET_KEY = env.str("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = bool(int(os.environ.get('DEBUG', 0)))
 
-ALLOWED_HOSTS = ["apm-ashpense-76bd87be6dd5.herokuapp.com", "localhost", "127.0.0.1"]
+ALLOWED_HOSTS = ["apm-project-3d480ec09b67.herokuapp.com", "localhost", "127.0.0.1"]
 
 
 # Application definition
