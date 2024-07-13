@@ -40,7 +40,7 @@ ASHPense Manager was built with the following technologies:
 - PostgreSQL
 
 ## Accessing the Platform
-To access the platform, visit [ASHPense Manager]()
+To access the platform, visit [ASHPense Manager](https://apm-project-3d480ec09b67.herokuapp.com/)
 ### Signup to create an account
 <img src="static/images/register.png" alt="registration form">
 
