@@ -1,0 +1,31 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+       <meta charset="utf-8"> 
+       <meta name="viewport" content="width=device-width, initial-scale=1">
+       <meta name="description" content="ASHPense authentication">
+       <meta name="author" content="Emmanuel Amoaful Enchill">
+       <title>{% block title %}ASHPense | Authentication{% endblock title %}</title> 
+
+       <!-- Bootstarp CSS -->
+        <link href="{% static 'css/bootstrap-grid.css' %}" rel="stylesheet">
+        <link href="{% static 'css/bootstrap-grid.min.css' %}" rel="stylesheet">
+        <link href="{% static 'css/bootstrap-utilities.css' %}" rel="stylesheet">
+        <link href="{% static 'css/bootstrap-utilities.min.css' %}" rel="stylesheet">
+        <link href="{% static 'css/bootstrap.css' %}" rel="stylesheet">
+        <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+    </head>
+    <body>
+        <div class="row mt-5 p-3">
+            <div class="col-sm-4 m-3 p-2"></div>
+                <div class="col-sm-4">
+                    <div class="card p-3" style="width: 25rem;">
+                        {% block content %}
+                        {% endblock content %} 
+                    </div>
+                </div>
+            <div class="col-sm-4 m-3"></div>
+        </div>
+    </body>
+</html>

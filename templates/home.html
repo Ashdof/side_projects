@@ -1,0 +1,146 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}ASHPense | Home {% endblock title %}
+
+{% block content %}
+
+<section>
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+        <h1 class="h2">Dashboard</h1>
+    </div>
+</section>
+
+<!-- NEW TRANSACTION BUTTONS --> 
+<section>
+    <div class="container px-3 pb-5">
+        <div class="row">
+            <div class="col-lg-9 col-md-9 col-sm-9">
+                <div class="row">
+                    <div class="col-lg-3 col-md-3 col-sm-3 pb-2">
+                        <a href="{% url 'apm_earnings:apm_earnings_panel' %}" type="button" class="btn btn-success w-100">
+                            <img src="{% static 'icons/earnings.svg' %}" alt="earning icon">
+                            Earnings
+                        </a>
+                    </div>
+                    <div class="col-lg-3 col-md-3 col-sm-3 pb-2">
+                        <a href="{% url 'apm_expenses:apm_expenses_panel' %}" type="button" class="btn btn-danger w-100">
+                            <img src="{% static 'icons/expenses.svg' %}" alt="expense icon">
+                            Expenses
+                        </a>
+                    </div>
+                    <div class="col-lg-3 col-md-3 col-sm-3 pb-2">
+                        <a href="{% url 'apm_categories:apm_categories_panel' %}" type="button" class="btn btn-primary w-100">
+                            <img src="{% static 'icons/categories.svg' %}" alt="category icon">
+                            Categories
+                        </a>
+                    </div>                    
+                </div>
+            </div>
+        </div>
+    </div>
+ </section>
+
+ {% if not transactions %}
+ <div class="container bg-white px-5 py-5 border-top border-bottom rounded-3">
+    <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12">
+            <p class="text-center text-secondary fs-5 ">
+                You are all caught up. There are no records to display.<br />
+                <span>Use the buttons to start tracking your finances</span>
+            </p>
+        </div>
+    </div>
+</div>
+ {% else %}
+<!-- SUMMARY SECTION WITH BUTTONS -->
+<section>
+    <h4 class="text text-primary">Summary of Transactions<h4>
+    <div class="container my-3 px-3 pb-4">
+        <div class="row">
+            <div class="col col-lg-3 col-md-3 col-sm-3">
+                <div class="row h5">
+                    Income:
+                </div>
+                <div class="row h5">
+                    Expense:
+                </div>
+                <div class="row py-2 h5">
+                    Balance:
+                </div>
+            </div>
+            <div class="col col-lg-3 col-md-3 col-sm-3">
+                <div class="row h5">
+                    <a href="{% url 'apm_earnings:apm_earnings_panel' %}" class="text-decoration-none text-success">
+                        {{ total_earnings }}
+                    </a>
+                </div>
+                <div class="row h5">
+                    <a href="{% url 'apm_expenses:apm_expenses_panel' %}" class="text-decoration-none text-danger">
+                        {{ total_expenses }}
+                    </a>
+                </div>
+                <div class="row border-dark border-top border-bottom py-2 text-primary h5 w-25">
+                    {{ balance }}
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- TABULAR LIST OF EARNINGS -->
+<section>
+    <h4 class="text text-primary">List of Transactions</h4>
+    <div class="container my-3 px-3 pb-5">
+        <div class="table-responsive">
+            <table class="table table-sm">
+            <thead>
+                <tr>
+                    <th scope="col">Date</th>
+                    <th scope="col">Category</th>
+                    <th scope="col">Sub-category</th>
+                    <th scope="col">Payer</th>
+                    <th scope="col">Payee</th>
+                    <th scope="col">Payment Method</th>
+                    <th scope="col">Amount</th>
+                    <th scope="col">Description</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for transaction in transactions%}
+                <tr>
+                    <td>{{ transaction.date }}</td>
+                    <td>{{ transaction.category }}</td>
+                    {% if transaction.subcategory %}
+                        <td>{{ transaction.subcategory }}</td>
+                    {% else %}
+                        <td>-</td>
+                    {% endif %}
+                    {% if transaction.payer %}
+                        <td>{{ transaction.payer }}</td>
+                    {% else %}
+                        <td>-</td>
+                    {% endif %}
+                    {% if transaction.payee %}
+                        <td>{{ transaction.payee }}</td>
+                    {% else %}
+                        <td>-</td>
+                    {% endif %}
+                    <td>{{ transaction.payment_method }}</td>
+                    {% if transaction.payer %}
+                        <td><a href="{% url 'apm_earnings:apm_earnings_detail' pk=transaction.pk %}" class="text-decoration-none text-success">{{ transaction.amount }}</a></td>
+                    {% elif transaction.payee %}
+                        <td><a href="{% url 'apm_expenses:apm_expenses_detail' pk=transaction.pk %}" class="text-decoration-none text-danger">{{ transaction.amount }}</a></td>
+                    {% endif %}
+                    <td>{{ transaction.description }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+            </table>
+        </div>
+    </div>
+</section>
+
+{% endif %}
+
+{% endblock content %}
