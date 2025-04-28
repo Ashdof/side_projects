@@ -9,8 +9,10 @@ package com.enchill_projects.ashnovel_catalogue.controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
+@RequestMapping("catalogue")
 public class CatalogueHomeController {
 
     /**
@@ -18,9 +20,10 @@ public class CatalogueHomeController {
      * controller to display the home page
      * @return the logical template filename
      */
-    @GetMapping("/catalogue")
-    public String showHomePage() {
+    @GetMapping("/home")
+    public String showHomePage(Model model) {
 
+        model.addAttribute("user", "jaykay");
         return "index";
     }
 }
