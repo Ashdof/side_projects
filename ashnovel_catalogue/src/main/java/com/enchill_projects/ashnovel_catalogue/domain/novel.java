@@ -9,6 +9,7 @@ import com.enchill_projects.ashnovel_catalogue.service.impl.CatalogueIdServiceIm
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -17,7 +18,8 @@ import java.util.List;
 @Table(name = "novels")
 public class novel {
 
-    @Column(name = "novel_id", nullable = false, unique = true)
+    @Id
+    @Column(name = "novel_id", nullable = false, unique = true, updatable = false)
     private String id;
 
     @Column(name = "novel_title", nullable = false)
@@ -42,10 +44,10 @@ public class novel {
     private List<String> pubCompanies;
 
     @Column(name = "created_at", nullable = false)
-    private LocalDate createdAt;
+    private LocalDateTime createdAt;
 
     @Column(name = "updated_at", nullable = false)
-    private LocalDate updatedAt;
+    private LocalDateTime updatedAt;
 
     private static final String DEFAULT_TEXT_VALUE = "none";
 
@@ -61,8 +63,8 @@ public class novel {
         this.isbn = DEFAULT_TEXT_VALUE;
         this.pubYear = LocalDate.now();
         this.pubCompanies = new ArrayList<>(Collections.singleton(DEFAULT_TEXT_VALUE));
-        this.createdAt = LocalDate.now();
-        this.updatedAt = LocalDate.now();
+        this.createdAt = LocalDateTime.now();
+        this.updatedAt = LocalDateTime.now();
     }
 
     /**
@@ -178,7 +180,7 @@ public class novel {
 
     @PrePersist
     public void prePersist() {
-        LocalDate localDate = LocalDate.now();
+        LocalDateTime localDate = LocalDateTime.now();
 
         this.createdAt = localDate;
         this.updatedAt = localDate;
@@ -186,7 +188,7 @@ public class novel {
 
     @PreUpdate
     public void preUpdate() {
-        this.updatedAt = LocalDate.now();
+        this.updatedAt = LocalDateTime.now();
     }
 
 }
