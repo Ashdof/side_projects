@@ -9,6 +9,8 @@ package com.enchill_projects.ashnovel_catalogue.config;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.converter.HttpMessageConverter;
+import org.springframework.http.converter.StringHttpMessageConverter;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
@@ -20,6 +22,7 @@ import org.thymeleaf.templatemode.TemplateMode;
 import org.thymeleaf.templateresolver.ITemplateResolver;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Configuration
@@ -82,5 +85,29 @@ public class CatalogueMvcViewResolverContextConfig implements WebMvcConfigurer {
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/resources/**")
                 .addResourceLocations("/resources/");
+    }
+
+    /**
+     * Configures the HTTP message converters used for request/response processing.
+     *
+     * This implementation:
+     * 1. Clears all default converters that Spring autoconfigures (including JSON converters)
+     * 2. Only registers the StringHttpMessageConverter which handles basic text content
+     *
+     * Why we do this:
+     * - Prevents Spring from autoconfiguring JSON converters we don't need
+     * - Eliminates the requirement for JSON-B (Yasson) or Jackson dependencies
+     * - Reduces application startup time by only loading necessary converters
+     * - Still maintains support for basic text processing required by Thymeleaf
+     *
+     * @param converters The list of converters to modify (initially contains Spring defaults)
+     */
+    @Override
+    public void configureMessageConverters(List<HttpMessageConverter<?>> converters) {
+        // Clear all default converters
+        converters.clear();
+
+        // Add only what you need (e.g., for Thymeleaf)
+        converters.add(new StringHttpMessageConverter());
     }
 }
