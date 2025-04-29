@@ -27,7 +27,7 @@ public class CatalogueNovelDaoImpl implements CatalogueNovelDao {
      * persists a new novel object to the database
      * @param novel the Novel object
      */
-    public void addNewNovel(Novel novel) {
+    public void save(Novel novel) {
         Session session = sessionFactory.getCurrentSession();
         session.persist(novel);
     }
