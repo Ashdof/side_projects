@@ -106,6 +106,12 @@
             <artifactId>ksuid</artifactId>
             <version>1.1.3</version>
         </dependency>
+        <!-- JSON JACKSON -->
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>2.18.3</version>
+        </dependency>
     </dependencies>
     <build>
         <finalName>ashnovel_catalogue</finalName>
