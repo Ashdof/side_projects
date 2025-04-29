@@ -6,12 +6,15 @@
 
 package com.enchill_projects.ashnovel_catalogue.config;
 
+import org.hibernate.SessionFactory;
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.support.PropertiesLoaderUtils;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
+import org.springframework.orm.hibernate5.HibernateTransactionManager;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
@@ -74,5 +77,19 @@ public class CatalogueRootApplicationContextConfig {
         sessionFactoryBean.setHibernateProperties(hibernateProperties);
         return sessionFactoryBean;
     }
-    // PasswordEncoder Configurations etc.
+
+    /**
+     * Transaction Manager:
+     * configuration for managing database transactions
+     * @param sessionFactory the session object
+     * @return a transaction manager object
+     */
+    @Bean
+    public HibernateTransactionManager transactionManager(SessionFactory sessionFactory) {
+
+        HibernateTransactionManager hibernateTransactionManager = new HibernateTransactionManager();
+        hibernateTransactionManager.setSessionFactory(sessionFactory);
+
+        return hibernateTransactionManager;
+    }
 }
