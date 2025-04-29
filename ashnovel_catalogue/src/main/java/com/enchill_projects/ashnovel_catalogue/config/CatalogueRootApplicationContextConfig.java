@@ -7,14 +7,21 @@
 package com.enchill_projects.ashnovel_catalogue.config;
 
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.support.PropertiesLoaderUtils;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
+import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import javax.sql.DataSource;
 import java.io.IOException;
 import java.util.Properties;
 
+@Configuration
+@EnableTransactionManagement
+@ComponentScan("com.enchill_projects.ashnovel_catalogue")
 public class CatalogueRootApplicationContextConfig {
 
     /**
@@ -40,6 +47,32 @@ public class CatalogueRootApplicationContextConfig {
         return managerDataSource;
     }
 
-    // Hibernate Configurations
+    /**
+     * Hibernate Session:
+     * configuration for hibernate session
+     * @return a session factory manager object
+     * @throws IOException if an error occurs
+     */
+    @Bean
+    public LocalSessionFactoryBean localSessionFactoryBean() throws IOException {
+
+        LocalSessionFactoryBean sessionFactoryBean = new LocalSessionFactoryBean();
+        sessionFactoryBean.setDataSource(this.dataSource());
+
+        // Scan for model
+        sessionFactoryBean.setPackagesToScan(
+                "com.enchill_projects.ashnovel_catalogue.domain"
+        );
+
+        // Setup Hibernate properties
+        Properties hibernateProperties = new Properties();
+        hibernateProperties.setProperty("hibernate.dialect", "org.hibernate.dialect.PostgreSQLDialect");
+        hibernateProperties.setProperty("hibernate.hbm2ddl.auto", "validate");
+        hibernateProperties.setProperty("hibernate.show_sql", "true"); // Prints executed SQL commands in terminal
+        hibernateProperties.setProperty("hibernate.format_sql", "true");
+
+        sessionFactoryBean.setHibernateProperties(hibernateProperties);
+        return sessionFactoryBean;
+    }
     // PasswordEncoder Configurations etc.
 }
