@@ -41,7 +41,10 @@ public class Novel {
     private String summary;
 
     @Column(name = "publication_companies", nullable = false)
-    private List<String> pubCompanies;
+    private String pubCompanies;
+
+    @Column(name = "imagePath", nullable = false)
+    private String imagePath;
 
     @Column(name = "created_at", nullable = false)
     private LocalDateTime createdAt;
@@ -62,7 +65,7 @@ public class Novel {
         this.genre = new ArrayList<>(Collections.singleton(DEFAULT_TEXT_VALUE));
         this.isbn = DEFAULT_TEXT_VALUE;
         this.pubYear = LocalDate.now();
-        this.pubCompanies = new ArrayList<>(Collections.singleton(DEFAULT_TEXT_VALUE));
+        this.pubCompanies = DEFAULT_TEXT_VALUE;
         this.createdAt = LocalDateTime.now();
         this.updatedAt = LocalDateTime.now();
     }
@@ -102,7 +105,7 @@ public class Novel {
         return isbn;
     }
 
-    public List<String> getPubCompanies() {
+    public String getPubCompanies() {
         return pubCompanies;
     }
 
@@ -112,6 +115,18 @@ public class Novel {
 
     public String getSummary() {
         return summary;
+    }
+
+    public String getImagePath() {
+        return imagePath;
+    }
+
+    public LocalDateTime getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
     }
 
     public void setId(String id) {
@@ -154,7 +169,7 @@ public class Novel {
         this.isbn = isbn;
     }
 
-    public void setPubCompanies(List<String> pubCompanies) {
+    public void setPubCompanies(String pubCompanies) {
 
         if (pubCompanies == null || pubCompanies.isEmpty())
             throw new IllegalArgumentException("Publication company cannot be empty.");
@@ -176,6 +191,18 @@ public class Novel {
             throw new IllegalArgumentException("Summary of Novel cannot be empty.");
 
         this.summary = summary;
+    }
+
+    public void setImagePath(String imagePath) {
+        this.imagePath = imagePath;
+    }
+
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public void setUpdatedAt(LocalDateTime updatedAt) {
+        this.updatedAt = updatedAt;
     }
 
     @PrePersist
