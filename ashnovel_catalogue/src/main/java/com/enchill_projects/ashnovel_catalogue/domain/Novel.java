@@ -10,9 +10,6 @@ import jakarta.persistence.*;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
 
 @Entity
 @Table(name = "novels")
@@ -41,7 +38,7 @@ public class Novel {
     private String summary;
 
     @Column(name = "publication_companies", nullable = false)
-    private String pubCompanies;
+    private String pubCompany;
 
     @Column(name = "imagePath", nullable = false)
     private String imagePath;
@@ -65,7 +62,7 @@ public class Novel {
         this.genre = DEFAULT_TEXT_VALUE;
         this.isbn = DEFAULT_TEXT_VALUE;
         this.pubYear = LocalDate.now();
-        this.pubCompanies = DEFAULT_TEXT_VALUE;
+        this.pubCompany = DEFAULT_TEXT_VALUE;
         this.createdAt = LocalDateTime.now();
         this.updatedAt = LocalDateTime.now();
     }
@@ -105,8 +102,8 @@ public class Novel {
         return isbn;
     }
 
-    public String getPubCompanies() {
-        return pubCompanies;
+    public String getPubCompany() {
+        return pubCompany;
     }
 
     public LocalDate getPubYear() {
@@ -169,12 +166,12 @@ public class Novel {
         this.isbn = isbn;
     }
 
-    public void setPubCompanies(String pubCompanies) {
+    public void setPubCompany(String pubCompany) {
 
-        if (pubCompanies == null || pubCompanies.isEmpty())
+        if (pubCompany == null || pubCompany.isEmpty())
             throw new IllegalArgumentException("Publication company cannot be empty.");
 
-        this.pubCompanies = pubCompanies;
+        this.pubCompany = pubCompany;
     }
 
     public void setPubYear(LocalDate pubYear) {
