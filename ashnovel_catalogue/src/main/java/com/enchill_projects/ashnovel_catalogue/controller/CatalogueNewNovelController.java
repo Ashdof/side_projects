@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 @RequestMapping("catalogue")
-public class CatalogueNewNovel {
+public class CatalogueNewNovelController {
 
     /**
      * New Novel:
