@@ -29,7 +29,7 @@ public class Novel {
     private String author;
 
     @Column(name = "novel_genres", nullable = false)
-    private List<String> genre;
+    private String genre;
 
     @Column(name = "novel_isbn", nullable = false)
     private String isbn;
@@ -62,7 +62,7 @@ public class Novel {
         this.id = new CatalogueIdServiceImp().generateKsuidNewId();
         this.title = DEFAULT_TEXT_VALUE;
         this.author = DEFAULT_TEXT_VALUE;
-        this.genre = new ArrayList<>(Collections.singleton(DEFAULT_TEXT_VALUE));
+        this.genre = DEFAULT_TEXT_VALUE;
         this.isbn = DEFAULT_TEXT_VALUE;
         this.pubYear = LocalDate.now();
         this.pubCompanies = DEFAULT_TEXT_VALUE;
@@ -78,7 +78,7 @@ public class Novel {
      * @param author the author of the Novel
      * @param genre the Novel's genre(s)
      */
-    public Novel(String id, String title, String author, List<String> genre) {
+    public Novel(String id, String title, String author, String genre) {
         this.id = id;
         this.title = title;
         this.author = author;
@@ -97,7 +97,7 @@ public class Novel {
         return title;
     }
 
-    public List<String> getGenre() {
+    public String getGenre() {
         return genre;
     }
 
@@ -153,7 +153,7 @@ public class Novel {
         this.title = title;
     }
 
-    public void setGenre(List<String> genre) {
+    public void setGenre(String genre) {
 
         if (genre == null || genre.isEmpty())
             throw new IllegalArgumentException("Genres of Novel cannot be empty.");
