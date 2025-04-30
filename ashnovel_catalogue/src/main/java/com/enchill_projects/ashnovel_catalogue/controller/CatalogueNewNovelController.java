@@ -5,6 +5,8 @@
  */
 package com.enchill_projects.ashnovel_catalogue.controller;
 
+import com.enchill_projects.ashnovel_catalogue.domain.Novel;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,7 +25,7 @@ public class CatalogueNewNovelController {
     @GetMapping("/new_novel")
     public String showNewNovelForm(Model model) {
 
-        model.addAttribute("user", "jaykay");
+        model.addAttribute("newNovel", new Novel());
 
         return "new_novel";
     }
