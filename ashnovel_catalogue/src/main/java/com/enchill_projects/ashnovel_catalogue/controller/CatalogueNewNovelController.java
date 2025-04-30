@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 @RequestMapping("catalogue")
@@ -37,7 +38,7 @@ public class CatalogueNewNovelController {
     @GetMapping("/new_novel")
     public String showNewNovelForm(Model model) {
 
-        model.addAttribute("newNovel", new Novel());
+        model.addAttribute("novel", new Novel());
 
         return "new_novel";
     }
@@ -53,12 +54,14 @@ public class CatalogueNewNovelController {
     @PostMapping("/new_novel")
     public String processNewNovelForm(
             @ModelAttribute("novel") Novel novel,
-            BindingResult bindingResult) {
+            BindingResult bindingResult,
+            RedirectAttributes redirectAttributes) {
 
         if (bindingResult.hasErrors())
             return "new_novel";
 
         catalogueNovelService.saveNovelRecord(novel);
+        redirectAttributes.addAttribute("success", "Novel record saved successfully");
 
         return "redirect:/catalogue/home";
     }
