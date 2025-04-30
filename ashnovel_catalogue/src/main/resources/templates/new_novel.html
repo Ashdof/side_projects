@@ -124,7 +124,7 @@
                     <!-- Cover image -->
                     <div class="mb-3">
                         <label for="novelCover" class="form-label">Cover image <span class="text-danger">*</span></label>
-                        <input class="form-control" type="file" id="novelCover" th:field="*{imagePath}" required>
+                        <input class="form-control" type="file" id="novelCover" th:field="*{imagePath}" accept="image/*" required>
                         <div class="invalid-feedback">Please provide a summary.</div>
                     </div>
                 </fieldset>
