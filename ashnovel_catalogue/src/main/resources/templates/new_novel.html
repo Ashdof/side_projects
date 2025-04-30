@@ -53,28 +53,28 @@
         <div class="novel-form-container bg-white p-4 shadow rounded-3">
             <h2 class="text-center mb-4"><i class="bi bi-book me-2"></i>Register New Novel</h2>
 
-            <form id="novelForm" class="needs-validation" novalidate>
+            <form method="post" th:action="@{/catalogue/new_novel}" th:object="${novel}" id="novelForm" class="needs-validation" novalidate>
                 <fieldset class="form-section">
                     <legend>Novel Information</legend>
 
                     <!-- Title -->
                     <div class="mb-3">
                         <label for="novelTitle" class="form-label">Title <span class="text-danger">*</span></label>
-                        <input type="text" class="form-control" id="novelTitle" required>
+                        <input type="text" class="form-control" id="novelTitle" th:field="*{title}" required>
                         <div class="invalid-feedback">Please provide a title.</div>
                     </div>
 
                     <!-- Author -->
                     <div class="mb-3">
                         <label for="novelAuthor" class="form-label">Author <span class="text-danger">*</span></label>
-                        <input type="text" class="form-control" id="novelAuthor" required>
+                        <input type="text" class="form-control" id="novelAuthor" th:field="*{author}" required>
                         <div class="invalid-feedback">Please provide the author's name.</div>
                     </div>
 
                     <!-- Genre -->
                     <div class="mb-3">
                         <label for="novelGenre" class="form-label">Genre <span class="text-danger">*</span></label>
-                        <select class="form-select" id="novelGenre" required>
+                        <select class="form-select" id="novelGenre" th:field="*{genre}" required>
                             <option value="" selected disabled>Select a genre</option>
                             <option value="Fiction">Fiction</option>
                             <option value="Mystery">Mystery</option>
@@ -92,7 +92,7 @@
                     <!-- ISBN -->
                     <div class="mb-3">
                         <label for="novelISBN" class="form-label">ISBN</label>
-                        <input type="text" class="form-control" id="novelISBN" pattern="^(?:\d{3}-)?\d{10}$" placeholder="e.g., 123-4567890123 or 1234567890">
+                        <input type="text" class="form-control" id="novelISBN" pattern="^(?:\d{3}-)?\d{10}$" placeholder="e.g., 123-4567890123 or 1234567890" th:field="*{isbn}" required>
                         <div class="invalid-feedback">Please enter a valid ISBN (10 digits with optional hyphens).</div>
                     </div>
 
@@ -100,7 +100,7 @@
                     <div class="mb-3">
                         <label for="novelPubDate" class="form-label">Publication Year <span class="text-danger">*</span></label>
                         <div class="input-group" id="datepicker">
-                            <input type="text" class="form-control" id="novelPubDate" data-td-target="#datepicker" required>
+                            <input type="text" class="form-control" id="novelPubDate" data-td-target="#datepicker" th:field="*{pubYear}" required>
                             <span class="input-group-text" data-td-target="#datepicker" data-td-toggle="datetimepicker">
                                 <i class="bi bi-calendar"></i>
                             </span>
@@ -111,20 +111,20 @@
                     <!-- Publishing Company -->
                     <div class="mb-3">
                         <label for="novelPublisher" class="form-label">Publishing Company</label>
-                        <input type="text" class="form-control" id="novelPublisher">
+                        <input type="text" class="form-control" id="novelPublisher" th:field="*{pubCompany}" required>
                     </div>
 
                     <!-- Summary -->
                     <div class="mb-3">
                         <label for="novelSummary" class="form-label">Summary <span class="text-danger">*</span></label>
-                        <textarea class="form-control" id="novelSummary" rows="5" required></textarea>
+                        <textarea class="form-control" id="novelSummary" rows="5" th:field="*{summary}" required></textarea>
                         <div class="invalid-feedback">Please provide a summary.</div>
                     </div>
 
                     <!-- Cover image -->
                     <div class="mb-3">
                         <label for="novelCover" class="form-label">Cover image <span class="text-danger">*</span></label>
-                        <input class="form-control" type="file" id="novelCover" required>
+                        <input class="form-control" type="file" id="novelCover" th:field="*{imagePath}" required>
                         <div class="invalid-feedback">Please provide a summary.</div>
                     </div>
                 </fieldset>
