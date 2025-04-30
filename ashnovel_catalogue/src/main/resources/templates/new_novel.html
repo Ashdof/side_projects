@@ -9,15 +9,38 @@
     <title>ASHNovel Catalogue | New Record</title>
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7" crossorigin="anonymous">
-</head>
-<body>
-<main>
-    <h1 class="visually-hidden">ASHNovel Catalogue - Add New Record</h1>
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <!-- Tempus Dominus Datepicker -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@eonasdan/tempus-dominus@6.7.7/dist/css/tempus-dominus.min.css">
 
-    <div class="container">
+    <style>
+        .novel-form-container {
+            min-width: 70%;
+        }
+        .form-section {
+            border: 1px solid rgba(0,0,0,.125);
+            border-radius: 0.375rem;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+        .form-section legend {
+            width: auto;
+            padding: 0 0.5rem;
+            font-size: 1.1rem;
+            font-weight: 500;
+        }
+        .btn-action {
+            min-width: 120px;
+        }
+    </style>
+</head>
+<body class="bg-light">
+<section class="container">
+    <div>
         <header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
             <a class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
-                <span class="fs-4">ASHNovel Catalogue - Add New Record</span>
+                <span class="fs-4">ASHNovel Catalogue</span>
             </a>
 
             <ul class="nav nav-pills">
@@ -26,14 +49,150 @@
             </ul>
         </header>
     </div>
+    <div class="container-fluid-md d-flex justify-content-center align-items-center min-vh-100">
+        <div class="novel-form-container bg-white p-4 shadow rounded-3">
+            <h2 class="text-center mb-4"><i class="bi bi-book me-2"></i>Register New Novel</h2>
 
-    <div class="b-example-divider"></div>
+            <form id="novelForm" class="needs-validation" novalidate>
+                <fieldset class="form-section">
+                    <legend>Novel Information</legend>
 
-    <h1>Hello, World!</h1>
-    <p>Username: <b th:text="${user}"></b></p>
-    <p>Message:  Welcome to the ASHNovel Catalogue page for adding new records.</p>
-</main>
+                    <!-- Title -->
+                    <div class="mb-3">
+                        <label for="novelTitle" class="form-label">Title <span class="text-danger">*</span></label>
+                        <input type="text" class="form-control" id="novelTitle" required>
+                        <div class="invalid-feedback">Please provide a title.</div>
+                    </div>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js" integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq" crossorigin="anonymous"></script>
+                    <!-- Author -->
+                    <div class="mb-3">
+                        <label for="novelAuthor" class="form-label">Author <span class="text-danger">*</span></label>
+                        <input type="text" class="form-control" id="novelAuthor" required>
+                        <div class="invalid-feedback">Please provide the author's name.</div>
+                    </div>
+
+                    <!-- Genre -->
+                    <div class="mb-3">
+                        <label for="novelGenre" class="form-label">Genre <span class="text-danger">*</span></label>
+                        <select class="form-select" id="novelGenre" required>
+                            <option value="" selected disabled>Select a genre</option>
+                            <option value="Fiction">Fiction</option>
+                            <option value="Mystery">Mystery</option>
+                            <option value="Science Fiction">Science Fiction</option>
+                            <option value="Fantasy">Fantasy</option>
+                            <option value="Romance">Romance</option>
+                            <option value="Thriller">Thriller</option>
+                            <option value="Historical">Historical</option>
+                            <option value="Horror">Horror</option>
+                            <option value="Other">Other</option>
+                        </select>
+                        <div class="invalid-feedback">Please select a genre.</div>
+                    </div>
+
+                    <!-- ISBN -->
+                    <div class="mb-3">
+                        <label for="novelISBN" class="form-label">ISBN</label>
+                        <input type="text" class="form-control" id="novelISBN" pattern="^(?:\d{3}-)?\d{10}$" placeholder="e.g., 123-4567890123 or 1234567890">
+                        <div class="invalid-feedback">Please enter a valid ISBN (10 digits with optional hyphens).</div>
+                    </div>
+
+                    <!-- Publication Year -->
+                    <div class="mb-3">
+                        <label for="novelPubDate" class="form-label">Publication Year <span class="text-danger">*</span></label>
+                        <div class="input-group" id="datepicker">
+                            <input type="text" class="form-control" id="novelPubDate" data-td-target="#datepicker" required>
+                            <span class="input-group-text" data-td-target="#datepicker" data-td-toggle="datetimepicker">
+                                <i class="bi bi-calendar"></i>
+                            </span>
+                        </div>
+                        <div class="invalid-feedback">Please select a publication year.</div>
+                    </div>
+
+                    <!-- Publishing Company -->
+                    <div class="mb-3">
+                        <label for="novelPublisher" class="form-label">Publishing Company</label>
+                        <input type="text" class="form-control" id="novelPublisher">
+                    </div>
+
+                    <!-- Summary -->
+                    <div class="mb-3">
+                        <label for="novelSummary" class="form-label">Summary <span class="text-danger">*</span></label>
+                        <textarea class="form-control" id="novelSummary" rows="5" required></textarea>
+                        <div class="invalid-feedback">Please provide a summary.</div>
+                    </div>
+
+                    <!-- Cover image -->
+                    <div class="mb-3">
+                        <label for="novelCover" class="form-label">Cover image <span class="text-danger">*</span></label>
+                        <input class="form-control" type="file" id="novelCover" required>
+                        <div class="invalid-feedback">Please provide a summary.</div>
+                    </div>
+                </fieldset>
+
+                <!-- Buttons -->
+                <div class="d-flex justify-content-between mt-4">
+                    <button type="button" class="btn btn-outline-secondary btn-action" id="cancelBtn">
+                        <i class="bi bi-x-circle me-1"></i> Cancel
+                    </button>
+                    <button type="submit" class="btn btn-primary btn-action">
+                        <i class="bi bi-save me-1"></i> Save
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
+
+<!-- JavaScript Libraries -->
+<!-- Popper.js (required for Bootstrap) -->
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"></script>
+<!-- Bootstrap 5 JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"></script>
+<!-- Tempus Dominus Datepicker -->
+<script src="https://cdn.jsdelivr.net/npm/@eonasdan/tempus-dominus@6.7.7/dist/js/tempus-dominus.min.js"></script>
+
+<script>
+    // Initialize datepicker (year only)
+    document.addEventListener('DOMContentLoaded', function() {
+        const datepicker = new tempusDominus.TempusDominus(document.getElementById('datepicker'), {
+            display: {
+                components: {
+                    decades: true,
+                    year: true,
+                    month: false,
+                    day: false,
+                    hour: false,
+                    minute: false,
+                    second: false
+                },
+                viewMode: 'years'
+            },
+            localization: {
+                format: 'yyyy'
+            }
+        });
+
+        // Form validation
+        const form = document.getElementById('novelForm');
+        const cancelBtn = document.getElementById('cancelBtn');
+
+        form.addEventListener('submit', function(event) {
+            if (!form.checkValidity()) {
+                event.preventDefault();
+                event.stopPropagation();
+            }
+
+            form.classList.add('was-validated');
+        }, false);
+
+        cancelBtn.addEventListener('click', function() {
+            if(confirm('Are you sure you want to cancel? All changes will be lost.')) {
+                form.reset();
+                form.classList.remove('was-validated');
+            }
+        });
+    });
+</script>
+
 </body>
 </html>
