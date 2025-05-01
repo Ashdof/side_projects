@@ -41,7 +41,7 @@ public class CatalogueNewNovelController {
     @GetMapping("/new_novel")
     public String showNewNovelForm(Model model) {
 
-        model.addAttribute("novel", new CatalogueNovel());
+        model.addAttribute("catalogueNovel", new CatalogueNovel());
 
         return "new_novel";
     }
