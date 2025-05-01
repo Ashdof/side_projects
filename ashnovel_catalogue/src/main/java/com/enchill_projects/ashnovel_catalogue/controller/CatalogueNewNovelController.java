@@ -6,16 +6,17 @@
 package com.enchill_projects.ashnovel_catalogue.controller;
 
 import com.enchill_projects.ashnovel_catalogue.domain.CatalogueNovel;
+import com.enchill_projects.ashnovel_catalogue.service.CatalogueFileStorageService;
 import com.enchill_projects.ashnovel_catalogue.service.CatalogueNovelService;
 
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
@@ -23,10 +24,12 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 public class CatalogueNewNovelController {
 
     private final CatalogueNovelService catalogueNovelService;
+    private final CatalogueFileStorageService fileStorageService;
 
     @Autowired
-    public CatalogueNewNovelController(CatalogueNovelService catalogueNovelService) {
+    public CatalogueNewNovelController(CatalogueNovelService catalogueNovelService, CatalogueFileStorageService fileStorageService) {
         this.catalogueNovelService = catalogueNovelService;
+        this.fileStorageService = fileStorageService;
     }
 
     /**
@@ -53,15 +56,29 @@ public class CatalogueNewNovelController {
      */
     @PostMapping("/new_novel")
     public String processNewNovelForm(
-            @ModelAttribute("catalogueNovel") CatalogueNovel catalogueNovel,
+            @Valid @ModelAttribute("catalogueNovel") CatalogueNovel catalogueNovel,
             BindingResult bindingResult,
+            @RequestParam("coverImage") MultipartFile coverImage,
             RedirectAttributes redirectAttributes) {
 
         if (bindingResult.hasErrors())
             return "new_novel";
 
-        catalogueNovelService.saveNovelRecord(catalogueNovel);
-        redirectAttributes.addAttribute("success", "CatalogueNovel record saved successfully");
+        // Handle file upload
+        try {
+
+            if (!coverImage.isEmpty()) {
+                String fileName = fileStorageService.storeFile(coverImage);
+                catalogueNovel.setImagePath(fileName);
+            }
+
+            catalogueNovelService.saveNovelRecord(catalogueNovel);
+            redirectAttributes.addAttribute("success", "CatalogueNovel record saved successfully");
+        } catch (RuntimeException exception) {
+            redirectAttributes.addAttribute("error", exception.getMessage());
+
+            return "redirect:/catalogue/new_novel";
+        }
 
         return "redirect:/catalogue/home";
     }
