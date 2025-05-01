@@ -14,6 +14,7 @@ import org.springframework.http.converter.StringHttpMessageConverter;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import org.springframework.web.multipart.support.StandardServletMultipartResolver;
 
 import org.thymeleaf.spring6.SpringTemplateEngine;
 import org.thymeleaf.spring6.templateresolver.SpringResourceTemplateResolver;
@@ -109,5 +110,14 @@ public class CatalogueMvcViewResolverContextConfig implements WebMvcConfigurer {
 
         // Add only what you need (e.g., for Thymeleaf)
         converters.add(new StringHttpMessageConverter());
+    }
+
+    /**
+     * Handler for multipart requests (image files etc.)
+     * @return a resolver object for multipart requests
+     */
+    @Bean
+    public StandardServletMultipartResolver multipartResolver() {
+        return new StandardServletMultipartResolver();
     }
 }
