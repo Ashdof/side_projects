@@ -5,7 +5,6 @@
  */
 package com.enchill_projects.ashnovel_catalogue.domain;
 
-import com.enchill_projects.ashnovel_catalogue.service.impl.CatalogueIdServiceImp;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
@@ -16,8 +15,9 @@ import java.time.LocalDateTime;
 public class Novel {
 
     @Id
-    @Column(name = "novel_id", nullable = false, unique = true, updatable = false)
-    private String id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "novel_id")
+    private Long id;
 
     @Column(name = "novel_title", nullable = false)
     private String title;
@@ -56,7 +56,6 @@ public class Novel {
      * create a new Novel object with default values
      */
     public Novel() {
-        this.id = new CatalogueIdServiceImp().generateKsuidNewId();
         this.title = DEFAULT_TEXT_VALUE;
         this.author = DEFAULT_TEXT_VALUE;
         this.genre = DEFAULT_TEXT_VALUE;
@@ -75,14 +74,14 @@ public class Novel {
      * @param author the author of the Novel
      * @param genre the Novel's genre(s)
      */
-    public Novel(String id, String title, String author, String genre) {
+    public Novel(Long id, String title, String author, String genre) {
         this.id = id;
         this.title = title;
         this.author = author;
         this.genre = genre;
     }
 
-    public String getId() {
+    public Long getId() {
         return id;
     }
 
@@ -126,9 +125,9 @@ public class Novel {
         return createdAt;
     }
 
-    public void setId(String id) {
+    public void setId(Long id) {
 
-        if (id == null || id.isEmpty())
+        if (id == null || String.valueOf(id).isEmpty())
             throw new IllegalArgumentException("Id cannot be empty.");
 
         this.id = id;
