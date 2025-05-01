@@ -5,8 +5,10 @@
  */
 package com.enchill_projects.ashnovel_catalogue.service;
 
+import org.springframework.core.io.Resource;
 import org.springframework.web.multipart.MultipartFile;
 
 public interface CatalogueFileStorageService {
-    String store(MultipartFile file);
+    String storeFile(MultipartFile file);
+    Resource loadFileAsResource(String filename);
 }
