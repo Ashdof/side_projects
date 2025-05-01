@@ -1,12 +1,12 @@
 /**
- * Implementation of Novel Data Access Object
+ * Implementation of CatalogueNovel Data Access Object
  *
  * @author Emmanuel Enchill
  */
 package com.enchill_projects.ashnovel_catalogue.dao.daoImpl;
 
 import com.enchill_projects.ashnovel_catalogue.dao.CatalogueNovelDao;
-import com.enchill_projects.ashnovel_catalogue.domain.Novel;
+import com.enchill_projects.ashnovel_catalogue.domain.CatalogueNovel;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,12 +23,12 @@ public class CatalogueNovelDaoImpl implements CatalogueNovelDao {
     }
 
     /**
-     * Add New Novel:
-     * persists a new novel object to the database
-     * @param novel the Novel object
+     * Add New CatalogueNovel:
+     * persists a new catalogueNovel object to the database
+     * @param catalogueNovel the CatalogueNovel object
      */
-    public void save(Novel novel) {
+    public void save(CatalogueNovel catalogueNovel) {
         Session session = sessionFactory.getCurrentSession();
-        session.persist(novel);
+        session.persist(catalogueNovel);
     }
 }

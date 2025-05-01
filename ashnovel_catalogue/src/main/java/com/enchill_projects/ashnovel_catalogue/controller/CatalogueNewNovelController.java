@@ -5,7 +5,7 @@
  */
 package com.enchill_projects.ashnovel_catalogue.controller;
 
-import com.enchill_projects.ashnovel_catalogue.domain.Novel;
+import com.enchill_projects.ashnovel_catalogue.domain.CatalogueNovel;
 import com.enchill_projects.ashnovel_catalogue.service.CatalogueNovelService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,7 +30,7 @@ public class CatalogueNewNovelController {
     }
 
     /**
-     * New Novel:
+     * New CatalogueNovel:
      * display the form to add new novel record
      * @param model the model object
      * @return the template name of the form
@@ -38,7 +38,7 @@ public class CatalogueNewNovelController {
     @GetMapping("/new_novel")
     public String showNewNovelForm(Model model) {
 
-        model.addAttribute("novel", new Novel());
+        model.addAttribute("novel", new CatalogueNovel());
 
         return "new_novel";
     }
@@ -46,22 +46,22 @@ public class CatalogueNewNovelController {
     /**
      * Process Form:
      * process the form values and commit to the database
-     * @param novel the new Novel object
+     * @param catalogueNovel the new CatalogueNovel object
      * @param bindingResult the binding object
      * @return to the home page if successful, otherwise remain on
      * the form if there are errors
      */
     @PostMapping("/new_novel")
     public String processNewNovelForm(
-            @ModelAttribute("novel") Novel novel,
+            @ModelAttribute("catalogueNovel") CatalogueNovel catalogueNovel,
             BindingResult bindingResult,
             RedirectAttributes redirectAttributes) {
 
         if (bindingResult.hasErrors())
             return "new_novel";
 
-        catalogueNovelService.saveNovelRecord(novel);
-        redirectAttributes.addAttribute("success", "Novel record saved successfully");
+        catalogueNovelService.saveNovelRecord(catalogueNovel);
+        redirectAttributes.addAttribute("success", "CatalogueNovel record saved successfully");
 
         return "redirect:/catalogue/home";
     }

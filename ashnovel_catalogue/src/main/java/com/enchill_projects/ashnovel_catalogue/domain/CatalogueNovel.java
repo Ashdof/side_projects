@@ -1,5 +1,5 @@
 /**
- * A class to mode a Novel
+ * A class to mode a CatalogueNovel
  *
  * @author Emmanuel Enchill
  */
@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "novels")
-public class Novel {
+public class CatalogueNovel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -53,9 +53,9 @@ public class Novel {
 
     /**
      * Default constructor:
-     * create a new Novel object with default values
+     * create a new CatalogueNovel object with default values
      */
-    public Novel() {
+    public CatalogueNovel() {
         this.title = DEFAULT_TEXT_VALUE;
         this.author = DEFAULT_TEXT_VALUE;
         this.genre = DEFAULT_TEXT_VALUE;
@@ -67,14 +67,14 @@ public class Novel {
     }
 
     /**
-     * New Novel:
-     * create a new Novel object with basic data
-     * @param id the id  of the Novel
-     * @param title the title of the Novel
-     * @param author the author of the Novel
-     * @param genre the Novel's genre(s)
+     * New CatalogueNovel:
+     * create a new CatalogueNovel object with basic data
+     * @param id the id  of the CatalogueNovel
+     * @param title the title of the CatalogueNovel
+     * @param author the author of the CatalogueNovel
+     * @param genre the CatalogueNovel's genre(s)
      */
-    public Novel(Long id, String title, String author, String genre) {
+    public CatalogueNovel(Long id, String title, String author, String genre) {
         this.id = id;
         this.title = title;
         this.author = author;
@@ -144,7 +144,7 @@ public class Novel {
     public void setTitle(String title) {
 
         if (title == null || title.isEmpty())
-            throw new IllegalArgumentException("Title of Novel cannot be empty.");
+            throw new IllegalArgumentException("Title of CatalogueNovel cannot be empty.");
 
         this.title = title;
     }
@@ -152,7 +152,7 @@ public class Novel {
     public void setGenre(String genre) {
 
         if (genre == null || genre.isEmpty())
-            throw new IllegalArgumentException("Genres of Novel cannot be empty.");
+            throw new IllegalArgumentException("Genres of CatalogueNovel cannot be empty.");
 
         this.genre = genre;
     }
@@ -160,7 +160,7 @@ public class Novel {
     public void setIsbn(String isbn) {
 
         if (isbn == null || isbn.isEmpty())
-            throw new IllegalArgumentException("ISBN of Novel cannot be empty.");
+            throw new IllegalArgumentException("ISBN of CatalogueNovel cannot be empty.");
 
         this.isbn = isbn;
     }
@@ -184,7 +184,7 @@ public class Novel {
     public void setSummary(String summary) {
 
         if (summary == null || summary.isEmpty())
-            throw new IllegalArgumentException("Summary of Novel cannot be empty.");
+            throw new IllegalArgumentException("Summary of CatalogueNovel cannot be empty.");
 
         this.summary = summary;
     }
