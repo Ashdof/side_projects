@@ -80,6 +80,6 @@ public class CatalogueNewNovelController {
             return "redirect:/catalogue/new_novel";
         }
 
-        return "redirect:/catalogue/home";
+        return "redirect:/catalogue/new_novel";
     }
 }
