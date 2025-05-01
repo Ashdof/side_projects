@@ -58,6 +58,11 @@
                 <span th:text="${error}"></span>
             </div>
 
+            <!-- Success Messages -->
+            <div th:if="${success}" class="alert alert-success" role="alert">
+                <span th:text="${success}"></span>
+            </div>
+
             <form method="post" th:action="@{/catalogue/new_novel}" th:object="${catalogueNovel}" enctype="multipart/form-data" id="novelForm" class="needs-validation" novalidate>
                 <fieldset class="form-section">
                     <legend>Novel Information</legend>
