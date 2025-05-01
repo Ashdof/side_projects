@@ -70,9 +70,10 @@ public class CatalogueRootApplicationContextConfig {
         // Setup Hibernate properties
         Properties hibernateProperties = new Properties();
         hibernateProperties.setProperty("hibernate.dialect", "org.hibernate.dialect.PostgreSQLDialect");
-        hibernateProperties.setProperty("hibernate.hbm2ddl.auto", "validate");
+        hibernateProperties.setProperty("hibernate.hbm2ddl.auto", "create");
         hibernateProperties.setProperty("hibernate.show_sql", "true"); // Prints executed SQL commands in terminal
         hibernateProperties.setProperty("hibernate.format_sql", "true");
+        hibernateProperties.setProperty("hibernate.use_sql_comments", "true");
 
         sessionFactoryBean.setHibernateProperties(hibernateProperties);
         return sessionFactoryBean;
