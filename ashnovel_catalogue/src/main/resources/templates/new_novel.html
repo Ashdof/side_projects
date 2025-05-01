@@ -53,7 +53,12 @@
         <div class="novel-form-container bg-white p-4 shadow rounded-3">
             <h2 class="text-center mb-4"><i class="bi bi-book me-2"></i>Register New Novel</h2>
 
-            <form method="post" th:action="@{/catalogue/new_novel}" th:object="${novel}" id="novelForm" class="needs-validation" novalidate>
+            <!-- Error Messages -->
+            <div th:if="${error}" class="alert alert-danger" role="alert">
+                <span th:text="${error}"></span>
+            </div>
+
+            <form method="post" th:action="@{/catalogue/new_novel}" th:object="${catalogueNovel}" enctype="multipart/form-data" id="novelForm" class="needs-validation" novalidate>
                 <fieldset class="form-section">
                     <legend>Novel Information</legend>
 
@@ -124,18 +129,18 @@
                     <!-- Cover image -->
                     <div class="mb-3">
                         <label for="novelCover" class="form-label">Cover image <span class="text-danger">*</span></label>
-                        <input class="form-control" type="file" id="novelCover" th:field="*{imagePath}" accept="image/*" required>
-                        <div class="invalid-feedback">Please provide a summary.</div>
+                        <input class="form-control" type="file" id="novelCover" th:field="*{imagePath}" accept="image/jpeg, image/jpg, image/png,image/gif" required>
+                        <div class="form-text">Max size: 5MB (JPEG, PNG, GIF)</div>
                     </div>
                 </fieldset>
 
                 <!-- Buttons -->
                 <div class="d-flex justify-content-between mt-4">
-                    <button type="button" class="btn btn-outline-secondary btn-action" id="cancelBtn">
-                        <i class="bi bi-x-circle me-1"></i> Cancel
+                    <button type="button" class="btn btn-danger btn-action" id="cancelBtn">
+                        <a class="bi bi-x-circle me-1">Cancel</a>
                     </button>
                     <button type="submit" class="btn btn-primary btn-action">
-                        <i class="bi bi-save me-1"></i> Save
+                        <a th:href="@{/catalogue/home}" class="bi bi-save me-1">Save</a>
                     </button>
                 </div>
             </form>
