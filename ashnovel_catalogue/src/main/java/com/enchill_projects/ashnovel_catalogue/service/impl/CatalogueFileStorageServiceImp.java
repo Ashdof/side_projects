@@ -22,15 +22,15 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
-import java.util.Arrays;
-import java.util.Objects;
-import java.util.UUID;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 public class CatalogueFileStorageServiceImp implements CatalogueFileStorageService {
 
     private final Path fileStorageLocation;
-    private final String[] allowedContentTypes;
+    private final Set<String> allowedContentTypes;
+    private final Set<String> allowedExtensions;
 
     /**
      * Initialize Storage:
@@ -43,8 +43,19 @@ public class CatalogueFileStorageServiceImp implements CatalogueFileStorageServi
             @Value("${file.upload-dir}") String uploadDir,
             @Value("${file.allowed-types}") String allowedTypes) {
 
+        System.out.println("\nRaw allowed types from properties: " + allowedTypes);
+        System.out.println("Processed allowed types: " + Arrays.toString(allowedTypes.split(",")) + "\n");
+
         this.fileStorageLocation = Paths.get(uploadDir).toAbsolutePath().normalize();
-        this.allowedContentTypes = allowedTypes.split(",");
+
+        // Process allowed types
+        this.allowedContentTypes = Arrays.stream(allowedTypes.split(","))
+                .map(String::trim)
+                .map(String::toLowerCase)
+                .collect(Collectors.toSet());
+
+        // Check corresponding file extensions
+        this.allowedExtensions = Set.of("jpg", "jpeg", "png", "gif");
 
         try {
             Files.createDirectories(this.fileStorageLocation);
@@ -67,13 +78,34 @@ public class CatalogueFileStorageServiceImp implements CatalogueFileStorageServi
             throw new RuntimeException("Error saving file: empty");
 
         // Check the content type of the file
-        if (!Arrays.asList(allowedContentTypes).contains(file.getContentType()))
-            throw new RuntimeException("Invalid file type");
+        String contentType = Optional.ofNullable(file.getContentType())
+                .orElse("")
+                .trim()
+                .toLowerCase();
 
-        // Generate unique file name
+        // Get the file extension
         String originalFileName = StringUtils.cleanPath(Objects.requireNonNull(file.getOriginalFilename()));
-        String fileExtension = originalFileName.substring(originalFileName.lastIndexOf("."));
-        String newFileName = UUID.randomUUID() + fileExtension;
+        String fileExtension = originalFileName.substring(originalFileName.lastIndexOf(".") + 1).toLowerCase();
+
+        // Validate file content type
+        if (!allowedContentTypes.contains(contentType)) {
+            System.out.println("Content type received: " + contentType);
+            System.out.println("Content type allowed: " + allowedContentTypes);
+
+            throw new RuntimeException("Invalid content type");
+        }
+
+        // Validate file extension
+        if (!allowedExtensions.contains(fileExtension)) {
+            throw new RuntimeException(
+                    String.format("Invalid file extension '%s'. Allowed extensions: [%s]%n",
+                            fileExtension,
+                            String.join(", ", Arrays.toString(allowedExtensions.toArray())))
+            );
+        }
+
+        // Generate unique filename
+        String newFileName = UUID.randomUUID() + "." + fileExtension;
 
         try {
 
