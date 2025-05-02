@@ -17,6 +17,7 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -58,7 +59,8 @@ public class CatalogueFileStorageServiceImp implements CatalogueFileStorageServi
         this.allowedExtensions = Set.of("jpg", "jpeg", "png", "gif");
 
         try {
-            Files.createDirectories(this.fileStorageLocation);
+            if (!Files.exists(fileStorageLocation.getParent()))
+                Files.createDirectories(this.fileStorageLocation);
         } catch (Exception exception) {
             throw new RuntimeException("Error creating storage directories - " + exception.getMessage());
         }
@@ -108,14 +110,31 @@ public class CatalogueFileStorageServiceImp implements CatalogueFileStorageServi
         String newFileName = UUID.randomUUID() + "." + fileExtension;
 
         try {
+            Path targetLocation = this.fileStorageLocation.resolve(newFileName);
+
+            if (!Files.exists(targetLocation.getParent()))
+                Files.createDirectories(targetLocation.getParent());
+
+            // Debug output
+            System.out.println("Attempting to save file to: " + targetLocation);
+            System.out.println("Parent directory exists: " + Files.exists(targetLocation.getParent()));
+            System.out.println("Is writable: " + Files.isWritable(targetLocation.getParent()));
 
             // Copy file to target directory
-            Path targetLocation = this.fileStorageLocation.resolve(newFileName);
-            Files.copy(file.getInputStream(), targetLocation, StandardCopyOption.REPLACE_EXISTING);
+            try(InputStream inputStream = file.getInputStream()) {
+                Files.copy(inputStream, targetLocation, StandardCopyOption.REPLACE_EXISTING);
+            }
 
             return newFileName;
         } catch (IOException exception) {
-            throw new RuntimeException("Failed to upload file - " + exception.getMessage());
+            String errorDetails = String.format(
+                    "Failed to upload file [%s] to [%s]. Reason: %s%n",
+                    file.getOriginalFilename(),
+                    this.fileStorageLocation.resolve(newFileName),
+                    exception.getMessage()
+            );
+            System.err.println(errorDetails);
+            throw new RuntimeException("Failed to upload file - " + errorDetails);
         }
     }
 
