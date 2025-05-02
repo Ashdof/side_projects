@@ -13,6 +13,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service
 public class CatalogueNovelServiceImpl implements CatalogueNovelService {
 
@@ -32,5 +34,16 @@ public class CatalogueNovelServiceImpl implements CatalogueNovelService {
     @Transactional
     public void saveNovelRecord(CatalogueNovel catalogueNovel) {
         this.catalogueNovelDao.save(catalogueNovel);
+    }
+
+    /**
+     * All Novel Records:
+     * fet all Novel objects from the database
+     * @return a list of all Novel objects
+     */
+    @Override
+    @Transactional
+    public List<CatalogueNovel> getAllNovelRecords() {
+        return this.catalogueNovelDao.fetchAllNovels();
     }
 }
