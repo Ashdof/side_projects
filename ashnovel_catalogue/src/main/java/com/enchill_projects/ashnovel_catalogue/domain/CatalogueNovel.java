@@ -40,7 +40,7 @@ public class CatalogueNovel {
     @Column(name = "publication_companies", nullable = false)
     private String pubCompany;
 
-    @Column(name = "image_path", nullable = false)
+    @Column(name = "image_path")
     private String imagePath;
 
     @Column(name = "created_at", nullable = false)
