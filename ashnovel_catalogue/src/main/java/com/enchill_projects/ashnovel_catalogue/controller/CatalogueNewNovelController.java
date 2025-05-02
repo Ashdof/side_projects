@@ -72,13 +72,6 @@ public class CatalogueNewNovelController {
                 catalogueNovel.setImagePath(fileName);
             }
 
-            int summaryLength = catalogueNovel.getSummary().length();
-            if (summaryLength > 250)
-                redirectAttributes.addFlashAttribute(
-                        "error",
-                        "Summary must be 250 characters long"
-                );
-
             catalogueNovelService.saveNovelRecord(catalogueNovel);
             redirectAttributes.addFlashAttribute("success", "CatalogueNovel record saved successfully");
         } catch (RuntimeException exception) {
