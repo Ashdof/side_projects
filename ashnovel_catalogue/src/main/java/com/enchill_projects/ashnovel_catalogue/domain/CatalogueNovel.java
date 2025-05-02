@@ -34,6 +34,7 @@ public class CatalogueNovel {
     @Column(name = "date_published", nullable = false)
     private LocalDate pubYear;
 
+    @Lob // Treat this as a large object
     @Column(name = "novel_summary", nullable = false)
     private String summary;
 
