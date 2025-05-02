@@ -58,7 +58,7 @@ public class CatalogueNewNovelController {
     public String processNewNovelForm(
             @Valid @ModelAttribute("catalogueNovel") CatalogueNovel catalogueNovel,
             BindingResult bindingResult,
-            @RequestParam("coverImage") MultipartFile coverImage,
+            @RequestParam(value = "coverImage", required = false) MultipartFile coverImage,
             RedirectAttributes redirectAttributes) {
 
         if (bindingResult.hasErrors())
@@ -72,14 +72,21 @@ public class CatalogueNewNovelController {
                 catalogueNovel.setImagePath(fileName);
             }
 
+            int summaryLength = catalogueNovel.getSummary().length();
+            if (summaryLength > 250)
+                redirectAttributes.addFlashAttribute(
+                        "error",
+                        "Summary must be 250 characters long"
+                );
+
             catalogueNovelService.saveNovelRecord(catalogueNovel);
-            redirectAttributes.addAttribute("success", "CatalogueNovel record saved successfully");
+            redirectAttributes.addFlashAttribute("success", "CatalogueNovel record saved successfully");
         } catch (RuntimeException exception) {
-            redirectAttributes.addAttribute("error", exception.getMessage());
+            redirectAttributes.addFlashAttribute("error", exception.getMessage());
 
             return "redirect:/catalogue/new_novel";
         }
 
-        return "redirect:/catalogue/new_novel";
+        return "redirect:/catalogue/home";
     }
 }
