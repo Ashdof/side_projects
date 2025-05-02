@@ -11,6 +11,7 @@ import org.hibernate.SessionFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.support.PropertiesLoaderUtils;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
@@ -24,6 +25,7 @@ import java.util.Properties;
 
 @Configuration
 @EnableTransactionManagement
+@PropertySource("classpath:application.properties")
 @ComponentScan("com.enchill_projects.ashnovel_catalogue")
 public class CatalogueRootApplicationContextConfig {
 
