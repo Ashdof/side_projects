@@ -56,8 +56,17 @@
 
                 <!-- Success Messages -->
                 <div th:if="${success}" class="alert alert-success" role="alert">
-                    <span th:text="${success}"></span>
+                    <span th:text="${success}" id="flashMessage"></span>
                 </div>
+
+                <script>
+                    setTimeout(function () {
+                        let flashMessage = document.getElementById("flashMessage");
+                        if (flashMessage) {
+                            flashMessage.style.display = "none";
+                        }
+                    }, 3000);
+                </script>
 
                 <div class="row">
                     <div th:each="novel, iter : ${novels}" class="col-md-3 col-sm-6 novel-card">
