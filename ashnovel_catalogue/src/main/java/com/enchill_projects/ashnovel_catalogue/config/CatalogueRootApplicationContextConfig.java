@@ -11,6 +11,7 @@ import org.hibernate.SessionFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.support.PropertiesLoaderUtils;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
@@ -24,6 +25,7 @@ import java.util.Properties;
 
 @Configuration
 @EnableTransactionManagement
+@PropertySource("classpath:application.properties")
 @ComponentScan("com.enchill_projects.ashnovel_catalogue")
 public class CatalogueRootApplicationContextConfig {
 
@@ -68,15 +70,27 @@ public class CatalogueRootApplicationContextConfig {
         );
 
         // Setup Hibernate properties
+        Properties hibernateProperties = getHibernateProperties();
+        sessionFactoryBean.setHibernateProperties(hibernateProperties);
+
+        return sessionFactoryBean;
+    }
+
+    /**
+     * Hibernate Properties:
+     * set up configurations for Hibernate
+     * @return properties object of type Hibernate
+     */
+    private static Properties getHibernateProperties() {
         Properties hibernateProperties = new Properties();
+
         hibernateProperties.setProperty("hibernate.dialect", "org.hibernate.dialect.PostgreSQLDialect");
-        hibernateProperties.setProperty("hibernate.hbm2ddl.auto", "create");
+        hibernateProperties.setProperty("hibernate.hbm2ddl.auto", "validate");
         hibernateProperties.setProperty("hibernate.show_sql", "true"); // Prints executed SQL commands in terminal
         hibernateProperties.setProperty("hibernate.format_sql", "true");
         hibernateProperties.setProperty("hibernate.use_sql_comments", "true");
 
-        sessionFactoryBean.setHibernateProperties(hibernateProperties);
-        return sessionFactoryBean;
+        return hibernateProperties;
     }
 
     /**

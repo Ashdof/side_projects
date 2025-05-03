@@ -9,12 +9,37 @@
         <title>ASHNovel Catalogue | Home</title>
 
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7" crossorigin="anonymous">
-    </head>
-    <body>
-        <main>
-            <h1 class="visually-hidden">ASHNovel Catalogue</h1>
 
-            <div class="container">
+        <style>
+            .gallery-container {
+                padding: 2rem 0;
+            }
+            .novel-card {
+                margin-bottom: 2rem;
+                transition: transform 0.3s ease;
+            }
+            .novel-card:hover {
+                transform: scale(1.03);
+                transition: transform 0.2s ease;
+            }
+            .cover-image {
+                height: 300px;
+                width: 100%;
+                object-fit: cover;
+                border-radius: 4px;
+                box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            }
+            .novel-title {
+                margin-top: 0.5rem;
+                font-size: 1.1rem;
+                font-weight: 500;
+                text-align: center;
+            }
+        </style>
+    </head>
+    <body class="bg-light">
+        <section class="container">
+            <div>
                 <header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
                     <a class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
                         <span class="fs-4">ASHNovel Catalogue</span>
@@ -26,15 +51,42 @@
                     </ul>
                 </header>
             </div>
+            <div class="container gallery-container">
+                <h1 class="text-center mb-4">Collection of Novels</h1>
 
-            <div class="b-example-divider"></div>
+                <!-- Success Messages -->
+                <div th:if="${success}" class="alert alert-success" role="alert">
+                    <span th:text="${success}" id="flashMessage"></span>
+                </div>
 
-            <h1>Hello, World!</h1>
-            <p>ID: <b th:text="${id}"></b></p>
-            <p>Username: <b th:text="${user}"></b></p>
-            <p>Message:  Welcome to the ASHNovel Catalogue home page.</p>
-        </main>
+                <script>
+                    setTimeout(function () {
+                        let flashMessage = document.getElementById("flashMessage");
+                        if (flashMessage) {
+                            flashMessage.style.display = "none";
+                        }
+                    }, 3000);
+                </script>
 
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js" integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq" crossorigin="anonymous"></script>
+                <div class="row">
+                    <div th:each="novel, iter : ${novels}" class="col-md-3 col-sm-6 novel-card">
+                        <a href="#" class="text-decoration-none text-dark">
+                            <div class="card h-100">
+                                <img loading="lazy" th:if="${novel.imagePath}"
+                                     th:src="@{/uploads/cover-images/{filename}(filename=${novel.imagePath})}"
+                                     class="card-img-top cover-image"
+                                     alt="Cover image">
+                                <div th:unless="${novel.imagePath}" class="card-img-top cover-image bg-light d-flex align-items-center justify-content-center">
+                                    <i class="bi bi-book fs-1 text-muted"></i>
+                                </div>
+                                <div class="card-body">
+                                    <h5 class="novel-title" th:text="${novel.title}"></h5>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
     </body>
 </html>

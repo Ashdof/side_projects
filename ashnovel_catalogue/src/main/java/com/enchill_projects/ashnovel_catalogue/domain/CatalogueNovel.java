@@ -34,13 +34,14 @@ public class CatalogueNovel {
     @Column(name = "date_published", nullable = false)
     private LocalDate pubYear;
 
+    @Lob // Treat this as a large object
     @Column(name = "novel_summary", nullable = false)
     private String summary;
 
     @Column(name = "publication_companies", nullable = false)
     private String pubCompany;
 
-    @Column(name = "image_path", nullable = false)
+    @Column(name = "image_path")
     private String imagePath;
 
     @Column(name = "created_at", nullable = false)

@@ -9,8 +9,12 @@ import com.enchill_projects.ashnovel_catalogue.dao.CatalogueNovelDao;
 import com.enchill_projects.ashnovel_catalogue.domain.CatalogueNovel;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Repository
 public class CatalogueNovelDaoImpl implements CatalogueNovelDao {
@@ -30,5 +34,31 @@ public class CatalogueNovelDaoImpl implements CatalogueNovelDao {
     public void save(CatalogueNovel catalogueNovel) {
         Session session = sessionFactory.getCurrentSession();
         session.persist(catalogueNovel);
+    }
+
+    /**
+     * All Novels:
+     * get all Novel objects from the database
+     * @return a list of all Novel objects
+     */
+    public List<CatalogueNovel> fetchAllNovels() {
+        Session session = sessionFactory.openSession();
+        Transaction transaction = null;
+        List<CatalogueNovel> catalogueNovels = new ArrayList<>();
+
+        try {
+            transaction = session.beginTransaction();
+            catalogueNovels = session.createQuery("FROM CatalogueNovel", CatalogueNovel.class).list();
+            transaction.commit();
+        } catch (Exception exception) {
+            if (transaction != null)
+                transaction.rollback();
+
+            throw new RuntimeException(exception);
+        }finally {
+            session.close();
+        }
+
+        return catalogueNovels;
     }
 }

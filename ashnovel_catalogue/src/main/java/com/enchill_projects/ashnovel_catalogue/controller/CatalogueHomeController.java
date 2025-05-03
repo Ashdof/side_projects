@@ -6,22 +6,25 @@
 
 package com.enchill_projects.ashnovel_catalogue.controller;
 
-import com.enchill_projects.ashnovel_catalogue.service.CatalogueIdService;
+import com.enchill_projects.ashnovel_catalogue.domain.CatalogueNovel;
+import com.enchill_projects.ashnovel_catalogue.service.CatalogueNovelService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.util.List;
+
 @Controller
 @RequestMapping("catalogue")
 public class CatalogueHomeController {
 
-    private final CatalogueIdService catalogueIdService;
+    private final CatalogueNovelService catalogueNovelService;
 
     @Autowired
-    public CatalogueHomeController(CatalogueIdService catalogueIdService) {
-        this.catalogueIdService = catalogueIdService;
+    public CatalogueHomeController(CatalogueNovelService catalogueNovelService) {
+        this.catalogueNovelService = catalogueNovelService;
     }
 
     /**
@@ -32,10 +35,8 @@ public class CatalogueHomeController {
     @GetMapping("/home")
     public String showHomePage(Model model) {
 
-        String id = catalogueIdService.generateKsuidNewId();
-
-        model.addAttribute("user", "jaykay");
-        model.addAttribute("id", id);
+        List<CatalogueNovel> catalogueNovels = this.catalogueNovelService.getAllNovelRecords();
+        model.addAttribute("novels", catalogueNovels);
 
         return "index";
     }
