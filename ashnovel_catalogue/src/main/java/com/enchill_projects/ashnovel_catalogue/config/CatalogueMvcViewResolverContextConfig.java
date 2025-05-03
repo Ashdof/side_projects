@@ -86,6 +86,9 @@ public class CatalogueMvcViewResolverContextConfig implements WebMvcConfigurer {
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/resources/**")
                 .addResourceLocations("/resources/");
+
+        registry.addResourceHandler("/uploads/cover-images/**")
+                .addResourceLocations("file:/var/lib/ashnovel-catalogue/uploads/cover-images/");
     }
 
     /**
