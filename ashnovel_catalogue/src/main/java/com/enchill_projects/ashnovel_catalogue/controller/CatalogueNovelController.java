@@ -89,7 +89,7 @@ public class CatalogueNovelController {
      * @param model the Novel model
      * @return the logical template name of the details page
      */
-    @GetMapping("/{id}")
+    @GetMapping("/novel/{id}")
     public String getNovelDetailsById(@PathVariable("id") int id, Model model) {
 
         CatalogueNovel catalogueNovel = this.catalogueNovelService.getNovelById(id);
