@@ -61,4 +61,16 @@ public class CatalogueNovelDaoImpl implements CatalogueNovelDao {
 
         return catalogueNovels;
     }
+
+    /**
+     * Find by ID:
+     * search for a novel object using its provided id
+     * @param id the id of the object to search for
+     * @return a CatalogueNovel object or null if not found
+     */
+    public CatalogueNovel findByID(int id) {
+
+        Session session = this.sessionFactory.getCurrentSession();
+        return session.get(CatalogueNovel.class, id);
+    }
 }
