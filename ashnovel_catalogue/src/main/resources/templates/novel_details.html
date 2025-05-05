@@ -59,20 +59,20 @@
                                  alt="cover image" class="img-fluid shadow rounded">
                         </div>
                         <div class="col-md-8">
-                            <p><strong>Author:</strong><span th:text="${novel.author}"></span></p>
-                            <p><strong>Genre:</strong><span th:text="${novel.genre}"></span></p>
-                            <p><strong>ISBN:</strong><span th:text="${novel.isbn}"></span></p>
-                            <p><strong>Publication Year:</strong><span th:text="${novel.pubYear}"></span></p>
-                            <p><strong>Publishing Company:</strong><span th:text="${novel.pubCompany}"></span></p>
+                            <p><strong>Author: </strong><span th:text="${novel.author}"></span></p>
+                            <p><strong>Genre: </strong><span th:text="${novel.genre}"></span></p>
+                            <p><strong>ISBN: </strong><span th:text="${novel.isbn}"></span></p>
+                            <p><strong>Publication Year: </strong><span th:text="${novel.pubYear}"></span></p>
+                            <p><strong>Publishing Company: </strong><span th:text="${novel.pubCompany}"></span></p>
                             <p><strong>Summary:</strong></p>
                             <p th:text="${novel.Summary}"></p>
 
                             <div class="mt-4">
-                                <a th:href="@{/catalogue/home}" class="btn btn-secondary">
-                                    <span class="glyphicon-hand-left glyphicon"></span> Back
+                                <a th:href="@{/catalogue/home}" class="btn btn-primary">
+                                    <span class="glyphicon glyphicon-hand-left"></span> Back
                                 </a>
-                                <a href="#" class="btn btn-secondary">
-                                    <span class="glyphicon-remove glyphicon"></span> Delete
+                                <a href="#" class="btn btn-danger">
+                                    <span class="glyphicon glyphicon-remove"></span> Delete
                                 </a>
                             </div>
                         </div>
