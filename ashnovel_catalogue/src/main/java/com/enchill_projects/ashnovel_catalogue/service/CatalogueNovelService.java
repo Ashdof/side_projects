@@ -13,4 +13,5 @@ import java.util.List;
 public interface CatalogueNovelService {
     void saveNovelRecord(CatalogueNovel catalogueNovel);
     List<CatalogueNovel> getAllNovelRecords();
+    CatalogueNovel getNovelById(int id);
 }
