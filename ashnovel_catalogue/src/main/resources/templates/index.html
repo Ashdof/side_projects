@@ -70,7 +70,7 @@
 
                 <div class="row">
                     <div th:each="novel, iter : ${novels}" class="col-md-3 col-sm-6 novel-card">
-                        <a href="#" class="text-decoration-none text-dark">
+                        <a th:href="@{'/catalogue/novel/' + ${novel.id}}" class="text-decoration-none text-dark">
                             <div class="card h-100">
                                 <img loading="lazy" th:if="${novel.imagePath}"
                                      th:src="@{/uploads/cover-images/{filename}(filename=${novel.imagePath})}"

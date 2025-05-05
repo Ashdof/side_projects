@@ -13,4 +13,5 @@ import java.util.List;
 public interface CatalogueNovelDao {
     void save(CatalogueNovel catalogueNovel);
     List<CatalogueNovel> fetchAllNovels();
+    CatalogueNovel findByID(int id);
 }

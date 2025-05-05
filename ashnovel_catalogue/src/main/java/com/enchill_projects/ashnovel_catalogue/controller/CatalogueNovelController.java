@@ -11,7 +11,6 @@ import com.enchill_projects.ashnovel_catalogue.service.CatalogueNovelService;
 
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -21,13 +20,13 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 @RequestMapping("catalogue")
-public class CatalogueNewNovelController {
+public class CatalogueNovelController {
 
     private final CatalogueNovelService catalogueNovelService;
     private final CatalogueFileStorageService fileStorageService;
 
     @Autowired
-    public CatalogueNewNovelController(CatalogueNovelService catalogueNovelService, CatalogueFileStorageService fileStorageService) {
+    public CatalogueNovelController(CatalogueNovelService catalogueNovelService, CatalogueFileStorageService fileStorageService) {
         this.catalogueNovelService = catalogueNovelService;
         this.fileStorageService = fileStorageService;
     }
@@ -81,5 +80,21 @@ public class CatalogueNewNovelController {
         }
 
         return "redirect:/catalogue/home";
+    }
+
+    /**
+     * Novel Details:
+     * get the details of a Novel object
+     * @param id the id of the object
+     * @param model the Novel model
+     * @return the logical template name of the details page
+     */
+    @GetMapping("/novel/{id}")
+    public String getNovelDetailsById(@PathVariable("id") int id, Model model) {
+
+        CatalogueNovel catalogueNovel = this.catalogueNovelService.getNovelById(id);
+        model.addAttribute("novel", catalogueNovel);
+
+        return "novel_details";
     }
 }

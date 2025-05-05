@@ -46,4 +46,10 @@ public class CatalogueNovelServiceImpl implements CatalogueNovelService {
     public List<CatalogueNovel> getAllNovelRecords() {
         return this.catalogueNovelDao.fetchAllNovels();
     }
+
+    @Override
+    @Transactional
+    public CatalogueNovel getNovelById(int id) {
+        return this.catalogueNovelDao.findByID(id);
+    }
 }
