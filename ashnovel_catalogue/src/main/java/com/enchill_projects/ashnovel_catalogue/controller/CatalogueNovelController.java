@@ -81,4 +81,20 @@ public class CatalogueNovelController {
 
         return "redirect:/catalogue/home";
     }
+
+    /**
+     * Novel Details:
+     * get the details of a Novel object
+     * @param id the id of the object
+     * @param model the Novel model
+     * @return the logical template name of the details page
+     */
+    @GetMapping("/{id}")
+    public String getNovelDetailsById(@PathVariable("id") int id, Model model) {
+
+        CatalogueNovel catalogueNovel = this.catalogueNovelService.getNovelById(id);
+        model.addAttribute("novel", catalogueNovel);
+
+        return "novel_details";
+    }
 }
