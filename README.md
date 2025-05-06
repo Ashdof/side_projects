@@ -15,3 +15,11 @@ ASHCulator is a console-based calculator that performs simple arithmetic computa
     <img src="apm/static/images/banner.png" alt="amp_mini_banner">
 </a>
 ASHPense Manager is a web application designed to help individuals and small business owners manage their finances more effectively by tracking and monitoring financial transactions. This was a portfolio project which concluded the foundation curriculum during my one-year software engineering training at ALX.
+
+## [ASHNovel Catalogue](https://github.com/Ashdof/side_projects/tree/main/ashnovel_catalogue)
+<a href="https://github.com/Ashdof/side_projects/tree/main/ashnovel_catalogue">
+	<img src="ashnovel_catalogue/img/novel_home.png">
+</a>
+
+A web-based application built using Java Spring MVC for managing a catalogue of novels, authors, and genres. This project demonstrates clean MVC architecture, integration with PostgreSQL, and dynamic views powered by Thymeleaf.
+
