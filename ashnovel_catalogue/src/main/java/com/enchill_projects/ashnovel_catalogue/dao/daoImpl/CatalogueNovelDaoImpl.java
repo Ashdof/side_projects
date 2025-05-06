@@ -13,7 +13,6 @@ import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Repository
@@ -44,7 +43,7 @@ public class CatalogueNovelDaoImpl implements CatalogueNovelDao {
     public List<CatalogueNovel> fetchAllNovels() {
         Session session = sessionFactory.openSession();
         Transaction transaction = null;
-        List<CatalogueNovel> catalogueNovels = new ArrayList<>();
+        List<CatalogueNovel> catalogueNovels;
 
         try {
             transaction = session.beginTransaction();

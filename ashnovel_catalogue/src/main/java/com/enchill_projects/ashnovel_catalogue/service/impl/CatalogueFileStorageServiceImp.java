@@ -44,9 +44,6 @@ public class CatalogueFileStorageServiceImp implements CatalogueFileStorageServi
             @Value("${file.upload-dir}") String uploadDir,
             @Value("${file.allowed-types}") String allowedTypes) {
 
-        System.out.println("\nRaw allowed types from properties: " + allowedTypes);
-        System.out.println("Processed allowed types: " + Arrays.toString(allowedTypes.split(",")) + "\n");
-
         this.fileStorageLocation = Paths.get(uploadDir).toAbsolutePath().normalize();
 
         // Process allowed types
@@ -115,11 +112,6 @@ public class CatalogueFileStorageServiceImp implements CatalogueFileStorageServi
             if (!Files.exists(targetLocation.getParent()))
                 Files.createDirectories(targetLocation.getParent());
 
-            // Debug output
-            System.out.println("Attempting to save file to: " + targetLocation);
-            System.out.println("Parent directory exists: " + Files.exists(targetLocation.getParent()));
-            System.out.println("Is writable: " + Files.isWritable(targetLocation.getParent()));
-
             // Copy file to target directory
             try(InputStream inputStream = file.getInputStream()) {
                 Files.copy(inputStream, targetLocation, StandardCopyOption.REPLACE_EXISTING);
@@ -133,7 +125,7 @@ public class CatalogueFileStorageServiceImp implements CatalogueFileStorageServi
                     this.fileStorageLocation.resolve(newFileName),
                     exception.getMessage()
             );
-            System.err.println(errorDetails);
+
             throw new RuntimeException("Failed to upload file - " + errorDetails);
         }
     }
