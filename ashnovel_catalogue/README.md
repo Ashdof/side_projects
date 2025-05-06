@@ -1,4 +1,5 @@
 # ASHNOVEL CATALOGUE
+<img src="img/novel_home.png">
 A web-based application built using Java Spring MVC for managing a catalogue of novels, authors, and genres. This project demonstrates clean MVC architecture, integration with PostgreSQL, and dynamic views powered by Thymeleaf.
 
 ## 📚 Features
