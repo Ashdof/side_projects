@@ -16,6 +16,20 @@ A web-based application built using Java Spring MVC for managing a catalogue of 
 - **IDE:** IntelliJ IDEA Community
 - **Server:** Apache Tomcat Servlet
 
+## 📌 1. Catalogue Application Architecture
+The following is the layered flow of the platform
+```scss
+┌────────────┐       ┌──────────────┐       ┌──────────────┐       ┌─────────────┐
+│  Thymeleaf │ <-->  │  Controller  │ <-->  │   Service    │ <-->  │     DAO     │ <--> DB (PostgreSQL)
+│   (View)   │       │   (Spring)   │       │ (Business)   │       │ (Hibernate) │
+└────────────┘       └──────────────┘       └──────────────┘       └─────────────┘
+```
+- User interacts via Thymeleaf forms (HTML templates)
+- The **Controller** handles HTTP requests
+- The **Service** layer contains the business logic
+- The **Data Access Object (DAO)** interacts with the database using **Hibernate**
+- **PostgreSQL Database** stores the objects (novels).
+
 ## 🚀 Getting Started
 
 ### Prerequisites
@@ -66,6 +80,14 @@ src/
 ├── main/
 │   ├── java/
 │   │   └── com.enchill_projects.ashnovel_catalogue/
+│   │       ├── config
+│   │       │   └── project configurations (DispatcherServlet, WebConfig and AppConfig)
+│   │       ├── Controller
+│   │       │   └── Dashboard and forms
+│   │       ├── Data Access Object (DAO)
+│   │       ├── Domain (Entity definitions)
+│   │       ├── Service (Business logic)
+│   │       └── Utility (ID generator using GitHub's KSUID)
 │   ├── resources/
 │   │   ├── templates/
 │   │   │   └── # Thymeleaf views
